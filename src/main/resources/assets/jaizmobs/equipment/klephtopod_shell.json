@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "jaizmobs:klephtopod_shell"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "jaizmobs:klephtopod_shell"
+      }
+    ]
+  }
+}

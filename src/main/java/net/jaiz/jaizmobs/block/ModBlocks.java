@@ -1,43 +1,45 @@
 package net.jaiz.jaizmobs.block;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import java.util.function.Function;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.jaiz.jaizmobs.JaizMobs;
-import net.minecraft.block.*;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.references.BlockItemId;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.util.valueproviders.UniformInt;
 
-public class ModBlocks {
+public final class ModBlocks {
+    public static final Block SULFUR_ORE = register(
+            "sulfur_ore",
+            properties -> new DropExperienceBlock(UniformInt.of(1, 3), properties),
+            BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT).strength(4.0F).requiresCorrectToolForDrops()
+    );
 
-    public static final Block SULFUR_ORE = registerBlock("sulfur_ore",
-            new ExperienceDroppingBlock((UniformIntProvider.create(1, 3)), FabricBlockSettings.copyOf(Blocks.BASALT).strength(4f).requiresTool()));
-
-
-    private static Block registerBlock(String name, Block block) {
-        registerBlockItem(name, block);
-        return Registry.register(Registries.BLOCK, new Identifier(JaizMobs.MOD_ID, name), block);
+    private ModBlocks() {
     }
 
-    private static Item registerBlockItem(String name, Block block) {
-        return Registry.register(Registries.ITEM, new Identifier(JaizMobs.MOD_ID, name),
-                new BlockItem(block, new FabricItemSettings()));
+    private static Block register(String name, Function<BlockBehaviour.Properties, Block> factory,
+                                  BlockBehaviour.Properties properties) {
+        Identifier identifier = Identifier.fromNamespaceAndPath(JaizMobs.MOD_ID, name);
+        BlockItemId id = BlockItemId.create(identifier, identifier);
+        Block block = factory.apply(properties.setId(id.block()));
+        Registry.register(BuiltInRegistries.BLOCK, id.block(), block);
+        BlockItem item = new BlockItem(block, new Item.Properties().useBlockDescriptionPrefix().setId(id.item()));
+        Registry.register(BuiltInRegistries.ITEM, id.item(), item);
+        return block;
     }
 
     public static void registerModBlocks() {
-        JaizMobs.LOGGER.info("Registering ModBlocks for " + JaizMobs.MOD_ID);
-
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(ModBlocks::addBlocksToBlockGroup);
-    }
-
-    private static void addBlocksToBlockGroup(FabricItemGroupEntries entries)
-    {
-        entries.add(SULFUR_ORE);
+        JaizMobs.LOGGER.info("Registering mod blocks for {}", JaizMobs.MOD_ID);
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS)
+                .register(output -> output.accept(SULFUR_ORE));
     }
 }

@@ -1,51 +1,22 @@
 package net.jaiz.jaizmobs.entity.ai;
 
 import net.jaiz.jaizmobs.entity.custom.GeyserBerryEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.world.World;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 
-public class GeyserBerryAttackGoal extends MeleeAttackGoal {
-    private final GeyserBerryEntity entity;
+public final class GeyserBerryAttackGoal extends AnimatedMeleeAttackGoal<GeyserBerryEntity> {
+    private static final double ATTACK_DISTANCE = 0.6f; // TODO
 
-    public GeyserBerryAttackGoal(PathAwareEntity mob, double speed, boolean pauseWhenMobIdle) {
-        super(mob, speed, pauseWhenMobIdle);
-        entity = ((GeyserBerryEntity) mob);
+    public GeyserBerryAttackGoal(GeyserBerryEntity entity, double speed, boolean pauseWhenMobIdle) {
+        super(entity, speed, pauseWhenMobIdle, 0, 0, ATTACK_DISTANCE);
     }
 
     @Override
-    public void start() {
-        super.start();
+    protected void performAttack(LivingEntity target) {
+        this.resetAttackCooldown();
+        this.entity.level().explode(this.entity, this.entity.getX(), this.entity.getY(), this.entity.getZ(), 1.2f, Level.ExplosionInteraction.MOB);
+        this.entity.doHurtTarget((ServerLevel) this.entity.level(), target);
+        this.entity.discard();
     }
-
-    @Override
-    protected void attack(LivingEntity pEnemy) {
-        if (isEnemyWithinAttackDistance(pEnemy)) {
-            performAttack(pEnemy);
-        } else {
-            entity.setAttacking(false);
-        }
-    }
-
-    private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy) {
-        return this.entity.distanceTo(pEnemy) <= 0.6f; // TODO
-    }
-
-
-    protected void performAttack(LivingEntity pEnemy) {
-        this.mob.getLookControl().lookAt(pEnemy.getX(), pEnemy.getEyeY(), pEnemy.getZ());
-        this.mob.getWorld().createExplosion(this.mob, this.mob.getX(), this.mob.getY(),
-                this.mob.getZ(), 1.2f,
-                World.ExplosionSourceType.MOB);
-        this.mob.tryAttack(pEnemy);
-        this.mob.kill();
-        this.mob.discard();
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-    }
-
 }

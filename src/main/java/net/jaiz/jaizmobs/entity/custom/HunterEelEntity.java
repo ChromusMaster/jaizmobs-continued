@@ -1,40 +1,42 @@
 package net.jaiz.jaizmobs.entity.custom;
 
-
 import net.jaiz.jaizmobs.entity.ai.HunterEelAttackGoal;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.control.AquaticMoveControl;
-import net.minecraft.entity.ai.control.YawAdjustingLookControl;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.ai.pathing.EntityNavigation;
-import net.minecraft.entity.ai.pathing.SwimNavigation;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.GuardianEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.WaterCreatureEntity;
-import net.minecraft.entity.passive.AxolotlEntity;
-import net.minecraft.entity.passive.DolphinEntity;
-import net.minecraft.entity.passive.SquidEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.monster.Guardian;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.animal.fish.WaterAnimal;
+import net.minecraft.world.entity.animal.axolotl.Axolotl;
+import net.minecraft.world.entity.animal.dolphin.Dolphin;
+import net.minecraft.world.entity.animal.squid.Squid;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.server.level.ServerLevel;
 
-public class HunterEelEntity extends WaterCreatureEntity {
+public class HunterEelEntity extends WaterAnimal implements AttackingMob {
 
-    private static final TrackedData<Boolean> ATTACKING =
-            DataTracker.registerData(HunterEelEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> ATTACKING =
+            SynchedEntityData.defineId(HunterEelEntity.class, EntityDataSerializers.BOOLEAN);
 
     public AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
@@ -42,26 +44,25 @@ public class HunterEelEntity extends WaterCreatureEntity {
     public AnimationState attackAnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
 
-
-    public HunterEelEntity(EntityType<? extends WaterCreatureEntity > entityType, World world) {
+    public HunterEelEntity(EntityType<? extends WaterAnimal > entityType, Level world) {
 
         super(entityType, world);
-        this.moveControl = new AquaticMoveControl(this, 85, 10, 0.022f, 0.1f, true);
-        this.lookControl = new YawAdjustingLookControl(this, 10);
-        this.experiencePoints = 20;
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.022f, 0.1f, true);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
+        this.xpReward = 20;
     }
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = this.random.nextInt(40) + 80;
-            this.idleAnimationState.start(this.age);
+            this.idleAnimationState.start(this.tickCount);
         } else {
             --this.idleAnimationTimeout;
         }
 
         if(this.isAttacking()  && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 20;
-            attackAnimationState.start(this.age);
+            attackAnimationState.start(this.tickCount);
         } else {
             --this.attackAnimationTimeout;
         }
@@ -72,122 +73,102 @@ public class HunterEelEntity extends WaterCreatureEntity {
 
     }
 
-
-
-
-    @Override
-    protected void updateLimbs(float posDelta) {
-        float f = this.getPose() == EntityPose.STANDING ? Math.min(posDelta * 6.0f, 1.0f) : 0.0f;
-        this.limbAnimator.updateLimbs(f, 0.2f);
-    }
-
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClient()) {
+        if(this.level().isClientSide()) {
             setupAnimationStates();
         }
     }
 
     @Override
-    protected void initGoals() {
-        this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
-        this.goalSelector.add(8, new LookAroundGoal(this));
+    protected void registerGoals() {
+        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0f));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.initCustomGoals();
     }
 
     protected void initCustomGoals() {
-        this.goalSelector.add(1, new MoveIntoWaterGoal(this));
-        this.goalSelector.add(2, new HunterEelAttackGoal(this, 1d, false));
-        this.goalSelector.add(4, new SwimAroundGoal(this, 1.0, 10));
-        this.targetSelector.add(3, new ActiveTargetGoal (this, PlayerEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal (this, KlephtopodEntity.class, true));
-        this.targetSelector.add(7, new ActiveTargetGoal (this, AxolotlEntity.class, true));
-        this.targetSelector.add(7, new ActiveTargetGoal (this, DolphinEntity.class, true));
-        this.targetSelector.add(7, new ActiveTargetGoal (this, GuardianEntity.class, true));
-        this.targetSelector.add(7, new ActiveTargetGoal (this, SquidEntity.class, true));
-        this.targetSelector.add(3, new RevengeGoal(this));
+        this.goalSelector.addGoal(1, new TryFindWaterGoal(this));
+        this.goalSelector.addGoal(2, new HunterEelAttackGoal(this, 1d, false));
+        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0, 10));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal (this, Player.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal (this, KlephtopodEntity.class, true));
+        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal (this, Axolotl.class, true));
+        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal (this, Dolphin.class, true));
+        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal (this, Guardian.class, true));
+        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal (this, Squid.class, true));
+        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
 
     }
 
-    public static DefaultAttributeContainer.Builder createHunterEelAttributes() {
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 14)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.9f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 40);
+    public static AttributeSupplier.Builder createHunterEelAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 14)
+                .add(Attributes.MOVEMENT_SPEED, 0.9f)
+                .add(Attributes.ATTACK_DAMAGE, 2)
+                .add(Attributes.FOLLOW_RANGE, 40);
 
     }
 
     @Override
-    public boolean tryAttack(Entity target) {
-        boolean bl = super.tryAttack(target);
-        if (bl && this.getMainHandStack().isEmpty() && target instanceof LivingEntity) {
-            float f = this.getWorld().getLocalDifficulty(this.getBlockPos()).getLocalDifficulty();
-            ((LivingEntity)target).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100 * (int)f), this);
+    public boolean doHurtTarget(ServerLevel level, Entity target) {
+        boolean bl = super.doHurtTarget(level, target);
+        if (bl && this.getMainHandItem().isEmpty() && target instanceof LivingEntity livingEntity) {
+            float f = level.getCurrentDifficultyAt(this.blockPosition()).getEffectiveDifficulty();
+            livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 100 * (int) f), this);
         }
         return bl;
     }
 
     public void setAttacking(boolean attacking) {
-        this.dataTracker.set(ATTACKING, attacking);
+        this.entityData.set(ATTACKING, attacking);
     }
 
-    @Override
     public boolean isAttacking() {
-        return this.dataTracker.get(ATTACKING);
+        return this.entityData.get(ATTACKING);
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKING, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ATTACKING, false);
     }
 
-    public static boolean canSpawn(EntityType<? extends WaterCreatureEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return HunterEelEntity.canMobSpawn(type, world, spawnReason, pos, random);
+    public static boolean canSpawn(EntityType<? extends WaterAnimal> type, ServerLevelAccessor world, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random) {
+        return HunterEelEntity.checkMobSpawnRules(type, world, spawnReason, pos, random);
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_COD_AMBIENT;
+        return SoundEvents.COD_AMBIENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_SQUID_HURT;
+        return SoundEvents.SQUID_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_COD_DEATH;
-    }
-
-    @Override
-    protected SoundEvent getSplashSound() {
-        return SoundEvents.ENTITY_COD_FLOP;
+        return SoundEvents.COD_DEATH;
     }
 
     @Override
     protected SoundEvent getSwimSound() {
-        return SoundEvents.ENTITY_FISH_SWIM;
+        return SoundEvents.FISH_SWIM;
     }
 
-    protected SoundEvent getFlopSound() { return SoundEvents.ENTITY_COD_FLOP;}
+    protected SoundEvent getFlopSound() { return SoundEvents.COD_FLOP;}
 
     @Override
-    public EntityGroup getGroup() {
-        return EntityGroup.AQUATIC;
-    }
-
-    @Override
-    public void travel(Vec3d movementInput) {
-        if (this.canMoveVoluntarily() && this.isTouchingWater()) {
-            this.updateVelocity(this.getMovementSpeed(), movementInput);
-            this.move(MovementType.SELF, this.getVelocity());
-            this.setVelocity(this.getVelocity().multiply(0.9));
+    public void travel(Vec3 movementInput) {
+        if (this.isEffectiveAi() && this.isInWater()) {
+            this.moveRelative(this.getSpeed(), movementInput);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.9));
             if (this.getTarget() == null) {
-                this.setVelocity(this.getVelocity().add(0.0, -0.005, 0.0));
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0, -0.005, 0.0));
             }
         } else {
             super.travel(movementInput);
@@ -195,20 +176,28 @@ public class HunterEelEntity extends WaterCreatureEntity {
     }
 
     @Override
-    public void tickMovement() {
-        if (!this.isTouchingWater() && this.isOnGround() && this.verticalCollision) {
-            this.setVelocity(this.getVelocity().add((this.random.nextFloat() * 2.0f - 1.0f) * 0.05f, 0.4f, (this.random.nextFloat() * 2.0f - 1.0f) * 0.05f));
+    public void aiStep() {
+        if (!this.isInWater() && this.onGround() && this.verticalCollision) {
+            this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0f - 1.0f) * 0.05f, 0.4f, (this.random.nextFloat() * 2.0f - 1.0f) * 0.05f));
             this.setOnGround(false);
-            this.velocityDirty = true;
-            this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
+            this.hurtMarked = true;
+            this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
         }
-        super.tickMovement();
+        super.aiStep();
     }
 
     @Override
-    protected EntityNavigation createNavigation(World world) {
-        return new SwimNavigation(this, world);
+    protected PathNavigation createNavigation(Level world) {
+        return new WaterBoundPathNavigation(this, world);
     }
 
+    @Override
+    public AnimationState idleAnimationState() {
+        return this.idleAnimationState;
+    }
 
+    @Override
+    public AnimationState attackAnimationState() {
+        return this.attackAnimationState;
+    }
 }

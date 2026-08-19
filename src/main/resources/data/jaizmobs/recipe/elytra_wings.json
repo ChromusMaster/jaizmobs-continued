@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "Y": "jaizmobs:tattered_wing",
+    "X": "minecraft:phantom_membrane"
+  },
+  "pattern": [
+    "X X",
+    "Y Y"
+  ],
+  "result": {
+    "id": "minecraft:elytra"
+  },
+  "show_notification": true
+}

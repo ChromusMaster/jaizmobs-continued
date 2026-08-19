@@ -1,38 +1,29 @@
 package net.jaiz.jaizmobs.item.custom;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
 
+public final class GlowTool extends Item {
 
-public class GlowTool extends Item {
-
-
-    public GlowTool(Settings settings) {
-        super(settings);
+    public GlowTool(Properties properties) {
+        super(properties);
     }
-
 
     @Override
-    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (entity instanceof LivingEntity) {
-            entity.getWorld().playSoundFromEntity(user, entity, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.PLAYERS, 1.0f, 1.0f);
-            if (!user.getWorld().isClient) {
-                entity.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 3000, 1));
-                stack.decrement(1);
-            }
-            return ActionResult.success(user.getWorld().isClient);
+    public InteractionResult interactLivingEntity(ItemStack stack, Player user, LivingEntity entity, InteractionHand hand) {
+        if (!entity.level().isClientSide()) {
+            entity.level().playSound(null, entity, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.PLAYERS, 1.0F, 1.0F);
+            entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 3000, 1));
+            stack.consume(1, user);
         }
-        return ActionResult.PASS;
+        return InteractionResult.SUCCESS;
     }
 }
-
-
-

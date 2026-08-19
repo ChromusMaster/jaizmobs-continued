@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "jaizmobs:void_scale_mail"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "jaizmobs:void_scale_mail"
+      }
+    ]
+  }
+}

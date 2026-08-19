@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "jaizmobs:cracked_calcite_totem",
+    "minecraft:amethyst_shard"
+  ],
+  "result": {
+    "id": "jaizmobs:calcite_totem"
+  }
+}

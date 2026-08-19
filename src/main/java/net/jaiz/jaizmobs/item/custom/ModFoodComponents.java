@@ -1,26 +1,40 @@
 package net.jaiz.jaizmobs.item.custom;
 
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.FoodComponent;
+public final class ModFoodComponents {
+    public static final FoodProperties STAR_FISH = food(4, 0.1F);
+    public static final Consumable STAR_FISH_CONSUMABLE = effect(MobEffects.LEVITATION, 50, 0.1F);
+    public static final FoodProperties COOKED_STAR_FISH = food(6, 0.3F);
+    public static final FoodProperties HELIUM_MEMBRANE = new FoodProperties.Builder().nutrition(1).saturationModifier(0.05F).alwaysEdible().build();
+    public static final Consumable HELIUM_MEMBRANE_CONSUMABLE = effect(MobEffects.LEVITATION, 200, 1.0F);
+    public static final FoodProperties HUNTER_EEL = food(3, 0.1F);
+    public static final Consumable HUNTER_EEL_CONSUMABLE = effect(MobEffects.BLINDNESS, 10, 0.1F);
+    public static final FoodProperties COOKED_HUNTER_EEL = food(7, 0.2F);
+    public static final FoodProperties GEYSER_BERRY = food(8, 0.4F);
+    public static final FoodProperties COOKED_WARPED_FUNGUS = food(5, 0.3F);
+    public static final FoodProperties COOKED_CRIMSON_FUNGUS = food(5, 0.3F);
+    public static final FoodProperties STRIDER_HAM = food(6, 0.6F);
+    public static final Consumable STRIDER_HAM_CONSUMABLE = effect(MobEffects.FIRE_RESISTANCE, 60, 0.1F);
+    public static final Consumable DEFAULT_CONSUMABLE = Consumables.defaultFood().build();
 
-public class ModFoodComponents {
-    public static final FoodComponent STAR_FISH = new FoodComponent.Builder().hunger(4).saturationModifier(0.1f).statusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 50), 0.1f).build();
+    private ModFoodComponents() {
+    }
 
-    public static final FoodComponent COOKED_STAR_FISH = new FoodComponent.Builder().hunger(6).saturationModifier(0.3f).build();
+    private static FoodProperties food(int nutrition, float saturation) {
+        return new FoodProperties.Builder().nutrition(nutrition).saturationModifier(saturation).build();
+    }
 
-    public static final FoodComponent HELIUM_MEMBRANE = new FoodComponent.Builder().hunger(1).saturationModifier(0.05f).alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 200), 1f).build();
-
-    public static final FoodComponent HUNTER_EEL = new FoodComponent.Builder().hunger(3).saturationModifier(0.1f).statusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 10), 0.1f).build();
-
-    public static final FoodComponent COOKED_HUNTER_EEL = new FoodComponent.Builder().hunger(7).saturationModifier(0.2f).build();
-
-    public static final FoodComponent GEYSER_BERRY = new FoodComponent.Builder().hunger(8).saturationModifier(0.4f).build();
-
-    public static final FoodComponent COOKED_WARPED_FUNGUS = new FoodComponent.Builder().hunger(5).saturationModifier(0.3f).build();
-
-    public static final FoodComponent COOKED_CRIMSON_FUNGUS = new FoodComponent.Builder().hunger(5).saturationModifier(0.3f).build();
-
-    public static final FoodComponent STRIDER_HAM = new FoodComponent.Builder().hunger(6).saturationModifier(0.6f).statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 60), 0.1f).build();
+    private static Consumable effect(Holder<MobEffect> effect, int duration, float probability) {
+        return Consumables.defaultFood()
+                .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(effect, duration), probability))
+                .build();
+    }
 }

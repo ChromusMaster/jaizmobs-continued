@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0,
+      "conditions": [
+        {
+          "chance": 1,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2,
+                "min": 1
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1,
+                "min": 0
+              },
+              "function": "minecraft:enchanted_count_increase",
+              "enchantment": "minecraft:looting"
+            }
+          ],
+          "name": "jaizmobs:hardened_bone_fragment"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "jaizmobs:entities/soulwader"
+}

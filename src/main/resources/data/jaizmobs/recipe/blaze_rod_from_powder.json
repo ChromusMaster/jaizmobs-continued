@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "minecraft:gunpowder",
+    "minecraft:magma_cream"
+  ],
+  "result": {
+    "id": "minecraft:blaze_powder"
+  }
+}

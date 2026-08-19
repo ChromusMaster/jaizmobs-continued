@@ -1,27 +1,25 @@
 package net.jaiz.jaizmobs.entity.custom;
 
-
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.*;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.animal.*;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
-
-public class CultivatorEntity extends AnimalEntity {
+public class CultivatorEntity extends Animal implements AnimatedMob {
 
     public AnimationState idleAnimationState = new AnimationState();
     public int seedDropTime = this.random.nextInt(6000) + 1200;
@@ -31,118 +29,117 @@ public class CultivatorEntity extends AnimalEntity {
 
     private int idleAnimationTimeout = 0;
 
-    public CultivatorEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public CultivatorEntity(EntityType<? extends Animal> entityType, Level world) {
 
         super(entityType, world);
-        this.experiencePoints = 20;
+        this.xpReward = 20;
     }
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = this.random.nextInt(40) + 80;
-            this.idleAnimationState.start(this.age);
+            this.idleAnimationState.start(this.tickCount);
         } else {
             --this.idleAnimationTimeout;
         }
     }
 
-
-
-
-    @Override
-    protected void updateLimbs(float posDelta) {
-        float f = this.getPose() == EntityPose.STANDING ? Math.min(posDelta * 6.0f, 1.0f) : 0.0f;
-        this.limbAnimator.updateLimbs(f, 0.2f);
-    }
-
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClient()) {
+        if(this.level().isClientSide()) {
             setupAnimationStates();
         }
     }
 
     @Override
-    protected void initGoals() {
-        this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
-        this.goalSelector.add(8, new LookAroundGoal(this));
+    protected void registerGoals() {
+        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0f));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.initCustomGoals();
     }
 
     protected void initCustomGoals() {
-        this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
+        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0));
 
     }
 
-    public static DefaultAttributeContainer.Builder createCultivatorAttributes() {
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 30)
-                .add(EntityAttributes.GENERIC_ARMOR, 0.4f)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 60)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.16)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.1f);
+    public static AttributeSupplier.Builder createCultivatorAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 30)
+                .add(Attributes.ARMOR, 0.4f)
+                .add(Attributes.FOLLOW_RANGE, 60)
+                .add(Attributes.MOVEMENT_SPEED, 0.16)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.1f);
 
     }
 
-    public static boolean canSpawn(EntityType<CultivatorEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return CultivatorEntity.canMobSpawn(type, world, spawnReason, pos, random);
+    public static boolean canSpawn(EntityType<CultivatorEntity> type, ServerLevelAccessor world, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random) {
+        return CultivatorEntity.checkMobSpawnRules(type, world, spawnReason, pos, random);
     }
 
     @Override
-    public void tickMovement() {
-        super.tickMovement();
+    public void aiStep() {
+        super.aiStep();
 
-        if (!this.getWorld().isClient && this.isAlive() && !this.isBaby() && --this.seedDropTime <= 0) {
-            this.playSound(SoundEvents.BLOCK_LAVA_POP, 0.7f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
-            this.dropItem(Items.WHEAT_SEEDS);
-            this.emitGameEvent(GameEvent.ENTITY_PLACE);
+        if (!(this.level() instanceof ServerLevel serverLevel) || !this.isAlive() || this.isBaby()) {
+            return;
+        }
+        if (--this.seedDropTime <= 0) {
+            this.playSound(SoundEvents.LAVA_POP, 0.7f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
+            this.spawnAtLocation(serverLevel, Items.WHEAT_SEEDS);
+            this.gameEvent(GameEvent.ENTITY_PLACE);
             this.seedDropTime = this.random.nextInt(6000) + 1200;
-
         }
-        if (!this.getWorld().isClient && this.isAlive() && !this.isBaby() && --this.beetSeedDropTime <= 0) {
-            this.playSound(SoundEvents.BLOCK_LAVA_POP, 0.7f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
-            this.dropItem(Items.BEETROOT_SEEDS);
-            this.emitGameEvent(GameEvent.ENTITY_PLACE);
+        if (--this.beetSeedDropTime <= 0) {
+            this.playSound(SoundEvents.LAVA_POP, 0.7f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
+            this.spawnAtLocation(serverLevel, Items.BEETROOT_SEEDS);
+            this.gameEvent(GameEvent.ENTITY_PLACE);
             this.beetSeedDropTime = this.random.nextInt(6000) + 1200;
-
         }
-        if (!this.getWorld().isClient && this.isAlive() && !this.isBaby() && --this.melonSeedDropTime <= 0) {
-            this.playSound(SoundEvents.BLOCK_LAVA_POP, 0.7f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
-            this.dropItem(Items.MELON_SEEDS);
-            this.emitGameEvent(GameEvent.ENTITY_PLACE);
+        if (--this.melonSeedDropTime <= 0) {
+            this.playSound(SoundEvents.LAVA_POP, 0.7f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
+            this.spawnAtLocation(serverLevel, Items.MELON_SEEDS);
+            this.gameEvent(GameEvent.ENTITY_PLACE);
             this.melonSeedDropTime = this.random.nextInt(12000) + 1200;
-
         }
-        if (!this.getWorld().isClient && this.isAlive() && !this.isBaby() && --this.pumpkinSeedDropTime <= 0) {
-            this.playSound(SoundEvents.BLOCK_LAVA_POP, 0.7f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
-            this.dropItem(Items.PUMPKIN_SEEDS);
-            this.emitGameEvent(GameEvent.ENTITY_PLACE);
+        if (--this.pumpkinSeedDropTime <= 0) {
+            this.playSound(SoundEvents.LAVA_POP, 0.7f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
+            this.spawnAtLocation(serverLevel, Items.PUMPKIN_SEEDS);
+            this.gameEvent(GameEvent.ENTITY_PLACE);
             this.pumpkinSeedDropTime = this.random.nextInt(12000) + 1200;
-
         }
     }
 
     @Nullable
     @Override
-    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+    public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
         return null;
     }
 
     @Override
+    public boolean isFood(ItemStack stack) {
+        return false;
+    }
+
+    @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_STRIDER_AMBIENT;
+        return SoundEvents.STRIDER_AMBIENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_SNIFFER_HURT;
+        return SoundEvents.SNIFFER_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_SNIFFER_DEATH;
+        return SoundEvents.SNIFFER_DEATH;
     }
 
+    @Override
+    public AnimationState idleAnimationState() {
+        return this.idleAnimationState;
+    }
 }

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 10,
+  "experience": 0.35,
+  "ingredient": "minecraft:warped_fungus",
+  "result": {
+    "id": "jaizmobs:cooked_warped_fungus"
+  }
+}

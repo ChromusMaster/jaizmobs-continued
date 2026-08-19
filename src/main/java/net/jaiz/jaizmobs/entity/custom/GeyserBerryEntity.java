@@ -2,40 +2,38 @@ package net.jaiz.jaizmobs.entity.custom;
 
 import net.jaiz.jaizmobs.entity.ai.GeyserBerryAttackGoal;
 import net.jaiz.jaizmobs.item.custom.ModItems;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 
+public class GeyserBerryEntity extends Monster implements AttackingMob {
 
-public class GeyserBerryEntity extends HostileEntity {
-
-    private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(MolotovGolemEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-
-
+    private static final EntityDataAccessor<Boolean> ATTACKING = SynchedEntityData.defineId(GeyserBerryEntity.class, EntityDataSerializers.BOOLEAN);
 
     public AnimationState attackAnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
 
-
-    public GeyserBerryEntity(EntityType<? extends HostileEntity> entityType, World world) {
+    public GeyserBerryEntity(EntityType<? extends Monster> entityType, Level world) {
 
         super(entityType, world);
-        this.disableExperienceDropping();
+        this.xpReward = 0;
     }
 
     @Override
@@ -43,57 +41,57 @@ public class GeyserBerryEntity extends HostileEntity {
         super.tick();
     }
 
-    public static boolean canSpawn(EntityType<GeyserBerryEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isIn(BlockTags.NYLIUM);
+    public static boolean canSpawn(EntityType<GeyserBerryEntity> type, ServerLevelAccessor world, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random) {
+        return world.getBlockState(pos.below()).is(BlockTags.NYLIUM);
     }
 
     @Override
-    protected void initGoals() {
+    protected void registerGoals() {
         this.initCustomGoals();
     }
 
     protected void initCustomGoals() {
-        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 6.0f));
-        this.goalSelector.add(1, new GeyserBerryAttackGoal(this, 1, false));
-        this.targetSelector.add(1, new ActiveTargetGoal(this, PlayerEntity.class, true));
-        this.targetSelector.add(4, new ActiveTargetGoal(this, PathAwareEntity.class, true));
+        this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0f));
+        this.goalSelector.addGoal(1, new GeyserBerryAttackGoal(this, 1, false));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal(this, Player.class, true));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal(this, PathfinderMob.class, true));
     }
 
     @Override
-    protected ActionResult interactMob(PlayerEntity player, Hand hand) {
-        this.dropItem(ModItems.GEYSER_BERRY_SPAWN_EGG);
-        this.discard();
-        return ActionResult.PASS;
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (this.level() instanceof ServerLevel serverLevel) {
+            this.spawnAtLocation(serverLevel, ModItems.GEYSER_BERRY_SPAWN_EGG);
+            this.discard();
+        }
+        return InteractionResult.SUCCESS;
     }
 
-
-    @Override
-    public boolean isFireImmune() {
-        return true;
-    }
-
-    public static DefaultAttributeContainer.Builder createGeyserBerryAttributes() {
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.0f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20);
+    public static AttributeSupplier.Builder createGeyserBerryAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 1)
+                .add(Attributes.MOVEMENT_SPEED, 0.0f)
+                .add(Attributes.ATTACK_DAMAGE, 6)
+                .add(Attributes.FOLLOW_RANGE, 20);
 
     }
 
     public void setAttacking(boolean attacking) {
-        this.dataTracker.set(ATTACKING, attacking);
+        this.entityData.set(ATTACKING, attacking);
     }
 
-    @Override
     public boolean isAttacking()
     {
-        return this.dataTracker.get(ATTACKING);
+        return this.entityData.get(ATTACKING);
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKING, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ATTACKING, false);
+    }
+
+    @Override
+    public AnimationState attackAnimationState() {
+        return this.attackAnimationState;
     }
 }

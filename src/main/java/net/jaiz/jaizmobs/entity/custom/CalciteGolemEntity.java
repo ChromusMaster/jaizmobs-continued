@@ -2,46 +2,45 @@ package net.jaiz.jaizmobs.entity.custom;
 
 import com.google.common.collect.Sets;
 import net.jaiz.jaizmobs.entity.ai.CalciteGolemAttackGoal;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.CreeperEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.Monster;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.TameableEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.registry.tag.EntityTypeTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.EntityView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
-
-public class CalciteGolemEntity extends TameableEntity{
+public class CalciteGolemEntity extends TamableAnimal implements AttackingMob {
 
     private static final Set<Item> TAMING_INGREDIENTS = Sets.newHashSet(Items.AMETHYST_SHARD);
 
-    private static final TrackedData<Boolean> ATTACKING =
-            DataTracker.registerData(CalciteGolemEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> ATTACKING =
+            SynchedEntityData.defineId(CalciteGolemEntity.class, EntityDataSerializers.BOOLEAN);
 
     public AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
@@ -49,23 +48,22 @@ public class CalciteGolemEntity extends TameableEntity{
     public AnimationState attackAnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
 
-    public CalciteGolemEntity(EntityType<? extends TameableEntity> entityType, World world) {
+    public CalciteGolemEntity(EntityType<? extends TamableAnimal> entityType, Level world) {
         super(entityType, world);
-        this.disableExperienceDropping();
+        this.xpReward = 0;
     }
-
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = this.random.nextInt(20) + 20;
-            this.idleAnimationState.start(this.age);
+            this.idleAnimationState.start(this.tickCount);
         } else {
             --this.idleAnimationTimeout;
         }
 
         if(this.isAttacking()  && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 20;
-            attackAnimationState.start(this.age);
+            attackAnimationState.start(this.tickCount);
         } else {
             --this.attackAnimationTimeout;
         }
@@ -77,121 +75,110 @@ public class CalciteGolemEntity extends TameableEntity{
     }
 
     @Override
-    protected void updateLimbs(float posDelta) {
-        float f = this.getPose() == EntityPose.STANDING ? Math.min(posDelta * 6.0f, 1.0f) : 0.0f;
-        this.limbAnimator.updateLimbs(f, 0.2f);
-    }
-
-    @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClient()) {
+        if(this.level().isClientSide()) {
             setupAnimationStates();
         }
     }
 
     @Override
-    protected void initGoals() {
-        this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
-        this.goalSelector.add(8, new LookAroundGoal(this));
+    protected void registerGoals() {
+        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0f));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.initCustomGoals();
     }
 
     protected void initCustomGoals() {
-        this.goalSelector.add(1, new FollowOwnerGoal(this, 1.25, 10.0f, 2.0f, false));
-        this.goalSelector.add(3, new FollowMobGoal(this, 1.0, 10.0f, 2.0f));
-        this.goalSelector.add(1, new CalciteGolemAttackGoal(this, 1D, true));
-        this.targetSelector.add(1, new ActiveTargetGoal<MobEntity>(this, MobEntity.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof CreeperEntity)));
-        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
+        this.goalSelector.addGoal(1, new FollowOwnerGoal(this, 1.25, 10.0f, 2.0f));
+        this.goalSelector.addGoal(3, new FollowMobGoal(this, 1.0, 10.0f, 2.0f));
+        this.goalSelector.addGoal(1, new CalciteGolemAttackGoal(this, 1D, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Mob>(this, Mob.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof Creeper)));
+        this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0));
 
     }
 
-    public static DefaultAttributeContainer.Builder createCalciteGolemAttributes() {
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 16)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 40)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.6)
-                .add(EntityAttributes.GENERIC_ARMOR, 3)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.5);
+    public static AttributeSupplier.Builder createCalciteGolemAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 16)
+                .add(Attributes.MOVEMENT_SPEED, 0.25f)
+                .add(Attributes.ATTACK_DAMAGE, 6)
+                .add(Attributes.FOLLOW_RANGE, 40)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.6)
+                .add(Attributes.ARMOR, 3)
+                .add(Attributes.ATTACK_KNOCKBACK, 1.5);
 
     }
 
-    public static boolean canSpawn(EntityType<CalciteGolemEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return CalciteGolemEntity.canMobSpawn(type, world, spawnReason, pos, random);
+    public static boolean canSpawn(EntityType<CalciteGolemEntity> type, ServerLevelAccessor world, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random) {
+        return CalciteGolemEntity.checkMobSpawnRules(type, world, spawnReason, pos, random);
     }
 
     public void setAttacking(boolean attacking) {
-        this.dataTracker.set(ATTACKING, attacking);
+        this.entityData.set(ATTACKING, attacking);
     }
 
-    @Override
     public boolean isAttacking() {
-        return this.dataTracker.get(ATTACKING);
+        return this.entityData.get(ATTACKING);
     }
 
     @Nullable
     @Override
-    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+    public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
         return null;
     }
 
     @Override
-    public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        ItemStack itemStack = player.getStackInHand(hand);
-        if (!this.isTamed() && TAMING_INGREDIENTS.contains(itemStack.getItem())) {
-            if (!player.getAbilities().creativeMode) {
-                itemStack.decrement(1);
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        if (!this.isTame() && TAMING_INGREDIENTS.contains(itemStack.getItem())) {
+            if (!player.getAbilities().instabuild) {
+                itemStack.shrink(1);
             }
             if (!this.isSilent()) {
-                this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_IRON_GOLEM_REPAIR, this.getSoundCategory(), 1.0f, 1.0f + (this.random.nextFloat() - this.random.nextFloat()) * 0.2f);
+                this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.IRON_GOLEM_REPAIR, this.getSoundSource(), 1.0f, 1.0f + (this.random.nextFloat() - this.random.nextFloat()) * 0.2f);
             }
-            if (!this.getWorld().isClient) {
-                if (this.random.nextInt(1) == 0) {
-                    this.setOwner(player);
-                    this.getWorld().sendEntityStatus(this, EntityStatuses.ADD_DEATH_PARTICLES);
-                } else {
-                    this.getWorld().sendEntityStatus(this, EntityStatuses.ADD_NEGATIVE_PLAYER_REACTION_PARTICLES);
-                }
+            if (!this.level().isClientSide()) {
+                this.setOwner(player);
+                this.level().broadcastEntityEvent(this, EntityEvent.DEATH);
             }
-            return ActionResult.success(this.getWorld().isClient);
+            return this.level().isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
         }
-        return super.interactMob(player, hand);
+        return super.mobInteract(player, hand);
     }
 
     @Override
-    public boolean isBreedingItem(ItemStack stack) {
+    public boolean isFood(ItemStack stack) {
         return false;
     }
 
     @Override
-    public boolean isPushedByFluids() {
+    public boolean isPushedByFluid() {
         return false;
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKING, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ATTACKING, false);
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.BLOCK_POINTED_DRIPSTONE_FALL;
+        return SoundEvents.POINTED_DRIPSTONE_FALL;
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource source) {return SoundEvents.BLOCK_DRIPSTONE_BLOCK_BREAK;
+    protected SoundEvent getHurtSound(DamageSource source) {return SoundEvents.DRIPSTONE_BLOCK_BREAK;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.BLOCK_DEEPSLATE_TILES_BREAK;
+        return SoundEvents.DEEPSLATE_TILES_BREAK;
     }
 
     protected SoundEvent getStepSound() {
-        return SoundEvents.BLOCK_DRIPSTONE_BLOCK_STEP;
+        return SoundEvents.DRIPSTONE_BLOCK_STEP;
     }
 
     @Override
@@ -199,9 +186,13 @@ public class CalciteGolemEntity extends TameableEntity{
         this.playSound(this.getStepSound(), 0.1f, 0.9f);
     }
 
+    @Override
+    public AnimationState idleAnimationState() {
+        return this.idleAnimationState;
+    }
 
     @Override
-    public EntityView method_48926() {
-        return this.getWorld();
+    public AnimationState attackAnimationState() {
+        return this.attackAnimationState;
     }
 }

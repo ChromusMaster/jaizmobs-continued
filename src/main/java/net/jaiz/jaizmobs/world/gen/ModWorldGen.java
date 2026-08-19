@@ -6,6 +6,5 @@ public class ModWorldGen {
         ModEntitySpawn.addEntitySpawn();
         ModOreGeneration.generateOres();
 
-
     }
 }

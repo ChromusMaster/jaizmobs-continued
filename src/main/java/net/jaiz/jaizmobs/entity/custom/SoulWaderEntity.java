@@ -1,133 +1,111 @@
 package net.jaiz.jaizmobs.entity.custom;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.AnimationState;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 
-public class SoulWaderEntity extends HostileEntity {
+public class SoulWaderEntity extends Monster implements AnimatedMob {
 
-    private static final TrackedData<Boolean> ATTACKING =
-            DataTracker.registerData(SoulWaderEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> ATTACKING =
+            SynchedEntityData.defineId(SoulWaderEntity.class, EntityDataSerializers.BOOLEAN);
 
     public AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 
-    public SoulWaderEntity(EntityType<? extends HostileEntity> entityType, World world) {
+    public SoulWaderEntity(EntityType<? extends Monster> entityType, Level world) {
 
         super(entityType, world);
-        this.experiencePoints = 25;
+        this.xpReward = 25;
     }
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = this.random.nextInt(40) + 40;
-            this.idleAnimationState.start(this.age);
+            this.idleAnimationState.start(this.tickCount);
         } else {
             --this.idleAnimationTimeout;
         }
             }
 
-
-
-
-    @Override
-    protected void updateLimbs(float posDelta) {
-        float f = this.getPose() == EntityPose.STANDING ? Math.min(posDelta * 6.0f, 1.0f) : 0.0f;
-        this.limbAnimator.updateLimbs(f, 0.2f);
-    }
-
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClient()) {
+        if(this.level().isClientSide()) {
             if(this.idleAnimationTimeout <= 0) {
-                this.getWorld().addParticle(ParticleTypes.SOUL, this.getX(), this.getY() + 4, this.getZ(), 0.0, 0.05, 0.0);
+                this.level().addParticle(ParticleTypes.SOUL, this.getX(), this.getY() + 4, this.getZ(), 0.0, 0.05, 0.0);
             }
             if(this.idleAnimationTimeout == 40) {
-                this.getWorld().addParticle(ParticleTypes.SOUL, this.getX(), this.getY() + 4, this.getZ(), 0.0, 0.05, 0.0);
+                this.level().addParticle(ParticleTypes.SOUL, this.getX(), this.getY() + 4, this.getZ(), 0.0, 0.05, 0.0);
             }
             setupAnimationStates();
         }
     }
 
-    public static boolean canSpawn(EntityType<SoulWaderEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isIn(BlockTags.SOUL_SPEED_BLOCKS);
+    public static boolean canSpawn(EntityType<SoulWaderEntity> type, ServerLevelAccessor world, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random) {
+        return world.getBlockState(pos.below()).is(BlockTags.SOUL_SPEED_BLOCKS);
     }
 
     @Override
-    protected void initGoals() {
-        this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
-        this.goalSelector.add(8, new LookAroundGoal(this));
+    protected void registerGoals() {
+        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0f));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.initCustomGoals();
     }
 
-    @Override
-    public boolean isFireImmune() {
-        return true;
-    }
-
-
     protected void initCustomGoals() {
-        this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
+        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0));
 
     }
 
-    public static DefaultAttributeContainer.Builder createSoulWaderAttributes() {
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 60)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f)
-                .add(EntityAttributes.GENERIC_ARMOR, 0.6f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 40)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0f)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 2);
+    public static AttributeSupplier.Builder createSoulWaderAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 60)
+                .add(Attributes.MOVEMENT_SPEED, 0.2f)
+                .add(Attributes.ARMOR, 0.6f)
+                .add(Attributes.ATTACK_DAMAGE, 4)
+                .add(Attributes.FOLLOW_RANGE, 40)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 1.0f)
+                .add(Attributes.ATTACK_KNOCKBACK, 2);
     }
-
-    @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-    }
-
-
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_WARDEN_AGITATED;
+        return SoundEvents.WARDEN_AGITATED;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.BLOCK_CAMPFIRE_CRACKLE;
+        return SoundEvents.CAMPFIRE_CRACKLE;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_WARDEN_SONIC_BOOM;
+        return SoundEvents.WARDEN_SONIC_BOOM;
     }
 
     protected SoundEvent getStepSound() {
-        return SoundEvents.ENTITY_WARDEN_HEARTBEAT;
+        return SoundEvents.WARDEN_HEARTBEAT;
     }
 
     @Override
@@ -135,5 +113,8 @@ public class SoulWaderEntity extends HostileEntity {
         this.playSound(this.getStepSound(), 4.0f, 1.0f);
     }
 
-
+    @Override
+    public AnimationState idleAnimationState() {
+        return this.idleAnimationState;
+    }
 }

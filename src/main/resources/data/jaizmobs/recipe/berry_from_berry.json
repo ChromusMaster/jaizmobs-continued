@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "jaizmobs:geyser_berry"
+  ],
+  "result": {
+    "id": "jaizmobs:geyser_berry_spawn_egg"
+  }
+}

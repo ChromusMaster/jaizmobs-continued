@@ -1,89 +1,57 @@
 package net.jaiz.jaizmobs.item.custom;
 
+import java.util.Map;
 import net.jaiz.jaizmobs.JaizMobs;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 
-import java.util.function.Supplier;
+public final class ModArmourMaterials {
+    public static final int VOID_SCALE_MAIL_DURABILITY = 40;
+    public static final int KLEPHTOPOD_SHELL_DURABILITY = 18;
+    public static final int HARDENED_BONE_DURABILITY = 12;
 
-public enum ModArmourMaterials implements ArmorMaterial {
-    VOID_SCALE_MAIL("void_scale_mail", 40, new int[] {5, 8, 7, 6}, 10,
-            SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 3f, 0.3f, () -> Ingredient.ofItems(ModItems.VOID_HUSK)),
+    public static final TagKey<Item> REPAIRS_VOID_SCALE_MAIL = repairTag("repairs_void_scale_mail");
+    public static final TagKey<Item> REPAIRS_KLEPHTOPOD_SHELL = repairTag("repairs_klephtopod_shell");
+    public static final TagKey<Item> REPAIRS_HARDENED_BONE = repairTag("repairs_hardened_bone");
 
-    KLEPHTOPOD_SHELL("klephtopod_shell", 18, new int[] {2, 4, 4, 2}, 12,
-            SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 1f, 0.0f, () -> Ingredient.ofItems(ModItems.KLEPHTOPOD_SCUTE)),
+    public static final ArmorMaterial VOID_SCALE_MAIL = create(
+            VOID_SCALE_MAIL_DURABILITY,
+            Map.of(ArmorType.HELMET, 5, ArmorType.CHESTPLATE, 8, ArmorType.LEGGINGS, 7, ArmorType.BOOTS, 6),
+            10, 3.0F, 0.3F, REPAIRS_VOID_SCALE_MAIL, "void_scale_mail"
+    );
+    public static final ArmorMaterial KLEPHTOPOD_SHELL = create(
+            KLEPHTOPOD_SHELL_DURABILITY,
+            Map.of(ArmorType.HELMET, 2, ArmorType.CHESTPLATE, 4, ArmorType.LEGGINGS, 4, ArmorType.BOOTS, 2),
+            12, 1.0F, 0.0F, REPAIRS_KLEPHTOPOD_SHELL, "klephtopod_shell"
+    );
+    public static final ArmorMaterial HARDENED_BONE = create(
+            HARDENED_BONE_DURABILITY,
+            Map.of(ArmorType.HELMET, 7, ArmorType.CHESTPLATE, 1, ArmorType.LEGGINGS, 1, ArmorType.BOOTS, 1),
+            17, 1.0F, 0.0F, REPAIRS_HARDENED_BONE, "hardened_bone"
+    );
 
-    HARDENED_BONE("hardened_bone", 12, new int[] {7, 1, 1, 1}, 17,
-            SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 1f, 0.0f, () -> Ingredient.ofItems(ModItems.HARDENED_BONE_FRAGMENT))
-
-    ;
-
-
-
-
-    private final String name;
-    private final int durabilityMultiplyer;
-    private final int[] protectionAmounts;
-    private final int enchantability;
-    private final SoundEvent equipSound;
-    private final float toughness;
-    private final float knockbackResisitance;
-    private final Supplier<Ingredient> repairIngredient;
-
-    private static final int[] BASE_DURABILITY = {11, 16, 15, 13};
-
-    ModArmourMaterials(String name, int durabilityMultiplyer, int[] protectionAmounts, int enchantability, SoundEvent equipSound, float toughness, float knockbackResisitance, Supplier<Ingredient> repairIngredient) {
-        this.name = name;
-        this.durabilityMultiplyer = durabilityMultiplyer;
-        this.protectionAmounts = protectionAmounts;
-        this.enchantability = enchantability;
-        this.equipSound = equipSound;
-        this.toughness = toughness;
-        this.knockbackResisitance = knockbackResisitance;
-        this.repairIngredient = repairIngredient;
+    private ModArmourMaterials() {
     }
 
-
-    @Override
-    public int getDurability(ArmorItem.Type type) {
-        return BASE_DURABILITY[type.ordinal()] * this.durabilityMultiplyer;
+    private static ArmorMaterial create(int durability, Map<ArmorType, Integer> defense, int enchantmentValue,
+                                        float toughness, float knockbackResistance, TagKey<Item> repairTag, String name) {
+        ResourceKey<EquipmentAsset> asset = ResourceKey.create(
+                EquipmentAssets.ROOT_ID,
+                Identifier.fromNamespaceAndPath(JaizMobs.MOD_ID, name)
+        );
+        return new ArmorMaterial(durability, defense, enchantmentValue, SoundEvents.ARMOR_EQUIP_CHAIN,
+                toughness, knockbackResistance, repairTag, asset);
     }
 
-    @Override
-    public int getProtection(ArmorItem.Type type) {
-        return protectionAmounts[type.ordinal()];
-    }
-
-    @Override
-    public int getEnchantability() {
-        return this.enchantability;
-    }
-
-    @Override
-    public SoundEvent getEquipSound() {
-        return this.equipSound;
-    }
-
-    @Override
-    public Ingredient getRepairIngredient() {
-        return this.repairIngredient.get();
-    }
-
-    @Override
-    public String getName() {
-        return JaizMobs.MOD_ID + ":" + this.name;
-    }
-
-    @Override
-    public float getToughness() {
-        return this.toughness;
-    }
-
-    @Override
-    public float getKnockbackResistance() {
-        return this.knockbackResisitance;
+    private static TagKey<Item> repairTag(String name) {
+        return TagKey.create(BuiltInRegistries.ITEM.key(), Identifier.fromNamespaceAndPath(JaizMobs.MOD_ID, name));
     }
 }

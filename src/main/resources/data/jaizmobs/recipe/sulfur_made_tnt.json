@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": [
+      "minecraft:sand",
+      "minecraft:red_sand"
+    ],
+    "X": "jaizmobs:sulfuric_remnant"
+  },
+  "pattern": [
+    "X#X",
+    "#X#",
+    "X#X"
+  ],
+  "result": {
+    "id": "minecraft:tnt",
+    "count": 3
+  },
+  "show_notification": true
+}

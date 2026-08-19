@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "jaizmobs:sulfuric_remnant",
+    "minecraft:paper"
+  ],
+  "result": {
+    "id": "minecraft:firework_rocket",
+    "count": 9
+  }
+}

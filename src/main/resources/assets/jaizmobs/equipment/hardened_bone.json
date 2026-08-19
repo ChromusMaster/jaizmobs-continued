@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "jaizmobs:hardened_bone"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "jaizmobs:hardened_bone"
+      }
+    ]
+  }
+}

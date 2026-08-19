@@ -2,44 +2,49 @@ package net.jaiz.jaizmobs.entity.custom;
 
 import net.jaiz.jaizmobs.entity.ai.KlephtopodAttackGoal;
 import net.jaiz.jaizmobs.item.custom.ModItems;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.control.AquaticMoveControl;
-import net.minecraft.entity.ai.control.YawAdjustingLookControl;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.ai.pathing.EntityNavigation;
-import net.minecraft.entity.ai.pathing.SwimNavigation;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.DrownedEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.WaterCreatureEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.monster.zombie.Drowned;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.animal.fish.WaterAnimal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
 
+public class KlephtopodEntity extends WaterAnimal implements AttackingMob {
 
-public class KlephtopodEntity extends WaterCreatureEntity implements ItemSteerable{
-
-    private static final Ingredient ATTRACTING_INGREDIENT = Ingredient.ofItems(ModItems.HUNTER_EEL, ModItems.COOKED_HUNTER_EEL, ModItems.EEL_ON_A_STICK);
+    private static final Ingredient ATTRACTING_INGREDIENT = Ingredient.of(ModItems.HUNTER_EEL, ModItems.COOKED_HUNTER_EEL, ModItems.EEL_ON_A_STICK);
     @Nullable
     private TemptGoal temptGoal;
 
-    private static final TrackedData<Boolean> ATTACKING =
-            DataTracker.registerData(KlephtopodEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> ATTACKING =
+            SynchedEntityData.defineId(KlephtopodEntity.class, EntityDataSerializers.BOOLEAN);
 
     public AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
@@ -47,26 +52,25 @@ public class KlephtopodEntity extends WaterCreatureEntity implements ItemSteerab
     public AnimationState attackAnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
 
-
-    public KlephtopodEntity(EntityType<? extends WaterCreatureEntity > entityType, World world) {
+    public KlephtopodEntity(EntityType<? extends WaterAnimal > entityType, Level world) {
 
         super(entityType, world);
-        this.moveControl = new AquaticMoveControl(this, 85, 10, 0.022f, 0.1f, true);
-        this.lookControl = new YawAdjustingLookControl(this, 10);
-        this.experiencePoints = 20;
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.022f, 0.1f, true);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
+        this.xpReward = 20;
     }
 
     private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = this.random.nextInt(40) + 80;
-            this.idleAnimationState.start(this.age);
+            this.idleAnimationState.start(this.tickCount);
         } else {
             --this.idleAnimationTimeout;
         }
 
         if(this.isAttacking()  && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 20;
-            attackAnimationState.start(this.age);
+            attackAnimationState.start(this.tickCount);
         } else {
             --this.attackAnimationTimeout;
         }
@@ -77,147 +81,126 @@ public class KlephtopodEntity extends WaterCreatureEntity implements ItemSteerab
 
     }
 
-
-
-
-    @Override
-    protected void updateLimbs(float posDelta) {
-        float f = this.getPose() == EntityPose.STANDING ? Math.min(posDelta * 6.0f, 1.0f) : 0.0f;
-        this.limbAnimator.updateLimbs(f, 0.2f);
-    }
-
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClient()) {
+        if(this.level().isClientSide()) {
             setupAnimationStates();
         }
     }
 
     @Override
-    protected void initGoals() {
-        this.goalSelector.add(8, new LookAroundGoal(this));
+    protected void registerGoals() {
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.initCustomGoals();
     }
 
     protected void initCustomGoals() {
-        this.goalSelector.add(0, new MoveIntoWaterGoal(this));
-        this.goalSelector.add(4, new SwimAroundGoal(this, 1.0, 10));
-        this.goalSelector.add(8, new WanderAroundGoal(this, 1.0, 10));
-        this.goalSelector.add(1, new KlephtopodAttackGoal(this, 1d, false));
-        this.targetSelector.add(4, new RevengeGoal(this));
+        this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
+        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0, 10));
+        this.goalSelector.addGoal(8, new RandomStrollGoal(this, 1.0, 10));
+        this.goalSelector.addGoal(1, new KlephtopodAttackGoal(this, 1d, false));
+        this.targetSelector.addGoal(4, new HurtByTargetGoal(this));
         this.temptGoal = new TemptGoal(this, 1.4, ATTRACTING_INGREDIENT, false);
-        this.goalSelector.add(3, this.temptGoal);
-        this.goalSelector.add(6, new ChaseBoatGoal(this));
-        this.targetSelector.add(5, new RevengeGoal(this));
-        this.targetSelector.add(8, new ActiveTargetGoal (this, HunterEelEntity.class, true));
-        this.targetSelector.add(8, new ActiveTargetGoal (this, DrownedEntity.class, true));
+        this.goalSelector.addGoal(3, this.temptGoal);
+        this.goalSelector.addGoal(6, new FollowBoatGoal(this));
+        this.targetSelector.addGoal(5, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal (this, HunterEelEntity.class, true));
+        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal (this, Drowned.class, true));
 
     }
 
-    public static DefaultAttributeContainer.Builder createKlephtopodAttributes() {
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 40)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.2f)
-                .add(EntityAttributes.GENERIC_ARMOR, 2.6f)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 40);
+    public static AttributeSupplier.Builder createKlephtopodAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 40)
+                .add(Attributes.MOVEMENT_SPEED, 1.2f)
+                .add(Attributes.ARMOR, 2.6f)
+                .add(Attributes.ATTACK_DAMAGE, 5)
+                .add(Attributes.FOLLOW_RANGE, 40);
 
-    }
-
-    @Override
-    protected EntityNavigation createNavigation(World world) {
-        return new SwimNavigation(this, world);
     }
 
     @Override
-    public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        if (!player.shouldCancelInteraction()) {
-            if (!this.getWorld().isClient) {
+    protected PathNavigation createNavigation(Level world) {
+        return new WaterBoundPathNavigation(this, world);
+    }
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (!player.isSecondaryUseActive()) {
+            if (!this.level().isClientSide()) {
                 player.startRiding(this);
             }
-            return ActionResult.success(this.getWorld().isClient);
+            return this.level().isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
         }
-        ActionResult actionResult = super.interactMob(player, hand);
-        return actionResult;
+        return super.mobInteract(player, hand);
     }
 
     @Override
-    public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-        if (effect.getEffectType() == StatusEffects.POISON) {
-            return effect.getEffectType() == StatusEffects.REGENERATION;
+    public boolean canBeAffected(MobEffectInstance effect) {
+        if (effect.getEffect() == MobEffects.POISON) {
+            return effect.getEffect() == MobEffects.REGENERATION;
         }
-        return super.canHaveStatusEffect(effect);
+        return super.canBeAffected(effect);
     }
 
     public void setAttacking(boolean attacking) {
-        this.dataTracker.set(ATTACKING, attacking);
+        this.entityData.set(ATTACKING, attacking);
     }
 
-    @Override
     public boolean isAttacking() {
-        return this.dataTracker.get(ATTACKING);
+        return this.entityData.get(ATTACKING);
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKING, false);
-    }
-
-    @Override
-    public EntityGroup getGroup() {
-        return EntityGroup.AQUATIC;
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ATTACKING, false);
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_STRIDER_AMBIENT;
+        return SoundEvents.STRIDER_AMBIENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_TURTLE_HURT;
+        return SoundEvents.TURTLE_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_TURTLE_DEATH;
-    }
-
-    @Override
-    protected SoundEvent getSplashSound() {
-        return SoundEvents.ENTITY_DOLPHIN_SPLASH;
+        return SoundEvents.TURTLE_DEATH;
     }
 
     @Override
     protected SoundEvent getSwimSound() {
-        return SoundEvents.ENTITY_DOLPHIN_SWIM;
+        return SoundEvents.DOLPHIN_SWIM;
     }
 
-    public static boolean canSpawn(EntityType<? extends WaterCreatureEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return KlephtopodEntity.canMobSpawn(type, world, spawnReason, pos, random);
+    public static boolean canSpawn(EntityType<? extends WaterAnimal> type, ServerLevelAccessor world, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random) {
+        return KlephtopodEntity.checkMobSpawnRules(type, world, spawnReason, pos, random);
     }
 
     @Override
-    public void tickMovement() {
-        if (!this.isTouchingWater() && this.isOnGround() && this.verticalCollision) {
-            this.setVelocity(this.getVelocity().add((this.random.nextFloat() * 2.0f - 0.5f) * 0.05f, 0.4f, (this.random.nextFloat() * 2.0f - 0.5f) * 0.05f));
+    public void aiStep() {
+        if (!this.isInWater() && this.onGround() && this.verticalCollision) {
+            this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0f - 0.5f) * 0.05f, 0.4f, (this.random.nextFloat() * 2.0f - 0.5f) * 0.05f));
             this.setOnGround(false);
-            this.velocityDirty = true;
-            this.playSound(SoundEvents.ENTITY_GENERIC_SMALL_FALL, 0.5f, 1);
+            this.hurtMarked = true;
+            this.playSound(SoundEvents.GENERIC_SMALL_FALL, 0.5f, 1);
         }
-        super.tickMovement();
+        super.aiStep();
     }
 
     @Override
-    public void travel(Vec3d movementInput) {
-        if (this.canMoveVoluntarily() && this.isTouchingWater()) {
-            this.updateVelocity(this.getMovementSpeed(), movementInput);
-            this.move(MovementType.SELF, this.getVelocity());
-            this.setVelocity(this.getVelocity().multiply(0.9));
+    public void travel(Vec3 movementInput) {
+        if (this.isEffectiveAi() && this.isInWater()) {
+            this.moveRelative(this.getSpeed(), movementInput);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.9));
             if (this.getTarget() == null) {
-                this.setVelocity(this.getVelocity().add(0.0, -0.005, 0.0));
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0, -0.005, 0.0));
             }
         } else {
             super.travel(movementInput);
@@ -227,51 +210,54 @@ public class KlephtopodEntity extends WaterCreatureEntity implements ItemSteerab
     @Override
     @Nullable
     public LivingEntity getControllingPassenger() {
-        PlayerEntity playerEntity;
+        Player playerEntity;
         Entity entity;
-        if ((entity = this.getFirstPassenger()) instanceof PlayerEntity && (playerEntity = (PlayerEntity)entity).isHolding(ModItems.EEL_ON_A_STICK)) {
+        if ((entity = this.getFirstPassenger()) instanceof Player && (playerEntity = (Player)entity).isHolding(ModItems.EEL_ON_A_STICK)) {
             return playerEntity;
 
         }
         return super.getControllingPassenger();
     }
 
-
     @Override
-    protected void tickControlled(PlayerEntity controllingPlayer, Vec3d movementInput) {
-        this.setRotation(controllingPlayer.getYaw(), controllingPlayer.getPitch() * 0.5f);
-        this.bodyYaw = this.headYaw = this.getYaw();
-        this.prevYaw = this.headYaw;
-        super.tickControlled(controllingPlayer, movementInput);
+    protected void tickRidden(Player controllingPlayer, Vec3 movementInput) {
+        this.setRot(controllingPlayer.getYRot(), controllingPlayer.getXRot() * 0.5f);
+        this.yBodyRot = this.yHeadRot = this.getYRot();
+        this.yRotO = this.yHeadRot;
+        super.tickRidden(controllingPlayer, movementInput);
     }
 
     @Override
-    protected Vec3d getControlledMovementInput(PlayerEntity controllingPlayer, Vec3d movementInput) {
-        if (this.isTouchingWater()) {
-            this.updateVelocity(this.getMovementSpeed(), movementInput);
-            this.move(MovementType.SELF, this.getVelocity());
-            this.setVelocity(this.getVelocity().multiply(0.9));
+    protected Vec3 getRiddenInput(Player controllingPlayer, Vec3 movementInput) {
+        if (this.isInWater()) {
+            this.moveRelative(this.getSpeed(), movementInput);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.9));
             if (this.getTarget() == null) {
-                this.setVelocity(this.getVelocity().add(0.0, -0.005, 0.0));
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0, -0.005, 0.0));
             }
         } else {
             super.travel(movementInput);
         }
-        return new Vec3d(0.0, controllingPlayer.getPitch() * -10, 10.0);
+        return new Vec3(0.0, controllingPlayer.getXRot() * -10, 10.0);
     }
 
     @Override
-    protected float getSaddledSpeed(PlayerEntity controllingPlayer) {
-        if(isTouchingWater()) {
-            return (float) (this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) / 5);
+    protected float getRiddenSpeed(Player controllingPlayer) {
+        if(isInWater()) {
+            return (float) (this.getAttributeValue(Attributes.MOVEMENT_SPEED) / 5);
         } else {
-            return (float) (this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) / 32);
+            return (float) (this.getAttributeValue(Attributes.MOVEMENT_SPEED) / 32);
         }
     }
 
+    @Override
+    public AnimationState idleAnimationState() {
+        return this.idleAnimationState;
+    }
 
     @Override
-    public boolean consumeOnAStickItem() {
-        return false;
+    public AnimationState attackAnimationState() {
+        return this.attackAnimationState;
     }
 }

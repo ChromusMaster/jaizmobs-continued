@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": "jaizmobs:basalt_mandible",
+    "Y": "minecraft:stick"
+  },
+  "pattern": [
+    "X",
+    "X",
+    "Y"
+  ],
+  "result": {
+    "id": "jaizmobs:mandible_blade"
+  },
+  "show_notification": true
+}

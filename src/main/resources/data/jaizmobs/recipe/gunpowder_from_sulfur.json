@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "jaizmobs:sulfuric_remnant",
+    "minecraft:charcoal"
+  ],
+  "result": {
+    "id": "minecraft:gunpowder",
+    "count": 4
+  }
+}

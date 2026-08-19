@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:fishing_rod",
+    "X": "jaizmobs:hunter_eel"
+  },
+  "pattern": [
+    "# ",
+    " X"
+  ],
+  "result": {
+    "id": "jaizmobs:eel_on_a_stick"
+  },
+  "show_notification": true
+}

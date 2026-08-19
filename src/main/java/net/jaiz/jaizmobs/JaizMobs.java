@@ -3,7 +3,7 @@ package net.jaiz.jaizmobs;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.fabricmc.fabric.api.registry.FuelValueEvents;
 import net.jaiz.jaizmobs.block.ModBlocks;
 import net.jaiz.jaizmobs.entity.ModEntities;
 import net.jaiz.jaizmobs.entity.custom.*;
@@ -19,7 +19,6 @@ public class JaizMobs implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
-
 		// Mod Blocks
 
 		ModBlocks.registerModBlocks();
@@ -28,7 +27,7 @@ public class JaizMobs implements ModInitializer {
 		ModItems.registerModItems();
 
 		// Fuel Items
-		FuelRegistry.INSTANCE.add(ModItems.SULFURIC_REMNANT, 3200);
+		FuelValueEvents.BUILD.register((builder, context) -> builder.add(ModItems.SULFURIC_REMNANT, 3200));
 
 		// Mob Registries
 		FabricDefaultAttributeRegistry.register(ModEntities.TOTEM_SPIRIT, TotemSpiritEntity.createTotemSpiritAttributes());
