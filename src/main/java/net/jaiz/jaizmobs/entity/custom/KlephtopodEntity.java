@@ -111,6 +111,7 @@ public class KlephtopodEntity extends WaterAnimal implements AttackingMob {
     public static AttributeSupplier.Builder createKlephtopodAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 40)
+                .add(Attributes.TEMPT_RANGE, 10)
                 .add(Attributes.MOVEMENT_SPEED, 1.2f)
                 .add(Attributes.ARMOR, 2.6f)
                 .add(Attributes.ATTACK_DAMAGE, 5)
