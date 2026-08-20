@@ -36,6 +36,21 @@ public final class ModModelProvider extends FabricModelProvider {
         ).forEach(item -> generator.generateFlatItem(item, ModelTemplates.FLAT_ITEM));
         List.of(ModItems.DRIPSTONE_SHANK, ModItems.MANDIBLE_BLADE)
                 .forEach(item -> generator.generateFlatItem(item, ModelTemplates.FLAT_HANDHELD_ITEM));
+        List.of(
+                ModItems.TOTEM_SPIRIT_SPAWN_EGG, ModItems.DESERT_TOTEM_SPIRIT_SPAWN_EGG,
+                ModItems.JUNGLE_TOTEM_SPIRIT_SPAWN_EGG, ModItems.FROSTED_TOTEM_SPIRIT_SPAWN_EGG,
+                ModItems.SPORETRAP_SPAWN_EGG, ModItems.VOIDBULL_SPAWN_EGG,
+                ModItems.STARFISH_SPAWN_EGG, ModItems.STARFISHLEADER_SPAWN_EGG,
+                ModItems.PINE_GIANT_SPAWN_EGG, ModItems.DRIPLET_SPAWN_EGG,
+                ModItems.STALAGTITAN_SPAWN_EGG, ModItems.SNAIL_SPAWN_EGG,
+                ModItems.CALCITE_GOLEM_SPAWN_EGG, ModItems.CULTIVATOR_SPAWN_EGG,
+                ModItems.KLEPHTOPOD_SPAWN_EGG, ModItems.HUNTER_EEL_SPAWN_EGG,
+                ModItems.AEROBLOB_SPAWN_EGG, ModItems.ENDERWING_SPAWN_EGG,
+                ModItems.MOLOTOV_GOLEM_SPAWN_EGG, ModItems.GEYSER_BERRY_SPAWN_EGG,
+                ModItems.CRIMSON_TRUFFLER_SPAWN_EGG, ModItems.WARPED_TRUFFLER_SPAWN_EGG,
+                ModItems.EMBERBEETLE_SPAWN_EGG, ModItems.SOULWADER_SPAWN_EGG,
+                ModItems.STRIDER_HUNTER_SPAWN_EGG
+        ).forEach(item -> generator.generateFlatItem(item, ModelTemplates.FLAT_ITEM));
     }
 
     @Override

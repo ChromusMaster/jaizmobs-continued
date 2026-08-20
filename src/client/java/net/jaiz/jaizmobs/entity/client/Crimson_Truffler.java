@@ -43,6 +43,10 @@ public final class Crimson_Truffler extends EntityModel<JaizMobRenderState> {
 		truffler.addOrReplaceChild("leg_r2", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(1.5F, 0.0F, 1.5F));
 
 		truffler.addOrReplaceChild("leg_l2", CubeListBuilder.create().texOffs(0, 4).addBox(-1.0F, 0.0F, -0.75F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(1.5F, 0.0F, -1.75F));
+
+		truffler.addOrReplaceChild("leg_l3", CubeListBuilder.create(), PartPose.offset(-1.5F, 0.0F, 1.25F));
+
+		truffler.addOrReplaceChild("leg_r3", CubeListBuilder.create(), PartPose.offset(1.5F, 0.0F, 1.5F));
 		return LayerDefinition.create(modelData, 44, 44);
 	}
 
