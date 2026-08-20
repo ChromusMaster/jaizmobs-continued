@@ -21,7 +21,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -93,7 +92,7 @@ public class CalciteGolemEntity extends TamableAnimal implements AttackingMob {
         this.goalSelector.addGoal(1, new FollowOwnerGoal(this, 1.25, 10.0f, 2.0f));
         this.goalSelector.addGoal(3, new FollowMobGoal(this, 1.0, 10.0f, 2.0f));
         this.goalSelector.addGoal(1, new CalciteGolemAttackGoal(this, 1D, true));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Mob>(this, Mob.class, 5, false, false, entity -> entity instanceof Monster && !(entity instanceof Creeper)));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Mob>(this, Mob.class, 5, false, false, (entity, level) -> entity instanceof Monster && !(entity instanceof Creeper)));
         this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0));
 
     }

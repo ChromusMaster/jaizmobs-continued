@@ -18,13 +18,11 @@ public final class Calcite_Golem extends EntityModel<JaizMobRenderState> {
 	private final KeyframeAnimation walkAnimation;
 	private final KeyframeAnimation idleAnimation;
 	private final KeyframeAnimation attackAnimation;
-	private final ModelPart calcite_golem;
 	private final ModelPart head;
 
 	public Calcite_Golem(ModelPart root) {
 		super(root);
-		this.calcite_golem = root.getChild("calcite_golem");
-		this.head = calcite_golem.getChild("body").getChild("head");
+		this.head = root.getChild("calcite_golem").getChild("body").getChild("head");
 	
 		this.walkAnimation = ModAnimations.CALCITE_GOLEM_WALK.bake(root);
 		this.idleAnimation = ModAnimations.CALCITE_GOLEM_IDLE.bake(root);
@@ -35,18 +33,18 @@ public final class Calcite_Golem extends EntityModel<JaizMobRenderState> {
 		PartDefinition modelPartData = modelData.getRoot();
 		PartDefinition calcite_golem = modelPartData.addOrReplaceChild("calcite_golem", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		PartDefinition leg_l = calcite_golem.addOrReplaceChild("leg_l", CubeListBuilder.create().texOffs(0, 27).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(1.75F, -4.0F, -0.5F));
+		calcite_golem.addOrReplaceChild("leg_l", CubeListBuilder.create().texOffs(0, 27).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(1.75F, -4.0F, -0.5F));
 
-		PartDefinition leg_r = calcite_golem.addOrReplaceChild("leg_r", CubeListBuilder.create().texOffs(24, 0).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.75F, -4.0F, -0.5F));
+		calcite_golem.addOrReplaceChild("leg_r", CubeListBuilder.create().texOffs(24, 0).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.75F, -4.0F, -0.5F));
 
 		PartDefinition body = calcite_golem.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 15).addBox(-3.5F, -7.0F, -2.5F, 7.0F, 7.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -4.0F, -0.5F));
 
-		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -7.0F, -4.0F, 8.0F, 7.0F, 8.0F, new CubeDeformation(0.0F))
+		body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -7.0F, -4.0F, 8.0F, 7.0F, 8.0F, new CubeDeformation(0.0F))
 		.texOffs(0, 0).addBox(-1.0F, -4.0F, -5.0F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -6.0F, 0.0F));
 
-		PartDefinition arm_r = body.addOrReplaceChild("arm_r", CubeListBuilder.create().texOffs(24, 15).addBox(-2.0F, -0.75F, -1.5F, 2.0F, 8.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.5F, -5.0F, 0.0F));
+		body.addOrReplaceChild("arm_r", CubeListBuilder.create().texOffs(24, 15).addBox(-2.0F, -0.75F, -1.5F, 2.0F, 8.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.5F, -5.0F, 0.0F));
 
-		PartDefinition arm_l = body.addOrReplaceChild("arm_l", CubeListBuilder.create().texOffs(21, 26).addBox(0.0F, -0.75F, -1.5F, 2.0F, 8.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(3.5F, -5.0F, 0.0F));
+		body.addOrReplaceChild("arm_l", CubeListBuilder.create().texOffs(21, 26).addBox(0.0F, -0.75F, -1.5F, 2.0F, 8.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(3.5F, -5.0F, 0.0F));
 		return LayerDefinition.create(modelData, 40, 40);
 	}
 	@Override

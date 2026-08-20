@@ -1,7 +1,6 @@
 package net.jaiz.jaizmobs.entity.client;
 
 import net.jaiz.jaizmobs.JaizMobs;
-import net.jaiz.jaizmobs.entity.client.state.JaizMobRenderState;
 import net.jaiz.jaizmobs.entity.custom.HunterEelEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.Identifier;

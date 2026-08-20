@@ -18,13 +18,11 @@ public final class Driplet extends EntityModel<JaizMobRenderState> {
 	private final KeyframeAnimation walkAnimation;
 	private final KeyframeAnimation idleAnimation;
 	private final KeyframeAnimation attackAnimation;
-	private final ModelPart driplet;
 	private final ModelPart body;
 
 	public Driplet(ModelPart root) {
 		super(root);
-		this.driplet = root.getChild("driplet");
-		this.body = driplet.getChild("body");
+		this.body = root.getChild("driplet").getChild("body");
 	
 		this.walkAnimation = ModAnimations.DRIPLET_WALK.bake(root);
 		this.idleAnimation = ModAnimations.DRIPLET_IDLE.bake(root);
@@ -37,13 +35,13 @@ public final class Driplet extends EntityModel<JaizMobRenderState> {
 
 		PartDefinition body = driplet.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -4.0F, 0.0F));
 
-		PartDefinition head_1_r1 = body.addOrReplaceChild("head_1_r1", CubeListBuilder.create().texOffs(0, 10).addBox(0.0F, -16.0F, -4.0F, 0.0F, 6.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 4.0F, 0.0F, 0.0F, -0.7854F, 0.0F));
+		body.addOrReplaceChild("head_1_r1", CubeListBuilder.create().texOffs(0, 10).addBox(0.0F, -16.0F, -4.0F, 0.0F, 6.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 4.0F, 0.0F, 0.0F, -0.7854F, 0.0F));
 
-		PartDefinition head_2_r1 = body.addOrReplaceChild("head_2_r1", CubeListBuilder.create().texOffs(0, 4).addBox(0.0F, -16.0F, -4.0F, 0.0F, 6.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 4.0F, 0.0F, 0.0F, 0.7854F, 0.0F));
+		body.addOrReplaceChild("head_2_r1", CubeListBuilder.create().texOffs(0, 4).addBox(0.0F, -16.0F, -4.0F, 0.0F, 6.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 4.0F, 0.0F, 0.0F, 0.7854F, 0.0F));
 
-		PartDefinition leg_l = driplet.addOrReplaceChild("leg_l", CubeListBuilder.create().texOffs(18, 0).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(1.5F, -4.0F, 0.0F));
+		driplet.addOrReplaceChild("leg_l", CubeListBuilder.create().texOffs(18, 0).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(1.5F, -4.0F, 0.0F));
 
-		PartDefinition leg_r = driplet.addOrReplaceChild("leg_r", CubeListBuilder.create().texOffs(16, 12).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.5F, -4.0F, 0.0F));
+		driplet.addOrReplaceChild("leg_r", CubeListBuilder.create().texOffs(16, 12).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.5F, -4.0F, 0.0F));
 		return LayerDefinition.create(modelData, 24, 24);
 	}
 	@Override

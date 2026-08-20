@@ -88,10 +88,10 @@ public class MolotovGolemEntity extends Monster implements AttackingMob {
     protected void initCustomGoals() {
         this.goalSelector.addGoal(7, new MolotovGolemEntity.LookAtTargetGoal(this));
         this.goalSelector.addGoal(1, new MolotovGolemAttackGoal(this, 1, false));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, Player.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(4, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal(this, IronGolem.class, true));
-        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal(this, SnowGolem.class, true));
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, SnowGolem.class, true));
         this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0));
 
     }
@@ -173,19 +173,16 @@ public class MolotovGolemEntity extends Monster implements AttackingMob {
 
         @Override
         public void tick() {
-            if (this.molotov_golem.getTarget() == null) {
+            LivingEntity target = this.molotov_golem.getTarget();
+            if (target == null) {
                 Vec3 vec3d = this.molotov_golem.getDeltaMovement();
                 this.molotov_golem.setYRot(-((float) Mth.atan2(vec3d.x, vec3d.z)) * 57.295776f);
                 this.molotov_golem.yBodyRot = this.molotov_golem.getYRot();
-            } else {
-                LivingEntity livingEntity = this.molotov_golem.getTarget();
-                double d = 64.0;
-                if (livingEntity.distanceToSqr(this.molotov_golem) < 4096.0) {
-                    double e = livingEntity.getX() - this.molotov_golem.getX();
-                    double f = livingEntity.getZ() - this.molotov_golem.getZ();
+            } else if (target.distanceToSqr(this.molotov_golem) < 4096.0) {
+                    double e = target.getX() - this.molotov_golem.getX();
+                    double f = target.getZ() - this.molotov_golem.getZ();
                     this.molotov_golem.setYRot(-((float)Mth.atan2(e, f)) * 57.295776f);
                     this.molotov_golem.yBodyRot = this.molotov_golem.getYRot();
-                }
             }
         }
     }

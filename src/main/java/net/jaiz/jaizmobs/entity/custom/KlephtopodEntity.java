@@ -22,15 +22,13 @@ import net.minecraft.world.entity.monster.zombie.Drowned;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.fish.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.util.Mth;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -55,7 +53,7 @@ public class KlephtopodEntity extends WaterAnimal implements AttackingMob {
     public KlephtopodEntity(EntityType<? extends WaterAnimal > entityType, Level world) {
 
         super(entityType, world);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.022f, 0.1f, true);
+        this.moveControl = new SmoothSwimmingMoveControl<>(this, 85, 10, 0.022f, 0.1f, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
         this.xpReward = 20;
     }
@@ -103,10 +101,10 @@ public class KlephtopodEntity extends WaterAnimal implements AttackingMob {
         this.targetSelector.addGoal(4, new HurtByTargetGoal(this));
         this.temptGoal = new TemptGoal(this, 1.4, ATTRACTING_INGREDIENT, false);
         this.goalSelector.addGoal(3, this.temptGoal);
-        this.goalSelector.addGoal(6, new FollowBoatGoal(this));
+        this.goalSelector.addGoal(6, new FollowPlayerRiddenEntityGoal(this, AbstractBoat.class));
         this.targetSelector.addGoal(5, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal (this, HunterEelEntity.class, true));
-        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal (this, Drowned.class, true));
+        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, HunterEelEntity.class, true));
+        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, Drowned.class, true));
 
     }
 

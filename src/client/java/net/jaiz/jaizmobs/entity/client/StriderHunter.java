@@ -18,13 +18,11 @@ public final class StriderHunter extends EntityModel<JaizMobRenderState> {
 	private final KeyframeAnimation walkAnimation;
 	private final KeyframeAnimation idleAnimation;
 	private final KeyframeAnimation attackAnimation;
-	private final ModelPart striderhunter;
 	private final ModelPart head;
 
 	public StriderHunter(ModelPart root) {
 		super(root);
-		this.striderhunter = root.getChild("striderhunter");
-		this.head = striderhunter.getChild("body").getChild("head");
+		this.head = root.getChild("striderhunter").getChild("body").getChild("head");
 	
 		this.walkAnimation = ModAnimations.STRIDER_HUNTER_WALK.bake(root);
 		this.idleAnimation = ModAnimations.STRIDER_HUNTER_IDLE.bake(root);
@@ -40,9 +38,9 @@ public final class StriderHunter extends EntityModel<JaizMobRenderState> {
 
 		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(88, 37).addBox(-5.0F, -5.0F, -0.0167F, 10.0F, 10.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 3.6154F, 35.6705F));
 
-		PartDefinition jaw_l = head.addOrReplaceChild("jaw_l", CubeListBuilder.create().texOffs(78, 74).addBox(-5.0F, -2.5F, -1.0167F, 8.0F, 5.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, 1.5F, 8.0F));
+		head.addOrReplaceChild("jaw_l", CubeListBuilder.create().texOffs(78, 74).addBox(-5.0F, -2.5F, -1.0167F, 8.0F, 5.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(-3.0F, 1.5F, 8.0F));
 
-		PartDefinition jaw_r = head.addOrReplaceChild("jaw_r", CubeListBuilder.create().texOffs(0, 86).addBox(-3.0F, -2.5F, -1.0167F, 8.0F, 5.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, 1.5F, 8.0F));
+		head.addOrReplaceChild("jaw_r", CubeListBuilder.create().texOffs(0, 86).addBox(-3.0F, -2.5F, -1.0167F, 8.0F, 5.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(3.0F, 1.5F, 8.0F));
 
 		PartDefinition body2 = body.addOrReplaceChild("body2", CubeListBuilder.create().texOffs(40, 80).addBox(0.0F, -14.5F, -14.0F, 0.0F, 8.0F, 14.0F, new CubeDeformation(0.0F))
 				.texOffs(46, 46).addBox(-7.0F, -6.5F, -14.0F, 14.0F, 14.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 3.1154F, 5.6538F));
@@ -53,26 +51,26 @@ public final class StriderHunter extends EntityModel<JaizMobRenderState> {
 		PartDefinition body4 = body3.addOrReplaceChild("body4", CubeListBuilder.create().texOffs(0, 8).addBox(0.0F, -12.3846F, -13.9962F, 0.0F, 8.0F, 14.0F, new CubeDeformation(0.0F))
 				.texOffs(62, 0).addBox(-4.5F, -4.3846F, -13.9962F, 9.0F, 9.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -13.95F));
 
-		PartDefinition body5 = body4.addOrReplaceChild("body5", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -10.4846F, -13.9962F, 0.0F, 8.0F, 14.0F, new CubeDeformation(0.0F))
+		body4.addOrReplaceChild("body5", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -10.4846F, -13.9962F, 0.0F, 8.0F, 14.0F, new CubeDeformation(0.0F))
 				.texOffs(38, 74).addBox(-3.0F, -2.9846F, -13.9962F, 6.0F, 6.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.1F, -14.0F));
 
 		PartDefinition legs = striderhunter.addOrReplaceChild("legs", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
 		PartDefinition legs_l = legs.addOrReplaceChild("legs_l", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition front_l = legs_l.addOrReplaceChild("front_l", CubeListBuilder.create().texOffs(0, 103).addBox(-1.5F, -1.5F, -2.5F, 5.0F, 17.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-10.5F, -15.5F, 25.5F));
+		legs_l.addOrReplaceChild("front_l", CubeListBuilder.create().texOffs(0, 103).addBox(-1.5F, -1.5F, -2.5F, 5.0F, 17.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-10.5F, -15.5F, 25.5F));
 
-		PartDefinition mid_l = legs_l.addOrReplaceChild("mid_l", CubeListBuilder.create().texOffs(35, 102).addBox(-1.5F, -1.5F, -2.5F, 5.0F, 17.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-10.5F, -15.5F, 10.5F));
+		legs_l.addOrReplaceChild("mid_l", CubeListBuilder.create().texOffs(35, 102).addBox(-1.5F, -1.5F, -2.5F, 5.0F, 17.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-10.5F, -15.5F, 10.5F));
 
-		PartDefinition back_l = legs_l.addOrReplaceChild("back_l", CubeListBuilder.create().texOffs(103, 94).addBox(-1.5F, -2.0F, -2.5F, 5.0F, 14.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-9.5F, -12.0F, -1.5F));
+		legs_l.addOrReplaceChild("back_l", CubeListBuilder.create().texOffs(103, 94).addBox(-1.5F, -2.0F, -2.5F, 5.0F, 14.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-9.5F, -12.0F, -1.5F));
 
 		PartDefinition legs_r = legs.addOrReplaceChild("legs_r", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition front_r = legs_r.addOrReplaceChild("front_r", CubeListBuilder.create().texOffs(63, 97).addBox(-3.5F, -1.5F, -2.5F, 5.0F, 17.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(10.5F, -15.5F, 25.5F));
+		legs_r.addOrReplaceChild("front_r", CubeListBuilder.create().texOffs(63, 97).addBox(-3.5F, -1.5F, -2.5F, 5.0F, 17.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(10.5F, -15.5F, 25.5F));
 
-		PartDefinition mid_r = legs_r.addOrReplaceChild("mid_r", CubeListBuilder.create().texOffs(83, 99).addBox(-3.5F, -1.5F, -2.5F, 5.0F, 17.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(10.5F, -15.5F, 10.5F));
+		legs_r.addOrReplaceChild("mid_r", CubeListBuilder.create().texOffs(83, 99).addBox(-3.5F, -1.5F, -2.5F, 5.0F, 17.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(10.5F, -15.5F, 10.5F));
 
-		PartDefinition back_r = legs_r.addOrReplaceChild("back_r", CubeListBuilder.create().texOffs(103, 18).addBox(-3.5F, -2.0F, -2.5F, 5.0F, 14.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(9.5F, -12.0F, -1.5F));
+		legs_r.addOrReplaceChild("back_r", CubeListBuilder.create().texOffs(103, 18).addBox(-3.5F, -2.0F, -2.5F, 5.0F, 14.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(9.5F, -12.0F, -1.5F));
 		return LayerDefinition.create(modelData, 128, 128);
 	}
 

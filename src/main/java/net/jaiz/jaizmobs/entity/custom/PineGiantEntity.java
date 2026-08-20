@@ -3,7 +3,6 @@ package net.jaiz.jaizmobs.entity.custom;
 import net.jaiz.jaizmobs.entity.ai.PineGiantAttackGoal;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;

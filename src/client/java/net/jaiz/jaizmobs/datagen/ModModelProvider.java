@@ -8,7 +8,6 @@ import net.jaiz.jaizmobs.item.custom.ModItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.world.item.Item;
 
 public final class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricPackOutput output) {

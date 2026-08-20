@@ -17,13 +17,11 @@ import net.minecraft.util.Mth;
 public final class Crimson_Truffler extends EntityModel<JaizMobRenderState> {
 	private final KeyframeAnimation walkAnimation;
 	private final KeyframeAnimation idleAnimation;
-	private final ModelPart truffler;
 	private final ModelPart head;
 
 	public Crimson_Truffler(ModelPart root) {
 		super(root);
-		this.truffler = root.getChild("truffler");
-		this.head = truffler.getChild("body");
+		this.head = root.getChild("truffler").getChild("body");
 	
 		this.walkAnimation = ModAnimations.TRUFFLER_WALK.bake(root);
 		this.idleAnimation = ModAnimations.TRUFFLER_IDLE.bake(root);
@@ -36,15 +34,15 @@ public final class Crimson_Truffler extends EntityModel<JaizMobRenderState> {
 		PartDefinition body = truffler.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -6.75F, -5.0F, 10.0F, 4.0F, 10.0F, new CubeDeformation(0.0F))
 				.texOffs(0, 14).addBox(-3.0F, -2.75F, -3.0F, 6.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -0.25F, 0.0F));
 
-		PartDefinition cap_r1 = body.addOrReplaceChild("cap_r1", CubeListBuilder.create().texOffs(2, 2).addBox(-4.0F, -1.5F, -4.0F, 8.0F, 3.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -8.25F, 0.0F, 0.0F, -1.5708F, 0.0F));
+		body.addOrReplaceChild("cap_r1", CubeListBuilder.create().texOffs(2, 2).addBox(-4.0F, -1.5F, -4.0F, 8.0F, 3.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -8.25F, 0.0F, 0.0F, -1.5708F, 0.0F));
 
-		PartDefinition leg_l = truffler.addOrReplaceChild("leg_l", CubeListBuilder.create().texOffs(0, 4).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.5F, 0.0F, 1.5F));
+		truffler.addOrReplaceChild("leg_l", CubeListBuilder.create().texOffs(0, 4).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.5F, 0.0F, 1.5F));
 
-		PartDefinition leg_r = truffler.addOrReplaceChild("leg_r", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.5F, 0.0F, -1.5F));
+		truffler.addOrReplaceChild("leg_r", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.5F, 0.0F, -1.5F));
 
-		PartDefinition leg_r2 = truffler.addOrReplaceChild("leg_r2", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(1.5F, 0.0F, 1.5F));
+		truffler.addOrReplaceChild("leg_r2", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, 0.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(1.5F, 0.0F, 1.5F));
 
-		PartDefinition leg_l2 = truffler.addOrReplaceChild("leg_l2", CubeListBuilder.create().texOffs(0, 4).addBox(-1.0F, 0.0F, -0.75F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(1.5F, 0.0F, -1.75F));
+		truffler.addOrReplaceChild("leg_l2", CubeListBuilder.create().texOffs(0, 4).addBox(-1.0F, 0.0F, -0.75F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(1.5F, 0.0F, -1.75F));
 		return LayerDefinition.create(modelData, 44, 44);
 	}
 

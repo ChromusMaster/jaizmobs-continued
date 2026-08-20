@@ -1,13 +1,9 @@
 package net.jaiz.jaizmobs.entity.custom;
 
-import net.jaiz.jaizmobs.entity.ai.PineGiantAttackGoal;
 import net.jaiz.jaizmobs.entity.ai.StriderHunterAttackGoal;
-import net.jaiz.jaizmobs.entity.ai.TotemSpiritAttackGoal;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -29,9 +25,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.LevelReader;
 
 public class StriderHunterEntity extends Monster implements AttackingMob {
@@ -109,11 +103,11 @@ public class StriderHunterEntity extends Monster implements AttackingMob {
 
     protected void initCustomGoals() {
         this.goalSelector.addGoal(1, new StriderHunterAttackGoal(this, 1D, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal (this, Player.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal (this, Strider.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Strider.class, true));
         this.targetSelector.addGoal(4, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal (this, IronGolem.class, true));
-        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal (this, SnowGolem.class, true));
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, SnowGolem.class, true));
         this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0, 60));
 
     }

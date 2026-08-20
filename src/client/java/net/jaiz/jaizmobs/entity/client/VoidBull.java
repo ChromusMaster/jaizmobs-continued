@@ -18,13 +18,11 @@ public final class VoidBull extends EntityModel<JaizMobRenderState> {
 	private final KeyframeAnimation walkAnimation;
 	private final KeyframeAnimation idleAnimation;
 	private final KeyframeAnimation attackAnimation;
-	private final ModelPart voidbull;
 	private final ModelPart head;
 
 	public VoidBull(ModelPart root) {
 		super(root);
-		this.voidbull = root.getChild("voidbull");
-		this.head = voidbull.getChild("body").getChild("head");
+		this.head = root.getChild("voidbull").getChild("body").getChild("head");
 	
 		this.walkAnimation = ModAnimations.VOIDBULL_WALK.bake(root);
 		this.idleAnimation = ModAnimations.VOIDBULL_IDLE.bake(root);
@@ -40,9 +38,9 @@ public final class VoidBull extends EntityModel<JaizMobRenderState> {
 
 		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(34, 43).addBox(-4.0F, -2.5F, 0.3333F, 9.0F, 9.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.5F, -0.5F, 8.6667F));
 
-		PartDefinition horn_r_r1 = head.addOrReplaceChild("horn_r_r1", CubeListBuilder.create().texOffs(46, 0).addBox(-2.5F, -4.5F, -4.5F, 5.0F, 9.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.5F, -1.0F, 5.8333F, -0.3491F, 0.3491F, 0.0F));
+		head.addOrReplaceChild("horn_r_r1", CubeListBuilder.create().texOffs(46, 0).addBox(-2.5F, -4.5F, -4.5F, 5.0F, 9.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.5F, -1.0F, 5.8333F, -0.3491F, 0.3491F, 0.0F));
 
-		PartDefinition horn_l_r1 = head.addOrReplaceChild("horn_l_r1", CubeListBuilder.create().texOffs(55, 23).addBox(-2.5F, -4.5F, -4.5F, 5.0F, 9.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.5F, -1.0F, 5.8333F, -0.3491F, -0.3491F, 0.0F));
+		head.addOrReplaceChild("horn_l_r1", CubeListBuilder.create().texOffs(55, 23).addBox(-2.5F, -4.5F, -4.5F, 5.0F, 9.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.5F, -1.0F, 5.8333F, -0.3491F, -0.3491F, 0.0F));
 
 		PartDefinition body_2 = body.addOrReplaceChild("body_2", CubeListBuilder.create().texOffs(0, 32).addBox(-6.0F, -6.0F, -11.5F, 12.0F, 12.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -8.5F));
 
@@ -54,19 +52,19 @@ public final class VoidBull extends EntityModel<JaizMobRenderState> {
 
 		PartDefinition tail_flukes = body_5.addOrReplaceChild("tail_flukes", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, -5.0F));
 
-		PartDefinition tail_fluke2_r1 = tail_flukes.addOrReplaceChild("tail_fluke2_r1", CubeListBuilder.create().texOffs(0, 63).addBox(0.0F, -4.0F, -50.0F, 0.0F, 8.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 38.5F, 0.0F, 0.0F, -0.7854F));
+		tail_flukes.addOrReplaceChild("tail_fluke2_r1", CubeListBuilder.create().texOffs(0, 63).addBox(0.0F, -4.0F, -50.0F, 0.0F, 8.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 38.5F, 0.0F, 0.0F, -0.7854F));
 
-		PartDefinition tail_fluke1_r1 = tail_flukes.addOrReplaceChild("tail_fluke1_r1", CubeListBuilder.create().texOffs(64, 30).addBox(0.0F, -4.0F, -5.5F, 0.0F, 8.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -6.0F, 0.0F, 0.0F, 0.7854F));
+		tail_flukes.addOrReplaceChild("tail_fluke1_r1", CubeListBuilder.create().texOffs(64, 30).addBox(0.0F, -4.0F, -5.5F, 0.0F, 8.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -6.0F, 0.0F, 0.0F, 0.7854F));
 
 		PartDefinition legs = voidbull.addOrReplaceChild("legs", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition front_l = legs.addOrReplaceChild("front_l", CubeListBuilder.create().texOffs(74, 0).addBox(-4.5F, 0.0F, -2.5F, 5.0F, 16.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-6.5F, -16.0F, 5.5F));
+		legs.addOrReplaceChild("front_l", CubeListBuilder.create().texOffs(74, 0).addBox(-4.5F, 0.0F, -2.5F, 5.0F, 16.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-6.5F, -16.0F, 5.5F));
 
-		PartDefinition front_r = legs.addOrReplaceChild("front_r", CubeListBuilder.create().texOffs(68, 64).addBox(-0.5F, 0.0F, -2.5F, 5.0F, 16.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(6.5F, -16.0F, 5.5F));
+		legs.addOrReplaceChild("front_r", CubeListBuilder.create().texOffs(68, 64).addBox(-0.5F, 0.0F, -2.5F, 5.0F, 16.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(6.5F, -16.0F, 5.5F));
 
-		PartDefinition back_l = legs.addOrReplaceChild("back_l", CubeListBuilder.create().texOffs(42, 79).addBox(-16.0F, 0.0F, -2.5F, 5.0F, 14.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(6.0F, -14.0F, -10.5F));
+		legs.addOrReplaceChild("back_l", CubeListBuilder.create().texOffs(42, 79).addBox(-16.0F, 0.0F, -2.5F, 5.0F, 14.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(6.0F, -14.0F, -10.5F));
 
-		PartDefinition back_r = legs.addOrReplaceChild("back_r", CubeListBuilder.create().texOffs(22, 74).addBox(11.0F, 0.0F, -2.5F, 5.0F, 14.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-6.0F, -14.0F, -10.5F));
+		legs.addOrReplaceChild("back_r", CubeListBuilder.create().texOffs(22, 74).addBox(11.0F, 0.0F, -2.5F, 5.0F, 14.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-6.0F, -14.0F, -10.5F));
 		return LayerDefinition.create(modelData, 100, 100);
 	}
 

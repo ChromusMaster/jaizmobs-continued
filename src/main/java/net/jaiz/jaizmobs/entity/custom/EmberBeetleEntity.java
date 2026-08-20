@@ -108,7 +108,7 @@ public class EmberBeetleEntity extends Mob implements AnimatedMob {
     }
 
     static class EmberBeetleMoveControl
-            extends MoveControl {
+            extends MoveControl<EmberBeetleEntity> {
         private final EmberBeetleEntity emberBeetle;
         private int collisionCheckCooldown;
 
@@ -132,19 +132,16 @@ public class EmberBeetleEntity extends Mob implements AnimatedMob {
                     this.operation = Operation.WAIT;
                 }
             }
-            if (this.emberBeetle.getTarget() == null) {
+            LivingEntity target = this.emberBeetle.getTarget();
+            if (target == null) {
                 Vec3 vec3d = this.emberBeetle.getDeltaMovement();
                 this.emberBeetle.setYRot(-((float)Mth.atan2(vec3d.x, vec3d.z)) * 57.295776f);
                 this.emberBeetle.yBodyRot = this.emberBeetle.getYRot();
-            } else {
-                LivingEntity livingEntity = this.emberBeetle.getTarget();
-                double d = 64.0;
-                if (livingEntity.distanceToSqr(this.emberBeetle) < 4096.0) {
-                    double e = livingEntity.getX() - this.emberBeetle.getX();
-                    double f = livingEntity.getZ() - this.emberBeetle.getZ();
+            } else if (target.distanceToSqr(this.emberBeetle) < 4096.0) {
+                    double e = target.getX() - this.emberBeetle.getX();
+                    double f = target.getZ() - this.emberBeetle.getZ();
                     this.emberBeetle.setYRot(-((float)Mth.atan2(e, f)) * 57.295776f);
                     this.emberBeetle.yBodyRot = this.emberBeetle.getYRot();
-                }
             }
         }
 

@@ -30,20 +30,11 @@ loom {
 }
 
 // This adds a new gradle task that runs the datagen API: "gradlew runDatagen"
+// Add the generated resources to the main source set
 fabricApi {
 	configureDataGeneration() {
 		client = true
-	}
-}
-
-// Add the generated resources to the main source set
-sourceSets {
-	main {
-		resources {
-			srcDirs += [
-					'src/main/generated'
-			]
-		}
+		addToResources = true
 	}
 }
 dependencies {

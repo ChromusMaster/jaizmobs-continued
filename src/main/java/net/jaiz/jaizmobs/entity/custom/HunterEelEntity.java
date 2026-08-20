@@ -47,7 +47,7 @@ public class HunterEelEntity extends WaterAnimal implements AttackingMob {
     public HunterEelEntity(EntityType<? extends WaterAnimal > entityType, Level world) {
 
         super(entityType, world);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.022f, 0.1f, true);
+        this.moveControl = new SmoothSwimmingMoveControl<>(this, 85, 10, 0.022f, 0.1f, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
         this.xpReward = 20;
     }
@@ -92,12 +92,12 @@ public class HunterEelEntity extends WaterAnimal implements AttackingMob {
         this.goalSelector.addGoal(1, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(2, new HunterEelAttackGoal(this, 1d, false));
         this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0, 10));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal (this, Player.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal (this, KlephtopodEntity.class, true));
-        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal (this, Axolotl.class, true));
-        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal (this, Dolphin.class, true));
-        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal (this, Guardian.class, true));
-        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal (this, Squid.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, KlephtopodEntity.class, true));
+        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, Axolotl.class, true));
+        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, Dolphin.class, true));
+        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, Guardian.class, true));
+        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, Squid.class, true));
         this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
 
     }

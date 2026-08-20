@@ -1,7 +1,6 @@
 package net.jaiz.jaizmobs.entity.custom;
 
 import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;

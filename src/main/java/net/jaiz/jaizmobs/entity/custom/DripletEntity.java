@@ -3,7 +3,6 @@ package net.jaiz.jaizmobs.entity.custom;
 import net.jaiz.jaizmobs.entity.ai.DripletAttackGoal;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -81,12 +80,12 @@ public class DripletEntity extends Monster implements AttackingMob {
     protected void initCustomGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(1, new DripletAttackGoal(this, 1D, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal (this, Player.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(4, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal (this, IronGolem.class, true));
-        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal (this, SnowGolem.class, true));
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, SnowGolem.class, true));
         this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0));
-        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal (this, AbstractVillager.class, true));
+        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
 
     }
 

@@ -100,7 +100,7 @@ public class StarFishLeaderEntity extends Mob implements AnimatedMob {
     }
 
     static class StarFishLeaderMoveControl
-            extends MoveControl {
+            extends MoveControl<StarFishLeaderEntity> {
         private final StarFishLeaderEntity starfishleader;
         private int collisionCheckCooldown;
 
@@ -128,19 +128,16 @@ public class StarFishLeaderEntity extends Mob implements AnimatedMob {
                     this.operation = Operation.WAIT;
                 }
             }
-            if (this.starfishleader.getTarget() == null) {
+            LivingEntity target = this.starfishleader.getTarget();
+            if (target == null) {
                 Vec3 vec3d = this.starfishleader.getDeltaMovement();
                 this.starfishleader.setYRot(-((float)Mth.atan2(vec3d.x, vec3d.z)) * 57.295776f);
                 this.starfishleader.yBodyRot = this.starfishleader.getYRot();
-            } else {
-                LivingEntity livingEntity = this.starfishleader.getTarget();
-                double d = 64.0;
-                if (livingEntity.distanceToSqr(this.starfishleader) < 4096.0) {
-                    double e = livingEntity.getX() - this.starfishleader.getX();
-                    double f = livingEntity.getZ() - this.starfishleader.getZ();
+            } else if (target.distanceToSqr(this.starfishleader) < 4096.0) {
+                    double e = target.getX() - this.starfishleader.getX();
+                    double f = target.getZ() - this.starfishleader.getZ();
                     this.starfishleader.setYRot(-((float)Mth.atan2(e, f)) * 57.295776f);
                     this.starfishleader.yBodyRot = this.starfishleader.getYRot();
-                }
             }
         }
 

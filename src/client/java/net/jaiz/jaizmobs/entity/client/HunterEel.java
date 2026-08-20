@@ -18,13 +18,11 @@ public final class HunterEel extends EntityModel<JaizMobRenderState> {
 	private final KeyframeAnimation walkAnimation;
 	private final KeyframeAnimation idleAnimation;
 	private final KeyframeAnimation attackAnimation;
-	private final ModelPart hunter_eel;
 	private final ModelPart head;
 
 	public HunterEel(ModelPart root) {
 		super(root);
-		this.hunter_eel = root.getChild("hunter_eel");
-		this.head = hunter_eel.getChild("head");
+		this.head = root.getChild("hunter_eel").getChild("head");
 	
 		this.walkAnimation = ModAnimations.HUNTER_EEL_SWIM.bake(root);
 		this.idleAnimation = ModAnimations.HUNTER_EEL_IDLE.bake(root);
@@ -39,7 +37,7 @@ public final class HunterEel extends EntityModel<JaizMobRenderState> {
 
 		PartDefinition bottom_jaw = head.addOrReplaceChild("bottom_jaw", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, -0.2321F, -0.1703F, 3.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.2321F, 0.1703F));
 
-		PartDefinition beard_r1 = bottom_jaw.addOrReplaceChild("beard_r1", CubeListBuilder.create().texOffs(0, 24).addBox(0.0F, -1.5F, -2.25F, 0.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 2.7679F, 3.8297F, -0.1745F, 0.0F, 0.0F));
+		bottom_jaw.addOrReplaceChild("beard_r1", CubeListBuilder.create().texOffs(0, 24).addBox(0.0F, -1.5F, -2.25F, 0.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 2.7679F, 3.8297F, -0.1745F, 0.0F, 0.0F));
 
 		PartDefinition segment1 = hunter_eel.addOrReplaceChild("segment1", CubeListBuilder.create().texOffs(17, 23).addBox(-1.0F, -1.0F, -3.0F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.0F))
 				.texOffs(28, 7).addBox(0.0F, 1.0F, -3.0F, 0.0F, 5.0F, 3.0F, new CubeDeformation(0.0F))
@@ -73,7 +71,7 @@ public final class HunterEel extends EntityModel<JaizMobRenderState> {
 				.texOffs(12, 0).addBox(-1.0F, -1.0F, -3.0F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.0F))
 				.texOffs(6, 30).addBox(0.0F, -6.0F, -3.0F, 0.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -3.0F));
 
-		PartDefinition segment9 = segment8.addOrReplaceChild("segment9", CubeListBuilder.create().texOffs(32, 0).addBox(-0.75F, -0.75F, -3.0F, 1.5F, 1.5F, 3.0F, new CubeDeformation(0.0F))
+		segment8.addOrReplaceChild("segment9", CubeListBuilder.create().texOffs(32, 0).addBox(-0.75F, -0.75F, -3.0F, 1.5F, 1.5F, 3.0F, new CubeDeformation(0.0F))
 				.texOffs(0, 0).addBox(0.0F, -6.0F, -9.0F, 0.0F, 12.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -3.0F));
 		return LayerDefinition.create(modelData, 42, 42);
 	}

@@ -2,16 +2,12 @@ package net.jaiz.jaizmobs.entity.custom;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -25,9 +21,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 public class SoulWaderEntity extends Monster implements AnimatedMob {
-
-    private static final EntityDataAccessor<Boolean> ATTACKING =
-            SynchedEntityData.defineId(SoulWaderEntity.class, EntityDataSerializers.BOOLEAN);
 
     public AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;

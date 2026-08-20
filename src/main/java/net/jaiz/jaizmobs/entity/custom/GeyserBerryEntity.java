@@ -53,8 +53,8 @@ public class GeyserBerryEntity extends Monster implements AttackingMob {
     protected void initCustomGoals() {
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 6.0f));
         this.goalSelector.addGoal(1, new GeyserBerryAttackGoal(this, 1, false));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal(this, Player.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal(this, PathfinderMob.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PathfinderMob.class, true));
     }
 
     @Override

@@ -18,17 +18,24 @@ public final class ModItems {
     private ModItems() {
     }
 
-    private static <T extends Item> T registerItem(String name, Function<Item.Properties, T> factory, Item.Properties properties) {
-        ResourceKey<Item> key = ResourceKey.create(
-                Registries.ITEM,
-                Identifier.fromNamespaceAndPath(JaizMobs.MOD_ID, name)
-        );
+    private static <T extends Item> T registerItem(ResourceKey<Item> key, Function<Item.Properties, T> factory, Item.Properties properties) {
         T item = factory.apply(properties.setId(key));
         return Registry.register(BuiltInRegistries.ITEM, key, item);
     }
 
+    private static <T extends Item> T registerItem(String name, Function<Item.Properties, T> factory, Item.Properties properties) {
+        return registerItem(ResourceKey.create(
+                Registries.ITEM,
+                Identifier.fromNamespaceAndPath(JaizMobs.MOD_ID, name)
+        ), factory, properties);
+    }
+
     private static Item registerItem(String name) {
         return registerItem(name, Item::new, new Item.Properties());
+    }
+
+    private static Item registerItem(ResourceKey<Item> key) {
+        return registerItem(key, Item::new, new Item.Properties());
     }
 
     // Food
@@ -56,30 +63,30 @@ public final class ModItems {
 
     // Ingredients
 
-    public static final Item VOID_HUSK = registerItem("void_husk");
+    public static final Item VOID_HUSK = registerItem(ModItemIds.VOID_HUSK);
     public static final Item TATTERED_WING = registerItem("tattered_wing");
-    public static final Item KLEPHTOPOD_SCUTE = registerItem("klephtopod_scute");
-    public static final Item DRIPSTONE_SHARD = registerItem("dripstone_shard");
+    public static final Item KLEPHTOPOD_SCUTE = registerItem(ModItemIds.KLEPHTOPOD_SCUTE);
+    public static final Item DRIPSTONE_SHARD = registerItem(ModItemIds.DRIPSTONE_SHARD);
     public static final Item CRACKED_CALCITE_TOTEM = registerItem("cracked_calcite_totem", Item::new, new Item.Properties().stacksTo(16));
     public static final Item SULFURIC_REMNANT = registerItem("sulfuric_remnant");
-    public static final Item HARDENED_BONE_FRAGMENT = registerItem("hardened_bone_fragment");
-    public static final Item BASALT_MANDIBLE = registerItem("basalt_mandible", Item::new, new Item.Properties().fireResistant());
+    public static final Item HARDENED_BONE_FRAGMENT = registerItem(ModItemIds.HARDENED_BONE_FRAGMENT);
+    public static final Item BASALT_MANDIBLE = registerItem(ModItemIds.BASALT_MANDIBLE, Item::new, new Item.Properties().fireResistant());
 
     // Armour Items
 
-    public static final Item VOID_SCALE_MAIL_HELMET = armor("void_scale_mail_helmet", ModArmourMaterials.VOID_SCALE_MAIL,
+    public static final Item VOID_SCALE_MAIL_HELMET = armor(ModItemIds.VOID_SCALE_MAIL_HELMET, ModArmourMaterials.VOID_SCALE_MAIL,
             ArmorType.HELMET, ModArmourMaterials.VOID_SCALE_MAIL_DURABILITY);
-    public static final Item VOID_SCALE_MAIL_CHESTPLATE = armor("void_scale_mail_chestplate", ModArmourMaterials.VOID_SCALE_MAIL,
+    public static final Item VOID_SCALE_MAIL_CHESTPLATE = armor(ModItemIds.VOID_SCALE_MAIL_CHESTPLATE, ModArmourMaterials.VOID_SCALE_MAIL,
             ArmorType.CHESTPLATE, ModArmourMaterials.VOID_SCALE_MAIL_DURABILITY);
-    public static final Item VOID_SCALE_MAIL_LEGGINGS = armor("void_scale_mail_leggings", ModArmourMaterials.VOID_SCALE_MAIL,
+    public static final Item VOID_SCALE_MAIL_LEGGINGS = armor(ModItemIds.VOID_SCALE_MAIL_LEGGINGS, ModArmourMaterials.VOID_SCALE_MAIL,
             ArmorType.LEGGINGS, ModArmourMaterials.VOID_SCALE_MAIL_DURABILITY);
-    public static final Item VOID_SCALE_MAIL_BOOTS = armor("void_scale_mail_boots", ModArmourMaterials.VOID_SCALE_MAIL,
+    public static final Item VOID_SCALE_MAIL_BOOTS = armor(ModItemIds.VOID_SCALE_MAIL_BOOTS, ModArmourMaterials.VOID_SCALE_MAIL,
             ArmorType.BOOTS, ModArmourMaterials.VOID_SCALE_MAIL_DURABILITY);
-    public static final Item KLEPHTOPOD_SHELL = armor("klephtopod_shell", ModArmourMaterials.KLEPHTOPOD_SHELL,
+    public static final Item KLEPHTOPOD_SHELL = armor(ModItemIds.KLEPHTOPOD_SHELL, ModArmourMaterials.KLEPHTOPOD_SHELL,
             ArmorType.HELMET, ModArmourMaterials.KLEPHTOPOD_SHELL_DURABILITY);
-    public static final Item KLEPHTOPOD_CHESTPLATE = armor("klephtopod_chestplate", ModArmourMaterials.KLEPHTOPOD_SHELL,
+    public static final Item KLEPHTOPOD_CHESTPLATE = armor(ModItemIds.KLEPHTOPOD_CHESTPLATE, ModArmourMaterials.KLEPHTOPOD_SHELL,
             ArmorType.CHESTPLATE, ModArmourMaterials.KLEPHTOPOD_SHELL_DURABILITY);
-    public static final Item HARDENED_SKULL = armor("hardened_skull", ModArmourMaterials.HARDENED_BONE,
+    public static final Item HARDENED_SKULL = armor(ModItemIds.HARDENED_SKULL, ModArmourMaterials.HARDENED_BONE,
             ArmorType.HELMET, ModArmourMaterials.HARDENED_BONE_DURABILITY);
 
     // Tools + Weapons
@@ -145,9 +152,9 @@ public final class ModItems {
         ModArmourItem.registerEffectHandler();
     }
 
-    private static Item armor(String name, net.minecraft.world.item.equipment.ArmorMaterial material,
+    private static Item armor(ResourceKey<Item> key, net.minecraft.world.item.equipment.ArmorMaterial material,
                               ArmorType type, int durability) {
-        return registerItem(name, Item::new, new Item.Properties()
+        return registerItem(key, Item::new, new Item.Properties()
                 .humanoidArmor(material, type)
                 .durability(type.getDurability(durability)));
     }
