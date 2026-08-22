@@ -7,16 +7,16 @@ import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.ParticleLimit;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import java.util.Optional;
 
 @Environment(EnvType.CLIENT)
 public class SproutParticle extends SingleQuadParticle {
 
-    SproutParticle(ClientLevel world, SpriteSet spriteProvider, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-        super(world, x, y - 0.125, z, velocityX, velocityY, velocityZ, spriteProvider.get(world.getRandom()));
+    SproutParticle(ClientLevel world, SpriteSet spriteProvider, double x, double y, double z, double velocityX, double velocityY, double velocityZ, RandomSource randomSource) {
+        super(world, x, y - 0.125, z, velocityX, velocityY, velocityZ, spriteProvider.get(randomSource));
         this.setSize(0.01F, 0.01F);
-        this.quadSize = this.quadSize * 0.5f ;
-        this.lifetime = (int)(16.0 / (Math.random() * 0.8 + 0.2));
+        this.quadSize *= 0.5F;
         this.hasPhysics = false;
         this.friction = 1.0F;
         this.gravity = 0.0F;
@@ -30,7 +30,6 @@ public class SproutParticle extends SingleQuadParticle {
     @Override
     public int getLightCoords(float tint) {
         int i = super.getLightCoords(tint);
-        int j = 240;
         int k = i >> 16 & 0xFF;
         return 240 | k << 16;
     }
@@ -43,14 +42,15 @@ public class SproutParticle extends SingleQuadParticle {
             this.spriteProvider = spriteProvider;
         }
 
-        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientWorld, double d, double e, double f, double g, double h, double i) {
-            SproutParticle sproutParticle = new SproutParticle(clientWorld, this.spriteProvider, d, e, f, 0.0, -0.65F, 0.0) {
+        @Override
+        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientWorld, double d, double e, double f, double g, double h, double i, RandomSource randomSource) {
+            SproutParticle sproutParticle = new SproutParticle(clientWorld, this.spriteProvider, d, e, f, 0.0, -0.65F, 0.0, randomSource) {
                 @Override
                 public Optional<ParticleLimit> getParticleLimit() {
                     return Optional.of(ParticleLimit.SPORE_BLOSSOM);
                 }
             };
-            sproutParticle.lifetime = Mth.randomBetweenInclusive(clientWorld.getRandom(), 200, 500);
+            sproutParticle.lifetime = Mth.randomBetweenInclusive(randomSource, 200, 500);
             sproutParticle.gravity = 0.00F;
             return sproutParticle;
         }
