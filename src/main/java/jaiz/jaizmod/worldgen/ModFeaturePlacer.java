@@ -195,6 +195,5 @@ public class ModFeaturePlacer {
         SpawnPlacements.register(ModEntities.FIRE_FLY_SWARM, SpawnPlacements.getPlacementType(ModEntities.FIRE_FLY_SWARM), Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
         SpawnPlacements.register(ModEntities.DRAGONFLY, SpawnPlacements.getPlacementType(ModEntities.DRAGONFLY), Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
         SpawnPlacements.register(ModEntities.SNAIL, SpawnPlacements.getPlacementType(ModEntities.SNAIL), Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkAnimalSpawnRules);
-        SpawnPlacements.register(EntityTypes.CAMEL, SpawnPlacements.getPlacementType(EntityTypes.CAMEL), Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Animal::checkMobSpawnRules);
     }
 }

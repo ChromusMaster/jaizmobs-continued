@@ -1,11 +1,13 @@
 package jaiz.jaizmod.block;
 
-import com.terraformersmc.terraform.sign.api.block.TerraformSignBlockHelper;
 import jaiz.jaizmod.JaizMod;
 //import jaiz.jaizmod.block.blockentities.WaterTickingBlock;
 import jaiz.jaizmod.block.blockentities.WaterTickingBlock;
 import jaiz.jaizmod.block.custom.*;
 import jaiz.jaizmod.worldgen.features.ModConfiguredFeatures;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityType;
+import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
 import net.minecraft.world.level.block.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
@@ -39,6 +41,7 @@ import net.minecraft.world.level.block.TallFlowerBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.grower.TreeGrower;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -482,9 +485,9 @@ public class ModBlocks {
     public static final Identifier ROTTEN_HANGING_SIGN_TEXTURE = Identifier.fromNamespaceAndPath(JaizMod.MOD_ID, "entity/signs/hanging/rotten");
     public static final Identifier ROTTEN_HANGING_GUI_SIGN_TEXTURE = Identifier.fromNamespaceAndPath(JaizMod.MOD_ID, "textures/gui/hanging_signs/rotten");
 
-    public static final WoodType ROTTEN_SIGN_TYPE = TerraformSignBlockHelper.registerDefaultWoodType(Identifier.fromNamespaceAndPath(JaizMod.MOD_ID, "rotten"));
-    public static final WoodType DESERT_OAK_SIGN_TYPE = TerraformSignBlockHelper.registerDefaultWoodType(Identifier.fromNamespaceAndPath(JaizMod.MOD_ID, "desert_oak"));
-    public static final WoodType MAHOGANY_SIGN_TYPE = TerraformSignBlockHelper.registerDefaultWoodType(Identifier.fromNamespaceAndPath(JaizMod.MOD_ID, "mahogany"));
+    public static final WoodType ROTTEN_SIGN_TYPE = registerWoodType("rotten");
+    public static final WoodType DESERT_OAK_SIGN_TYPE = registerWoodType("desert_oak");
+    public static final WoodType MAHOGANY_SIGN_TYPE = registerWoodType("mahogany");
 
     public static final Block HANGING_ROTTEN_SIGN = registerSignBlock("rotten_hanging_sign", settings -> new CeilingHangingSignBlock(ROTTEN_SIGN_TYPE, settings), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN));
     public static final Block WALL_HANGING_ROTTEN_SIGN = registerSignBlock("rotten_wall_hanging_sign", settings -> new WallHangingSignBlock(ROTTEN_SIGN_TYPE, settings), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN).overrideLootTable(HANGING_ROTTEN_SIGN.getLootTable()));
@@ -573,7 +576,22 @@ public class ModBlocks {
     public static <B extends SignBlock> B registerSignBlock(String name, Function<BlockBehaviour.Properties, B> factory, BlockBehaviour.Properties settings) {
         ResourceKey<Block> key = ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(JaizMod.MOD_ID, name));
         B block = factory.apply(settings.setId(key));
-        return TerraformSignBlockHelper.registerSignBlock(key, block);
+
+        if (block instanceof StandingSignBlock || block instanceof WallSignBlock) {
+            ((FabricBlockEntityType) (Object) BlockEntityTypes.SIGN).addValidBlock(block);
+        } else if (block instanceof CeilingHangingSignBlock || block instanceof WallHangingSignBlock) {
+            ((FabricBlockEntityType) (Object) BlockEntityTypes.HANGING_SIGN).addValidBlock(block);
+        } else {
+            throw new IllegalArgumentException("Unsupported sign block: " + block.getClass().getName());
+        }
+
+        return Registry.register(BuiltInRegistries.BLOCK, key, block);
+    }
+
+    private static WoodType registerWoodType(String name) {
+        Identifier id = Identifier.fromNamespaceAndPath(JaizMod.MOD_ID, name);
+        BlockSetType blockSetType = BlockSetTypeBuilder.copyOf(BlockSetType.OAK).register(id);
+        return WoodTypeBuilder.copyOf(WoodType.OAK).register(id, blockSetType);
     }
 
     public static void registerModBlocks() {

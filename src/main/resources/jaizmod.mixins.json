@@ -5,6 +5,7 @@
   "mixins": [
     "GlowSquidMixin",
     "IronGolemEntityMixin",
+    "NearestTargetGoalMixin",
     "SnifferEntityMixin",
     "SquidMixin",
     "StructurePlacerTypeInvoker",
