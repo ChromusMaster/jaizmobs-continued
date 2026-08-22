@@ -1,147 +1,171 @@
 {
   "type": "minecraft:simple_random_selector",
-  "config":
-  {
-    "features":
-    [
+  "config": {
+    "features": [
       {
         "feature": {
-          "type": "minecraft:random_patch",
+          "type": "minecraft:simple_block",
           "config": {
-            "feature": {
-              "feature": {
-                "type": "minecraft:simple_block",
-                "config": {
-                  "to_place": {
-                    "type": "minecraft:simple_state_provider",
-                    "state": {
-                      "Name": "minecraft:moss_carpet"
-                    }
-                  }
-                }
-              },
-              "placement": [
-                {
-                  "type": "minecraft:block_predicate_filter",
-                  "predicate": {
-                    "type": "minecraft:all_of",
-                    "predicates": [
-                      {
-                        "type": "minecraft:matching_blocks",
-                        "blocks": "minecraft:air"
-                      },
-                      {
-                        "type": "minecraft:matching_blocks",
-                        "blocks": "minecraft:birch_log",
-                        "offset": [
-                          0,
-                          -1,
-                          0
-                        ]
-                      }
-                    ]
-                  }
-                }
-              ]
-            },
-            "tries": 148,
-            "xz_spread": 9,
-            "y_spread": 2
+            "to_place": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "minecraft:moss_carpet"
+              }
+            }
           }
         },
-        "placement": []
-      },      {
+        "placement": [
+          {
+            "type": "minecraft:count",
+            "count": 148
+          },
+          {
+            "type": "minecraft:random_offset",
+            "xz_spread": {
+              "type": "minecraft:trapezoid",
+              "min": -9,
+              "max": 9,
+              "plateau": 0
+            },
+            "y_spread": {
+              "type": "minecraft:trapezoid",
+              "min": -2,
+              "max": 2,
+              "plateau": 0
+            }
+          },
+          {
+            "type": "minecraft:block_predicate_filter",
+            "predicate": {
+              "type": "minecraft:all_of",
+              "predicates": [
+                {
+                  "type": "minecraft:matching_blocks",
+                  "blocks": "minecraft:air"
+                },
+                {
+                  "type": "minecraft:matching_blocks",
+                  "blocks": "minecraft:birch_log",
+                  "offset": [
+                    0,
+                    -1,
+                    0
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
         "feature": {
-          "type": "minecraft:random_patch",
+          "type": "minecraft:simple_block",
           "config": {
-            "feature": {
-              "feature": {
-                "type": "minecraft:simple_block",
-                "config": {
-                  "to_place": {
-                    "type": "minecraft:simple_state_provider",
-                    "state": {
-                      "Name": "minecraft:red_mushroom"
-                    }
-                  }
-                }
-              },
-              "placement": [
-                {
-                  "type": "minecraft:block_predicate_filter",
-                  "predicate": {
-                    "type": "minecraft:all_of",
-                    "predicates": [
-                      {
-                        "type": "minecraft:matching_blocks",
-                        "blocks": "minecraft:air"
-                      },
-                      {
-                        "type": "minecraft:matching_blocks",
-                        "blocks": "minecraft:birch_log",
-                        "offset": [
-                          0,
-                          -1,
-                          0
-                        ]
-                      }
-                    ]
-                  }
-                }
-              ]
-            },
-            "tries": 108,
-            "xz_spread": 9,
-            "y_spread": 2
+            "to_place": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "minecraft:red_mushroom"
+              }
+            }
           }
         },
-        "placement": []
-      },      {
+        "placement": [
+          {
+            "type": "minecraft:count",
+            "count": 108
+          },
+          {
+            "type": "minecraft:random_offset",
+            "xz_spread": {
+              "type": "minecraft:trapezoid",
+              "min": -9,
+              "max": 9,
+              "plateau": 0
+            },
+            "y_spread": {
+              "type": "minecraft:trapezoid",
+              "min": -2,
+              "max": 2,
+              "plateau": 0
+            }
+          },
+          {
+            "type": "minecraft:block_predicate_filter",
+            "predicate": {
+              "type": "minecraft:all_of",
+              "predicates": [
+                {
+                  "type": "minecraft:matching_blocks",
+                  "blocks": "minecraft:air"
+                },
+                {
+                  "type": "minecraft:matching_blocks",
+                  "blocks": "minecraft:birch_log",
+                  "offset": [
+                    0,
+                    -1,
+                    0
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
         "feature": {
-          "type": "minecraft:random_patch",
+          "type": "minecraft:simple_block",
           "config": {
-            "feature": {
-              "feature": {
-                "type": "minecraft:simple_block",
-                "config": {
-                  "to_place": {
-                    "type": "minecraft:simple_state_provider",
-                    "state": {
-                      "Name": "minecraft:brown_mushroom"
-                    }
-                  }
-                }
-              },
-              "placement": [
-                {
-                  "type": "minecraft:block_predicate_filter",
-                  "predicate": {
-                    "type": "minecraft:all_of",
-                    "predicates": [
-                      {
-                        "type": "minecraft:matching_blocks",
-                        "blocks": "minecraft:air"
-                      },
-                      {
-                        "type": "minecraft:matching_blocks",
-                        "blocks": "minecraft:birch_log",
-                        "offset": [
-                          0,
-                          -1,
-                          0
-                        ]
-                      }
-                    ]
-                  }
-                }
-              ]
-            },
-            "tries": 108,
-            "xz_spread": 9,
-            "y_spread": 2
+            "to_place": {
+              "type": "minecraft:simple_state_provider",
+              "state": {
+                "Name": "minecraft:brown_mushroom"
+              }
+            }
           }
         },
-        "placement": []
+        "placement": [
+          {
+            "type": "minecraft:count",
+            "count": 108
+          },
+          {
+            "type": "minecraft:random_offset",
+            "xz_spread": {
+              "type": "minecraft:trapezoid",
+              "min": -9,
+              "max": 9,
+              "plateau": 0
+            },
+            "y_spread": {
+              "type": "minecraft:trapezoid",
+              "min": -2,
+              "max": 2,
+              "plateau": 0
+            }
+          },
+          {
+            "type": "minecraft:block_predicate_filter",
+            "predicate": {
+              "type": "minecraft:all_of",
+              "predicates": [
+                {
+                  "type": "minecraft:matching_blocks",
+                  "blocks": "minecraft:air"
+                },
+                {
+                  "type": "minecraft:matching_blocks",
+                  "blocks": "minecraft:birch_log",
+                  "offset": [
+                    0,
+                    -1,
+                    0
+                  ]
+                }
+              ]
+            }
+          }
+        ]
       }
     ]
   }

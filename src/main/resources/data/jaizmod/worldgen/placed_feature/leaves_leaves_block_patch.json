@@ -24,17 +24,57 @@
       "type": "minecraft:count",
       "count": {
         "type": "minecraft:clamped",
+        "max_inclusive": 1,
+        "min_inclusive": 0,
+        "source": {
+          "type": "minecraft:uniform",
           "max_inclusive": 1,
-          "min_inclusive": 0,
-          "source": {
-            "type": "minecraft:uniform",
-              "max_inclusive": 1,
-              "min_inclusive": -3
-          }
+          "min_inclusive": -3
+        }
       }
     },
     {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 1600
+    },
+    {
+      "type": "minecraft:random_offset",
+      "xz_spread": {
+        "type": "minecraft:trapezoid",
+        "min": -16,
+        "max": 16,
+        "plateau": 0
+      },
+      "y_spread": {
+        "type": "minecraft:trapezoid",
+        "min": -5,
+        "max": 5,
+        "plateau": 0
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:all_of",
+        "predicates": [
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          },
+          {
+            "type": "minecraft:matching_blocks",
+            "blocks": "jaizmod:mahogany_leaves",
+            "offset": [
+              0,
+              1,
+              0
+            ]
+          }
+        ]
+      }
     }
   ]
 }

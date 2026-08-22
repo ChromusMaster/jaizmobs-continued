@@ -1,6 +1,7 @@
 {
 	"textures": {
-		"spyglass": "jaizmod:item/glowing_spyglass_model"
+		"spyglass": "jaizmod:item/glowing_spyglass_model",
+		"particle": "jaizmod:item/glowing_spyglass_model"
 	},
 	"elements": [
 		{
