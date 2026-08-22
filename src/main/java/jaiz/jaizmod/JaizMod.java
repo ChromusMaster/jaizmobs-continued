@@ -13,6 +13,7 @@ import jaiz.jaizmod.entity.firefly.FireFlySwarmEntity;
 import jaiz.jaizmod.entity.fruit_bat.FruitBatEntity;
 import jaiz.jaizmod.entity.mason_mouth.MasonmouthEntity;
 import jaiz.jaizmod.entity.snail.SnailEntity;
+import jaiz.jaizmod.event.WelcomeGuide;
 import jaiz.jaizmod.item.ModItemGroups;
 import jaiz.jaizmod.item.ModItems;
 import jaiz.jaizmod.sound.ModSounds;
@@ -70,6 +71,7 @@ public class JaizMod implements ModInitializer {
 		ModCustomTrades.registerCustomTrades();
 		CustomBlockEntities.registerBlockEntities();
 		ModGameRules.registerGamerules();
+		WelcomeGuide.register();
 		ModBoats.registerBoats();
 		ModLootTables.registerLootTables();
 		ModBlocks.registerModBlocks();

@@ -1,0 +1,23 @@
+{
+  "entity.jaizmod.bandit": "Bandido",
+  "entity.jaizmod.butterfly": "Borboleta",
+  "entity.jaizmod.caterpillar": "Lagarta",
+  "entity.jaizmod.desert_oak_boat": "Barco de Carvalho do Deserto",
+  "entity.jaizmod.desert_oak_chest_boat": "Barco com Baú de Carvalho do Deserto",
+  "entity.jaizmod.dragonfly": "Libélula",
+  "entity.jaizmod.dynamite": "Dinamite",
+  "entity.jaizmod.fire_fly_swarm": "Enxame de Vaga-lumes",
+  "entity.jaizmod.fruit_bat": "Morcego-da-fruta",
+  "entity.jaizmod.glowball": "Bola Brilhante",
+  "entity.jaizmod.guano": "Guano",
+  "entity.jaizmod.mahogany_boat": "Barco de Mogno",
+  "entity.jaizmod.mahogany_chest_boat": "Barco com Baú de Mogno",
+  "entity.jaizmod.mason_mouth": "Mason Mouth",
+  "entity.jaizmod.rotten_boat": "Barco Apodrecido",
+  "entity.jaizmod.rotten_chest_boat": "Barco Apodrecido com Baú",
+  "entity.jaizmod.snail": "Caracol",
+  "guide.jaizmod.welcome.page_1": "Bem-vindo ao JaizMod Continued!\n\nEste megapack reúne JaizMod e Jaiz Mobs para o Minecraft 26.2.",
+  "guide.jaizmod.welcome.page_2": "Explore o mundo para encontrar novas criaturas, plantas, blocos, estruturas, equipamentos e pequenas surpresas Vanilla+.",
+  "guide.jaizmod.welcome.page_3": "No modo Criativo, abra as abas do JaizMod ou procure pelo ovo gerador do mob.\n\nOs comandos usam os namespaces jaizmod e jaizmobs.",
+  "guide.jaizmod.welcome.page_4": "Exemplos de comandos:\n/summon jaizmobs:aeroblob\n/give @s jaizmobs:aeroblob_spawn_egg\n\nDivirta-se explorando!"
+}
