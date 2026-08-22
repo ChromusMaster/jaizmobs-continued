@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "jaizmobs:item/emberbeetle_spawn_egg"
+  }
+}

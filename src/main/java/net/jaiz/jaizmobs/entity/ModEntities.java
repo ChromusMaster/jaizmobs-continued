@@ -23,7 +23,6 @@ public final class ModEntities {
     public static final EntityType<PineGiantEntity> PINE_GIANT = register("pine_giant", PineGiantEntity::new, MobCategory.MONSTER, 0.9f, 4.0f);
     public static final EntityType<DripletEntity> DRIPLET = register("driplet", DripletEntity::new, MobCategory.MONSTER, 0.5f, 0.8f);
     public static final EntityType<StalagtitanEntity> STALAGTITAN = register("stalagtitan", StalagtitanEntity::new, MobCategory.MONSTER, 0.8f, 3.3f);
-    public static final EntityType<SnailEntity> SNAIL = register("snail", SnailEntity::new, MobCategory.CREATURE, 0.4f, 0.4f);
     public static final EntityType<CalciteGolemEntity> CALCITE_GOLEM = register("calcite_golem", CalciteGolemEntity::new, MobCategory.CREATURE, 0.6f, 1.0f);
     public static final EntityType<CultivatorEntity> CULTIVATOR = register("cultivator", CultivatorEntity::new, MobCategory.CREATURE, 1.6f, 1.5f);
     public static final EntityType<KlephtopodEntity> KLEPHTOPOD = register("klephtopod", KlephtopodEntity::new, MobCategory.WATER_CREATURE, 1.0f, 0.7f);

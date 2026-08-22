@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "jaizmod:rare_spices",
+    "count": 2
+  },
+  "gives": {
+    "id": "minecraft:string",
+    "count": 12
+  },
+  "max_uses": 2.0,
+  "xp": 16.0,
+  "reputation_discount": 0.05
+}

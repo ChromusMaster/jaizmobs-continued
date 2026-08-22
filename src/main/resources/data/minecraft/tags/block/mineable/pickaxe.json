@@ -1,5 +1,18 @@
 {
   "values": [
-    "jaizmobs:sulfur_ore"
+    "jaizmod:packed_guano",
+    "jaizmod:guano_brick_wall",
+    "jaizmod:guano_brick_stairs",
+    "jaizmod:guano_brick_slab",
+    "jaizmod:guano_bricks",
+    "jaizmod:terracotta_brick_wall",
+    "jaizmod:terracotta_brick_stairs",
+    "jaizmod:terracotta_bricks",
+    "jaizmod:gilded_chiseled_sandstone",
+    "jaizmod:gilded_sandstone",
+    "jaizmod:gilded_cut_sandstone",
+    "jaizmod:chiseled_plated_calcite",
+    "jaizmod:plated_calcite",
+    "jaizmod:terracotta_brick_slab"
   ]
 }

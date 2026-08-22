@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "minecraft:emerald",
+    "count": 8
+  },
+  "gives": {
+    "id": "jaizmod:herbal_tea",
+    "count": 1
+  },
+  "max_uses": 3.0,
+  "xp": 2.0,
+  "reputation_discount": 0.05
+}

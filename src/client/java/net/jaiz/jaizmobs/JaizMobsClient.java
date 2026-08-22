@@ -20,7 +20,6 @@ public final class JaizMobsClient implements ClientModInitializer {
         EntityRenderers.register(ModEntities.PINE_GIANT, PineGiantRenderer::new);
         EntityRenderers.register(ModEntities.DRIPLET, DripletRenderer::new);
         EntityRenderers.register(ModEntities.STALAGTITAN, StalagtitanRenderer::new);
-        EntityRenderers.register(ModEntities.SNAIL, SnailRenderer::new);
         EntityRenderers.register(ModEntities.CALCITE_GOLEM, CalciteGolemRenderer::new);
         EntityRenderers.register(ModEntities.CULTIVATOR, CultivatorRenderer::new);
         EntityRenderers.register(ModEntities.KLEPHTOPOD, KlephtopodRenderer::new);

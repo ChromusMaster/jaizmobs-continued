@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "minecraft:emerald",
+    "count": 1
+  },
+  "gives": {
+    "id": "minecraft:clay_ball",
+    "count": 3
+  },
+  "max_uses": 6.0,
+  "xp": 2.0,
+  "reputation_discount": 0.05
+}

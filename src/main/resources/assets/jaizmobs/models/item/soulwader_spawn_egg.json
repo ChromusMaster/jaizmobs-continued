@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "jaizmobs:item/soulwader_spawn_egg"
+  }
+}

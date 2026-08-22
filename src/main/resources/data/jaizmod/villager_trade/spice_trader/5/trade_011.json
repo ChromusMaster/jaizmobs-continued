@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "jaizmod:rare_spices",
+    "count": 32
+  },
+  "gives": {
+    "id": "minecraft:mojang_banner_pattern",
+    "count": 1
+  },
+  "max_uses": 1.0,
+  "xp": 10.0,
+  "reputation_discount": 0.05
+}

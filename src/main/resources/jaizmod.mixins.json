@@ -1,0 +1,26 @@
+{
+  "required": true,
+  "package": "jaiz.jaizmod.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "GlowSquidMixin",
+    "IronGolemEntityMixin",
+    "SnifferEntityMixin",
+    "SquidMixin",
+    "StructurePlacerTypeInvoker",
+    "TargetGoalMixin",
+    "TreeDecoratorTypeMixin",
+    "TrunkPlacerTypeInvoker"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "InGameHUDMixin",
+    "PlayerEntityMixin",
+    "PlayerEntityRendererMixin",
+    "SnifferEntityRenderStateMixin",
+    "SnifferModelMixin",
+    "SnifferRendererMixin"
+  ]
+}

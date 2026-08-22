@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "jaizmod:rare_spices",
+    "count": 10
+  },
+  "gives": {
+    "id": "jaizmod:sharp_obsidian_shard",
+    "count": 1
+  },
+  "max_uses": 2.0,
+  "xp": 16.0,
+  "reputation_discount": 0.05
+}

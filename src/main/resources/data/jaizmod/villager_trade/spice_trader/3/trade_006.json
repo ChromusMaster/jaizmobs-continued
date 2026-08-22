@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "jaizmod:rare_spices",
+    "count": 3
+  },
+  "gives": {
+    "id": "minecraft:paper",
+    "count": 2
+  },
+  "max_uses": 6.0,
+  "xp": 5.0,
+  "reputation_discount": 0.05
+}

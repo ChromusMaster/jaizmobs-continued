@@ -40,7 +40,6 @@ public class JaizMobs implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.PINE_GIANT, PineGiantEntity.createPineGiantAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.DRIPLET, DripletEntity.createDripletAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.STALAGTITAN, StalagtitanEntity.createStalagtitanAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.SNAIL, SnailEntity.createSnailAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.CALCITE_GOLEM, CalciteGolemEntity.createCalciteGolemAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.CULTIVATOR, CultivatorEntity.createCultivatorAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.KLEPHTOPOD, KlephtopodEntity.createKlephtopodAttributes());

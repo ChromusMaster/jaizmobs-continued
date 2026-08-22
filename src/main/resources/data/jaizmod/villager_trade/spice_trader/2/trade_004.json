@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "jaizmod:rare_spices",
+    "count": 2
+  },
+  "gives": {
+    "id": "minecraft:raw_gold",
+    "count": 3
+  },
+  "max_uses": 3.0,
+  "xp": 5.0,
+  "reputation_discount": 0.05
+}

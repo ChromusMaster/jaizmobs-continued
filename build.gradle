@@ -11,44 +11,47 @@ base {
 }
 
 repositories {
-	// Add repositories to retrieve artifacts from in here.
-	// You should only use this when depending on other mods because
-	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-	// for more information about repositories.
+	maven {
+		name = 'TerraformersMC'
+		url = 'https://maven.terraformersmc.com/'
+	}
+	maven {
+		url = 'https://maven.minecraftforge.net/'
+	}
+}
+
+fabricApi {
+	configureDataGeneration {
+		client = true
+		addToResources = false
+	}
 }
 
 loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		jaizmobs {
+		jaizmod {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}
 	}
 }
 
-// This adds a new gradle task that runs the datagen API: "gradlew runDatagen"
-// Add the generated resources to the main source set
-fabricApi {
-	configureDataGeneration() {
-		client = true
-		addToResources = true
-	}
-}
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
+	implementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_version}"
+	include "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_version}"
+
+	implementation "com.github.glitchfiend:TerraBlender-fabric:${project.terrablender_version}"
+
+
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	
-	// Uncomment the following line to enable the deprecated Fabric API modules. 
-	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
-
-	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 }
 
 processResources {
@@ -82,7 +85,8 @@ jar {
 // configure the maven publication
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
+		create("mavenJava", MavenPublication) {
+			artifactId = project.archives_base_name
 			from components.java
 		}
 	}

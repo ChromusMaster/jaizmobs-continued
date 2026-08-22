@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "minecraft:emerald",
+    "count": 1
+  },
+  "gives": {
+    "id": "jaizmod:rare_spices",
+    "count": 1
+  },
+  "max_uses": 5.0,
+  "xp": 3.0,
+  "reputation_discount": 2.0
+}

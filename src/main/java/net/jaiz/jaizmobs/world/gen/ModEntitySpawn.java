@@ -111,15 +111,6 @@ public class ModEntitySpawn {
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.DRIPSTONE_CAVES), MobCategory.MONSTER,
                 ModEntities.STALAGTITAN, 100, 1, 1);
 
-        // Snail
-
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.SWAMP), MobCategory.CREATURE,
-                ModEntities.SNAIL, 3, 1, 2);
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MANGROVE_SWAMP), MobCategory.CREATURE,
-                ModEntities.SNAIL, 3, 1, 2);
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.LUSH_CAVES), MobCategory.CREATURE,
-                ModEntities.SNAIL, 3, 1, 2);
-
         // Calcite Golem
 
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.STONY_PEAKS), MobCategory.CREATURE,
@@ -201,7 +192,6 @@ public class ModEntitySpawn {
         SpawnPlacements.register(ModEntities.STALAGTITAN, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
         SpawnPlacements.register(ModEntities.STARFISH, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, StarFishEntity::canSpawn);
         SpawnPlacements.register(ModEntities.STARFISHLEADER, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, StarFishLeaderEntity::canSpawn);
-        SpawnPlacements.register(ModEntities.SNAIL, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SnailEntity::canSpawn);
         SpawnPlacements.register(ModEntities.CULTIVATOR, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CultivatorEntity::canSpawn);
         SpawnPlacements.register(ModEntities.CALCITE_GOLEM, SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CalciteGolemEntity::canSpawn);
         SpawnPlacements.register(ModEntities.KLEPHTOPOD, SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, KlephtopodEntity::canSpawn);

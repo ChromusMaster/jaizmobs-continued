@@ -42,7 +42,7 @@ public final class ModModelProvider extends FabricModelProvider {
                 ModItems.SPORETRAP_SPAWN_EGG, ModItems.VOIDBULL_SPAWN_EGG,
                 ModItems.STARFISH_SPAWN_EGG, ModItems.STARFISHLEADER_SPAWN_EGG,
                 ModItems.PINE_GIANT_SPAWN_EGG, ModItems.DRIPLET_SPAWN_EGG,
-                ModItems.STALAGTITAN_SPAWN_EGG, ModItems.SNAIL_SPAWN_EGG,
+                ModItems.STALAGTITAN_SPAWN_EGG,
                 ModItems.CALCITE_GOLEM_SPAWN_EGG, ModItems.CULTIVATOR_SPAWN_EGG,
                 ModItems.KLEPHTOPOD_SPAWN_EGG, ModItems.HUNTER_EEL_SPAWN_EGG,
                 ModItems.AEROBLOB_SPAWN_EGG, ModItems.ENDERWING_SPAWN_EGG,

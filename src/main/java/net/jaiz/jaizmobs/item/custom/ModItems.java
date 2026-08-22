@@ -109,7 +109,6 @@ public final class ModItems {
     public static final Item PINE_GIANT_SPAWN_EGG = spawnEgg("pine_giant_spawn_egg", ModEntities.PINE_GIANT);
     public static final Item DRIPLET_SPAWN_EGG = spawnEgg("driplet_spawn_egg", ModEntities.DRIPLET);
     public static final Item STALAGTITAN_SPAWN_EGG = spawnEgg("stalagtitan_spawn_egg", ModEntities.STALAGTITAN);
-    public static final Item SNAIL_SPAWN_EGG = spawnEgg("snail_spawn_egg", ModEntities.SNAIL);
     public static final Item CALCITE_GOLEM_SPAWN_EGG = spawnEgg("calcite_golem_spawn_egg", ModEntities.CALCITE_GOLEM);
     public static final Item CALCITE_TOTEM = registerItem("calcite_totem", SpawnEggItem::new,
             new Item.Properties().spawnEgg(ModEntities.CALCITE_GOLEM).stacksTo(16));
@@ -145,7 +144,7 @@ public final class ModItems {
                 TOTEM_SPIRIT_SPAWN_EGG, JUNGLE_TOTEM_SPIRIT_SPAWN_EGG, DESERT_TOTEM_SPIRIT_SPAWN_EGG,
                 FROSTED_TOTEM_SPIRIT_SPAWN_EGG, SPORETRAP_SPAWN_EGG, PINE_GIANT_SPAWN_EGG, DRIPLET_SPAWN_EGG,
                 STALAGTITAN_SPAWN_EGG, CALCITE_GOLEM_SPAWN_EGG, CULTIVATOR_SPAWN_EGG, KLEPHTOPOD_SPAWN_EGG,
-                HUNTER_EEL_SPAWN_EGG, SNAIL_SPAWN_EGG, MOLOTOV_GOLEM_SPAWN_EGG, GEYSER_BERRY_SPAWN_EGG,
+                HUNTER_EEL_SPAWN_EGG, MOLOTOV_GOLEM_SPAWN_EGG, GEYSER_BERRY_SPAWN_EGG,
                 CRIMSON_TRUFFLER_SPAWN_EGG, WARPED_TRUFFLER_SPAWN_EGG, EMBERBEETLE_SPAWN_EGG,
                 SOULWADER_SPAWN_EGG, STRIDER_HUNTER_SPAWN_EGG, VOIDBULL_SPAWN_EGG, AEROBLOB_SPAWN_EGG,
                 ENDERWING_SPAWN_EGG, STARFISH_SPAWN_EGG, STARFISHLEADER_SPAWN_EGG));

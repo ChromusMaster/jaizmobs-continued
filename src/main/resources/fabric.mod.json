@@ -1,34 +1,61 @@
 {
 	"schemaVersion": 1,
-	"id": "jaizmobs",
+	"id": "jaizmod",
+	"provides": [
+		"jaizmobs"
+	],
 	"version": "${version}",
-	"name": "Jaiz Mobs",
-	"description": "Silly Little Creatures",
+	"name": "JaizMod Continued Megapack",
+	"description": "JaizMod Continued and Jaiz Mobs Continued together in one big Vanilla+ pack.",
 	"authors": [
-		"Jaiz"
+		"Jaiz",
+
+		"Coding Help",
+		"- Romeo Snowblitz",
+		"- Trashoflevillage",
+		"- Diemant",
+
+		"Texture Help",
+		"- monobloc_chair",
+		"- themilkturtle",
+
+		"Music",
+		"- Krzysztof Pikes",
+		"- Knightrho"
 	],
 	"contact": {
-		"homepage": "https://github.com/ChromusMaster/jaizmobs-continued",
-		"sources": "https://github.com/ChromusMaster/jaizmobs-continued"
+		"homepage": "https://www.youtube.com/channel/UC5B7Z-cTk5peAeTRH9MTY2w",
+		"sources": "https://github.com/Jaiz15"
 	},
-	"license": "MIT",
-	"icon": "assets/jaizmobs/icon.png",
+	"license": "ARR",
+	"icon": "assets/jaizmod/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
+			"jaiz.jaizmod.JaizMod",
 			"net.jaiz.jaizmobs.JaizMobs"
 		],
 		"client": [
+			"jaiz.jaizmod.JaizModClient",
 			"net.jaiz.jaizmobs.JaizMobsClient"
 		],
 		"fabric-datagen": [
+			"jaiz.jaizmod.JaizModDataGenerator",
 			"net.jaiz.jaizmobs.JaizMobsDataGenerator"
+		],
+		"terrablender": [
+			"jaiz.jaizmod.worldgen.biome.TerraBlenderAPI"
 		]
 	},
+	"mixins": [
+		"jaizmod.mixins.json"
+	],
 	"depends": {
 		"fabricloader": ">=0.19.3",
 		"minecraft": "~26.2",
 		"java": ">=25",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"terraform-wood-api-v1": ">=17.0.1",
+		"terrablender": ">=26.2-26.2.0.0.2"
 	}
 }

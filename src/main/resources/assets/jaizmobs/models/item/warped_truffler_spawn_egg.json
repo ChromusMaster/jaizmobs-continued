@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "jaizmobs:item/warped_truffler_spawn_egg"
+  }
+}

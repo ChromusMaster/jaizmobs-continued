@@ -17,7 +17,6 @@ public final class ModModelLayers {
     public static final ModelLayerLocation PINE_GIANT = create("pine_giant");
     public static final ModelLayerLocation DRIPLET = create("driplet");
     public static final ModelLayerLocation STALAGTITAN = create("stalagtitan");
-    public static final ModelLayerLocation SNAIL = create("snail");
     public static final ModelLayerLocation CALCITE_GOLEM = create("calcite_golem");
     public static final ModelLayerLocation CULTIVATOR = create("cultivator");
     public static final ModelLayerLocation KLEPHTOPOD = create("klephtopod");
@@ -47,7 +46,6 @@ public final class ModModelLayers {
         ModelLayerRegistry.registerModelLayer(PINE_GIANT, PineGiant::getLayerDefinition);
         ModelLayerRegistry.registerModelLayer(DRIPLET, Driplet::getLayerDefinition);
         ModelLayerRegistry.registerModelLayer(STALAGTITAN, Stalagtitan::getLayerDefinition);
-        ModelLayerRegistry.registerModelLayer(SNAIL, Snail::getLayerDefinition);
         ModelLayerRegistry.registerModelLayer(CALCITE_GOLEM, Calcite_Golem::getLayerDefinition);
         ModelLayerRegistry.registerModelLayer(CULTIVATOR, Cultivator::getLayerDefinition);
         ModelLayerRegistry.registerModelLayer(KLEPHTOPOD, Klephtopod::getLayerDefinition);
