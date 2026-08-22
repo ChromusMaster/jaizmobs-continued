@@ -1,10 +1,23 @@
 # JaizMod Continued Megapack
 
-This is the bigger continued version of JaizMod. It joins JaizMod Continued with Jaiz Mobs Continued, so the creatures and features from both projects can live in one install instead of being split between two mods.
+This repository is a port of two mods made by Jaiz:
 
-The main goal was to keep the original ideas and the slightly odd Vanilla+ feel while getting the old code working on Minecraft Java 26.2. A lot changed between the old versions and 26.2, especially rendering, data files, entity saving and mappings, so this is more than a version number update.
+- [JaizMod 1.21.4](https://github.com/Jaiz15/JaizMod-1.21.4)
+- [Jaiz Mobs](https://github.com/Jaiz15/jaizmobs-mod)
 
-## Current target
+JaizMod is the bigger continuation and Jaiz Mobs contains an earlier group of creatures, so I brought both of them into one project. The result is a single Fabric mod with the content from the two originals, including the mobs that only existed in the smaller one.
+
+The current target is Minecraft Java 26.2. Updating it was a personal challenge more than anything else. I am ChromusMaster and my part here is the port: making the old code and data work again, fixing crashes, and trying not to change the personality of the original mods along the way.
+
+## What is in the pack
+
+There are 32 creatures at the moment. Some are peaceful little ambience mobs, some can be tamed or ridden, and some are very much a bad idea to approach without armor. The pack also has three wood families, plants, tea, food, blocks, structures, equipment, trims, sulfur ore, pottery-related loot and a number of small Vanilla+ additions.
+
+Both original namespaces are still used: `jaizmod` and `jaizmobs`. Keeping them avoids needlessly changing item and entity IDs from the original projects.
+
+A short guide is given to a player the first time they join a world with the mod installed. It points to the Creative tabs and gives a couple of command examples. A more complete player wiki is maintained separately from the source archive.
+
+## Version used by this port
 
 - Minecraft Java 26.2
 - Fabric Loader 0.19.3
@@ -14,63 +27,23 @@ The main goal was to keep the original ideas and the slightly odd Vanilla+ feel 
 - Terraform Wood API 17.0.1
 - TerraBlender 26.2-26.2.0.0.2
 
-## Creatures
+## A note about the port
 
-The pack currently registers 32 creature types:
+The two mods had to cross several Minecraft versions at once. Entity rendering, saved data, recipes, loot, world generation and quite a few Fabric hooks had all changed. The merged version also needed some duplicated content sorted out; the JaizMod snail was kept because it has the fuller bottle and interaction behaviour.
 
-- Mason Mouth
-- Bandit
-- Fruit Bat
-- Butterfly
-- Fire Fly Swarm
-- Dragonfly
-- Caterpillar
-- Snail
-- Totem Spirit
-- Desert Totem Spirit
-- Jungle Totem Spirit
-- Frosted Totem Spirit
-- Spore Trap
-- Void Bull
-- Starfish
-- Starfish Leader
-- Pine Giant
-- Driplet
-- Stalagtitan
-- Calcite Golem
-- Cultivator
-- Klephtopod
-- Hunter Eel
-- Aeroblob
-- Enderwing
-- Molotov Golem
-- Geyser Berry
-- Warped Truffler
-- Crimson Truffler
-- Ember Beetle
-- Soul Wader
-- Strider Hunter
+I have tried to leave the balance and the slightly strange charm of the originals alone. There may still be rough edges, and reports from actual play are useful.
 
-The JaizMod snail was kept as the main snail because it has the fuller bottle and interaction behavior. Its natural spawning also covers lush caves as well as swamps, keeping the useful spawn coverage from the smaller mobs project.
+## Credits and rights
 
-## Other stuff in here
+All rights and credits for the original mods, code, artwork, sounds, music, creature designs and ideas belong to Jaiz and the original contributors. The names listed in `fabric.mod.json` are kept as part of those credits.
 
-There are new plants, wood sets, food, tea, equipment, blocks, trims, world generation, trades and smaller changes to a few vanilla creatures. The mob half also brings sulfur ore, drops, weapons, armor and spawn eggs.
+This port does not claim ownership of their work and it is not an official replacement for either original repository. I, ChromusMaster, only made the 26.2 port as a personal challenge.
 
-Both `jaizmod` and `jaizmobs` resource namespaces are kept. The Fabric metadata also provides the old `jaizmobs` mod id, which should make moving from the separate creature project less annoying.
+Please visit the original projects first if you want to see where the mod came from:
 
-## Update notes
-
-The common and client code are split now. Rendering uses the current render-state pipeline, entity data is saved with the newer value input/output system, and recipes, loot tables, item definitions, tags, equipment assets, trades and worldgen data use the 26.2 layouts.
-
-Some repeated mob attack and render code was shared, attack distances are cached, and the armor set effect no longer checks every armor item on every tick. Runtime mixins were also moved to their current method names because the old targets could leave the game on a black screen during startup.
-
-This is still an old mod brought forward, and it has a lot of content. Balance may be a little strange in places. That was not flattened out on purpose.
-
-## Credits
-
-The original mod, creatures, art, sounds and ideas belong to Jaiz and the people credited in `fabric.mod.json`. This continuation is mostly about keeping all of that playable on newer Minecraft versions.
+- [JaizMod 1.21.4 by Jaiz](https://github.com/Jaiz15/JaizMod-1.21.4)
+- [Jaiz Mobs by Jaiz](https://github.com/Jaiz15/jaizmobs-mod)
 
 ## License
 
-See the included `LICENSE` file.
+The included `LICENSE` file still applies. Nothing in this README changes the rights held by the original author or contributors.

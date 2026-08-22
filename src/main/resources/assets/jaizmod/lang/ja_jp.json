@@ -1,0 +1,22 @@
+{
+  "entity.jaizmod.mason_mouth": "石工の口",
+  "entity.jaizmod.bandit": "盗賊",
+  "entity.jaizmod.fruit_bat": "フルーツコウモリ",
+  "entity.jaizmod.butterfly": "チョウ",
+  "entity.jaizmod.fire_fly_swarm": "ホタルの群れ",
+  "entity.jaizmod.dragonfly": "トンボ",
+  "entity.jaizmod.caterpillar": "イモムシ",
+  "entity.jaizmod.snail": "カタツムリ",
+  "item.jaizmod.mimic_pot": "ミミックの壺",
+  "item.jaizmod.bandit_spawn_egg": "盗賊のスポーンエッグ",
+  "item.jaizmod.fruit_bat_spawn_egg": "フルーツコウモリのスポーンエッグ",
+  "item.jaizmod.butterfly_spawn_egg": "チョウのスポーンエッグ",
+  "item.jaizmod.firefly_swarm_spawn_egg": "ホタルの群れのスポーンエッグ",
+  "item.jaizmod.dragonfly_spawn_egg": "トンボのスポーンエッグ",
+  "item.jaizmod.caterpillar_spawn_egg": "イモムシのスポーンエッグ",
+  "item.jaizmod.snail_spawn_egg": "カタツムリのスポーンエッグ",
+  "guide.jaizmod.welcome.page_1": "JaizMod Continuedへようこそ！\n\nこのメガパックはMinecraft 26.2向けにJaizModとJaiz Mobsをひとつにまとめています。",
+  "guide.jaizmod.welcome.page_2": "世界を旅して、新しい生き物、植物、ブロック、構造物、装備、それから小さなVanilla+の驚きを見つけてください。",
+  "guide.jaizmod.welcome.page_3": "クリエイティブではJaizModのタブを開くか、生き物のスポーンエッグを検索してください。\n\nコマンドではjaizmodとjaizmobsの名前空間を使います。",
+  "guide.jaizmod.welcome.page_4": "コマンド例：\n/summon jaizmobs:aeroblob\n/give @s jaizmobs:aeroblob_spawn_egg\n\n探索を楽しんでください！"
+}

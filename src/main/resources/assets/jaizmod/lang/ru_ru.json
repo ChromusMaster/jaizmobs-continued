@@ -1,0 +1,22 @@
+{
+  "entity.jaizmod.mason_mouth": "Пасть каменщика",
+  "entity.jaizmod.bandit": "Бандит",
+  "entity.jaizmod.fruit_bat": "Фруктовая летучая мышь",
+  "entity.jaizmod.butterfly": "Бабочка",
+  "entity.jaizmod.fire_fly_swarm": "Рой светлячков",
+  "entity.jaizmod.dragonfly": "Стрекоза",
+  "entity.jaizmod.caterpillar": "Гусеница",
+  "entity.jaizmod.snail": "Улитка",
+  "item.jaizmod.mimic_pot": "Горшок-мимик",
+  "item.jaizmod.bandit_spawn_egg": "Яйцо призыва бандита",
+  "item.jaizmod.fruit_bat_spawn_egg": "Яйцо призыва фруктовой летучей мыши",
+  "item.jaizmod.butterfly_spawn_egg": "Яйцо призыва бабочки",
+  "item.jaizmod.firefly_swarm_spawn_egg": "Яйцо призыва роя светлячков",
+  "item.jaizmod.dragonfly_spawn_egg": "Яйцо призыва стрекозы",
+  "item.jaizmod.caterpillar_spawn_egg": "Яйцо призыва гусеницы",
+  "item.jaizmod.snail_spawn_egg": "Яйцо призыва улитки",
+  "guide.jaizmod.welcome.page_1": "Добро пожаловать в JaizMod Continued!\n\nЭтот мегапак объединяет JaizMod и Jaiz Mobs для Minecraft 26.2.",
+  "guide.jaizmod.welcome.page_2": "Исследуйте мир, чтобы найти новых существ, растения, блоки, строения, снаряжение и небольшие сюрпризы в духе Vanilla+.",
+  "guide.jaizmod.welcome.page_3": "В творческом режиме откройте вкладки JaizMod или найдите яйцо призыва нужного существа.\n\nВ командах используются пространства имён jaizmod и jaizmobs.",
+  "guide.jaizmod.welcome.page_4": "Примеры команд:\n/summon jaizmobs:aeroblob\n/give @s jaizmobs:aeroblob_spawn_egg\n\nПриятного исследования!"
+}
