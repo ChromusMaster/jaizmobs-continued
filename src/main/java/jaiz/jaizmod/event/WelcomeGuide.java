@@ -50,7 +50,7 @@ public final class WelcomeGuide {
         );
         guide.set(DataComponents.WRITTEN_BOOK_CONTENT, new WrittenBookContent(
                 Filterable.passThrough("JaizMod Field Guide"),
-                "JaizMod Continued",
+                "JaizMod",
                 0,
                 pages,
                 true

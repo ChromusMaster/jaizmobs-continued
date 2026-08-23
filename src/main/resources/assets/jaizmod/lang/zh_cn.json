@@ -15,7 +15,7 @@
   "item.jaizmod.dragonfly_spawn_egg": "蜻蜓刷怪蛋",
   "item.jaizmod.caterpillar_spawn_egg": "毛毛虫刷怪蛋",
   "item.jaizmod.snail_spawn_egg": "蜗牛刷怪蛋",
-  "guide.jaizmod.welcome.page_1": "欢迎游玩JaizMod Continued！\n\n这个整合模组把JaizMod与Jaiz Mobs带到了Minecraft 26.2。",
+  "guide.jaizmod.welcome.page_1": "欢迎游玩JaizMod！\n\n这个版本把JaizMod与Jaiz Mobs带到了Minecraft 26.2。",
   "guide.jaizmod.welcome.page_2": "探索世界，寻找新生物、植物、方块、结构、装备，以及一些有趣的原版增强内容。",
   "guide.jaizmod.welcome.page_3": "在创造模式中打开JaizMod物品栏标签，或搜索生物的刷怪蛋。\n\n命令会使用jaizmod和jaizmobs两个命名空间。",
   "guide.jaizmod.welcome.page_4": "命令示例：\n/summon jaizmobs:aeroblob\n/give @s jaizmobs:aeroblob_spawn_egg\n\n祝你探索愉快！"

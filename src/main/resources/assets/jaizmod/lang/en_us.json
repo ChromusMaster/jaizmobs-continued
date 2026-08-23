@@ -274,7 +274,7 @@
   "item.jaizmod.dynamite": "Dynamite",
   "entity.jaizmod.dynamite": "Dynamite",
 
-  "guide.jaizmod.welcome.page_1": "Welcome to JaizMod Continued!\n\nThis megapack brings JaizMod and Jaiz Mobs together for Minecraft 26.2.",
+  "guide.jaizmod.welcome.page_1": "Welcome to JaizMod!\n\nThis version brings JaizMod and Jaiz Mobs together for Minecraft 26.2.",
   "guide.jaizmod.welcome.page_2": "Explore the world to find new creatures, plants, blocks, structures, equipment and small Vanilla+ surprises.",
   "guide.jaizmod.welcome.page_3": "In Creative mode, open the JaizMod tabs or search for a mob's Spawn Egg.\n\nCommands use both jaizmod and jaizmobs namespaces.",
   "guide.jaizmod.welcome.page_4": "Example commands:\n/summon jaizmobs:aeroblob\n/give @s jaizmobs:aeroblob_spawn_egg\n\nHave fun exploring!",

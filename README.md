@@ -1,17 +1,17 @@
-# JaizMod Continued Megapack
+# JaizMod
 
 This repository is a port of two mods made by Jaiz:
 
 - [JaizMod 1.21.4](https://github.com/Jaiz15/JaizMod-1.21.4)
 - [Jaiz Mobs](https://github.com/Jaiz15/jaizmobs-mod)
 
-JaizMod is the bigger continuation and Jaiz Mobs contains an earlier group of creatures, so I brought both of them into one project. The result is a single Fabric mod with the content from the two originals, including the mobs that only existed in the smaller one.
+JaizMod is the bigger continuation and Jaiz Mobs contains an earlier group of creatures, so I brought both of them into one project. The result keeps the JaizMod name and puts the content from the two originals in a single Fabric mod, including the mobs that only existed in the smaller one.
 
 The current target is Minecraft Java 26.2. Updating it was a personal challenge more than anything else. I am ChromusMaster and my part here is the port: making the old code and data work again, fixing crashes, and trying not to change the personality of the original mods along the way.
 
-## What is in the pack
+## What is in JaizMod
 
-There are 32 creatures at the moment. Some are peaceful little ambience mobs, some can be tamed or ridden, and some are very much a bad idea to approach without armor. The pack also has three wood families, plants, tea, food, blocks, structures, equipment, trims, sulfur ore, pottery-related loot and a number of small Vanilla+ additions.
+There are 32 creatures at the moment. Some are peaceful little ambience mobs, some can be tamed or ridden, and some are very much a bad idea to approach without armor. The mod also has three wood families, plants, tea, food, blocks, structures, equipment, trims, sulfur ore, pottery-related loot and a number of small Vanilla+ additions.
 
 Both original namespaces are still used: `jaizmod` and `jaizmobs`. Keeping them avoids needlessly changing item and entity IDs from the original projects.
 

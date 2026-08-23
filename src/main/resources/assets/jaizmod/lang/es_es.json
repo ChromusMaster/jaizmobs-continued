@@ -15,7 +15,7 @@
   "item.jaizmod.dragonfly_spawn_egg": "Huevo generador de libélula",
   "item.jaizmod.caterpillar_spawn_egg": "Huevo generador de oruga",
   "item.jaizmod.snail_spawn_egg": "Huevo generador de caracol",
-  "guide.jaizmod.welcome.page_1": "¡Bienvenido a JaizMod Continued!\n\nEste megapack reúne JaizMod y Jaiz Mobs para Minecraft 26.2.",
+  "guide.jaizmod.welcome.page_1": "¡Bienvenido a JaizMod!\n\nEsta versión reúne JaizMod y Jaiz Mobs para Minecraft 26.2.",
   "guide.jaizmod.welcome.page_2": "Explora el mundo para encontrar criaturas, plantas, bloques, estructuras, equipo y unas cuantas sorpresas Vanilla+.",
   "guide.jaizmod.welcome.page_3": "En Creativo, abre las pestañas de JaizMod o busca el huevo generador de la criatura.\n\nLos comandos usan los espacios de nombres jaizmod y jaizmobs.",
   "guide.jaizmod.welcome.page_4": "Ejemplos de comandos:\n/summon jaizmobs:aeroblob\n/give @s jaizmobs:aeroblob_spawn_egg\n\n¡Que disfrutes explorando!"
