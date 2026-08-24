@@ -1,4 +1,6 @@
 {
+  "gamerule.jaizmod.do_glowing_squid": "发光鱿鱼会发出光亮",
+  "gamerule.jaizmod.give_welcome_guide": "发放JaizMod欢迎指南",
   "entity.jaizmod.mason_mouth": "石匠之口",
   "entity.jaizmod.bandit": "强盗",
   "entity.jaizmod.fruit_bat": "果蝠",

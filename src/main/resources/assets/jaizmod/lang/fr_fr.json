@@ -1,4 +1,6 @@
 {
+  "gamerule.jaizmod.do_glowing_squid": "Les poulpes lumineux émettent de la lumière",
+  "gamerule.jaizmod.give_welcome_guide": "Donner le guide de bienvenue de JaizMod",
   "entity.jaizmod.mason_mouth": "Bouche de maçon",
   "entity.jaizmod.bandit": "Bandit",
   "entity.jaizmod.fruit_bat": "Chauve-souris frugivore",

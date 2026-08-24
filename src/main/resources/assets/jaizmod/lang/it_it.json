@@ -1,4 +1,6 @@
 {
+  "gamerule.jaizmod.do_glowing_squid": "I calamari luminosi emettono luce",
+  "gamerule.jaizmod.give_welcome_guide": "Fornisci la guida di benvenuto di JaizMod",
   "entity.jaizmod.mason_mouth": "Bocca del muratore",
   "entity.jaizmod.bandit": "Bandito",
   "entity.jaizmod.fruit_bat": "Pipistrello della frutta",

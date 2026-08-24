@@ -12,6 +12,10 @@ public class ModGameRules {
             .category(GameRuleCategory.MOBS)
             .buildAndRegister(Identifier.fromNamespaceAndPath(JaizMod.MOD_ID, "do_glowing_squid"));
 
+    public static final GameRule<Boolean> GIVE_WELCOME_GUIDE = GameRuleBuilder.forBoolean(true)
+            .category(GameRuleCategory.MISC)
+            .buildAndRegister(Identifier.fromNamespaceAndPath(JaizMod.MOD_ID, "give_welcome_guide"));
+
 
     public static void registerGamerules(){
     }

@@ -1,4 +1,6 @@
 {
+  "gamerule.jaizmod.do_glowing_squid": "Leuchttintenfische erzeugen Licht",
+  "gamerule.jaizmod.give_welcome_guide": "JaizMod-Willkommenshandbuch aushändigen",
   "entity.jaizmod.mason_mouth": "Maurermaul",
   "entity.jaizmod.bandit": "Bandit",
   "entity.jaizmod.fruit_bat": "Fruchtfledermaus",

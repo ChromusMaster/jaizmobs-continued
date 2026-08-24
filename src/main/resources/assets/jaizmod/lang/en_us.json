@@ -51,7 +51,8 @@
   "painting.jaizmod.liminal.title": "Liminal",
   "painting.jaizmod.liminal.author": "Monobloc_Chair",
 
-  "gamerule.doGlowingSquid": "Do Glowing Squid",
+  "gamerule.jaizmod.do_glowing_squid": "Glow Squids Emit Light",
+  "gamerule.jaizmod.give_welcome_guide": "Give the JaizMod Welcome Guide",
 
   "item.jaizmod.blooming_ivy": "Blooming Ivy",
   "block.jaizmod.blooming_ivy": "Blooming Ivy",

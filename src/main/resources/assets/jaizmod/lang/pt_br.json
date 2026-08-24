@@ -1,4 +1,6 @@
 {
+  "gamerule.jaizmod.do_glowing_squid": "Lulas-brilhantes emitem luz",
+  "gamerule.jaizmod.give_welcome_guide": "Entregar o guia de boas-vindas do JaizMod",
   "entity.jaizmod.bandit": "Bandido",
   "entity.jaizmod.butterfly": "Borboleta",
   "entity.jaizmod.caterpillar": "Lagarta",

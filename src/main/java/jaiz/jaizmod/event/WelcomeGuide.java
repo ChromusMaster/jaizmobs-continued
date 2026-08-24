@@ -3,12 +3,14 @@ package jaiz.jaizmod.event;
 import com.mojang.serialization.Codec;
 import java.util.List;
 import jaiz.jaizmod.JaizMod;
+import jaiz.jaizmod.util.ModGameRules;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.Filterable;
 import net.minecraft.world.item.ItemStack;
@@ -25,11 +27,12 @@ public final class WelcomeGuide {
     }
 
     public static void register() {
-        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> giveTo(handler.getPlayer()));
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> giveTo(handler.getPlayer(), server));
     }
 
-    private static void giveTo(ServerPlayer player) {
-        if (player.getAttachedOrElse(RECEIVED, false)) {
+    private static void giveTo(ServerPlayer player, MinecraftServer server) {
+        if (!server.getGlobalGameRules().get(ModGameRules.GIVE_WELCOME_GUIDE)
+                || player.getAttachedOrElse(RECEIVED, false)) {
             return;
         }
 

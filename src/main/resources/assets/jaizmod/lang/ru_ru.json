@@ -1,4 +1,6 @@
 {
+  "gamerule.jaizmod.do_glowing_squid": "Светящиеся спруты излучают свет",
+  "gamerule.jaizmod.give_welcome_guide": "Выдавать приветственное руководство JaizMod",
   "entity.jaizmod.mason_mouth": "Пасть каменщика",
   "entity.jaizmod.bandit": "Бандит",
   "entity.jaizmod.fruit_bat": "Фруктовая летучая мышь",

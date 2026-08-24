@@ -1,4 +1,6 @@
 {
+  "gamerule.jaizmod.do_glowing_squid": "ヒカリイカが光を放つ",
+  "gamerule.jaizmod.give_welcome_guide": "JaizModのウェルカムガイドを配布する",
   "entity.jaizmod.mason_mouth": "石工の口",
   "entity.jaizmod.bandit": "盗賊",
   "entity.jaizmod.fruit_bat": "フルーツコウモリ",
