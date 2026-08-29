@@ -14,14 +14,14 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.adventure.rare_spices.description"
+      "translate": "advancements.jaizmod.rare_spices.description"
     },
     "icon": {
       "count": 1,
       "id": "jaizmod:rare_spices"
     },
     "title": {
-      "translate": "advancements.adventure.rare_spices.title"
+      "translate": "advancements.jaizmod.rare_spices.title"
     }
   },
   "requirements": [

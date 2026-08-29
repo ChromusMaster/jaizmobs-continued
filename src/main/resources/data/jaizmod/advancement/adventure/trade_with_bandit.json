@@ -21,7 +21,7 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.adventure.spice_trade.description"
+      "translate": "advancements.jaizmod.spice_trade.description"
     },
     "hidden": true,
     "icon": {
@@ -29,7 +29,7 @@
       "id": "jaizmod:spice_barrel"
     },
     "title": {
-      "translate": "advancements.adventure.spice_trade.title"
+      "translate": "advancements.jaizmod.spice_trade.title"
     }
   },
   "requirements": [

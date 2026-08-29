@@ -1,0 +1,79 @@
+{
+  "parent": "jaizmod:progression/beneath_jungle",
+  "criteria": {
+    "mahogany_forest": {
+      "conditions": {
+        "player": [{"condition":"minecraft:entity_properties","entity":"this","predicate":{"location":{"biomes":"jaizmod:mahogany_forest"}}}]
+      },
+      "trigger": "minecraft:location"
+    },
+    "fruit_bat_caves": {
+      "conditions": {
+        "player": [{"condition":"minecraft:entity_properties","entity":"this","predicate":{"location":{"biomes":"jaizmod:fruit_bat_caves"}}}]
+      },
+      "trigger": "minecraft:location"
+    },
+    "fossil_pits": {
+      "conditions": {
+        "player": [{"condition":"minecraft:entity_properties","entity":"this","predicate":{"location":{"structures":"jaizmod:fossil_pits"}}}]
+      },
+      "trigger": "minecraft:location"
+    },
+    "desert_ruins": {
+      "conditions": {
+        "player": [{"condition":"minecraft:entity_properties","entity":"this","predicate":{"location":{"structures":"jaizmod:desert_ruins"}}}]
+      },
+      "trigger": "minecraft:location"
+    },
+    "badlands_ruins": {
+      "conditions": {
+        "player": [{"condition":"minecraft:entity_properties","entity":"this","predicate":{"location":{"structures":"jaizmod:badlands_ruins"}}}]
+      },
+      "trigger": "minecraft:location"
+    },
+    "jungle_temple": {
+      "conditions": {
+        "player": [{"condition":"minecraft:entity_properties","entity":"this","predicate":{"location":{"structures":"jaizmod:jungle_temple"}}}]
+      },
+      "trigger": "minecraft:location"
+    },
+    "desert_trading_post": {
+      "conditions": {
+        "player": [{"condition":"minecraft:entity_properties","entity":"this","predicate":{"location":{"structures":"jaizmod:trading_posts"}}}]
+      },
+      "trigger": "minecraft:location"
+    },
+    "badlands_trading_post": {
+      "conditions": {
+        "player": [{"condition":"minecraft:entity_properties","entity":"this","predicate":{"location":{"structures":"jaizmod:trading_posts_badlands"}}}]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.jaizmod.off_the_beaten_path.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "jaizmod:glowing_spyglass"
+    },
+    "title": {
+      "translate": "advancements.jaizmod.off_the_beaten_path.title"
+    }
+  },
+  "requirements": [
+    ["mahogany_forest"],
+    ["fruit_bat_caves"],
+    ["fossil_pits"],
+    ["desert_ruins"],
+    ["badlands_ruins"],
+    ["jungle_temple"],
+    ["desert_trading_post"],
+    ["badlands_trading_post"]
+  ],
+  "rewards": {
+    "experience": 150
+  },
+  "sends_telemetry_event": false
+}

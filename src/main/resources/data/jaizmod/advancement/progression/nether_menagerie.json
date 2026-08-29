@@ -1,0 +1,20 @@
+{
+  "parent": "jaizmod:progression/plants_fight_back",
+  "criteria": {
+    "molotov_golem": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:molotov_golem"}}]},"trigger":"minecraft:player_killed_entity"},
+    "crimson_truffler": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:crimson_truffler"}}]},"trigger":"minecraft:player_killed_entity"},
+    "warped_truffler": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:warped_truffler"}}]},"trigger":"minecraft:player_killed_entity"},
+    "ember_beetle": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:ember_beetle"}}]},"trigger":"minecraft:player_killed_entity"},
+    "soulwader": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:soulwader"}}]},"trigger":"minecraft:player_killed_entity"},
+    "strider_hunter": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:strider_hunter"}}]},"trigger":"minecraft:player_killed_entity"}
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.nether_menagerie.description"},
+    "frame": "challenge",
+    "icon": {"id":"jaizmobs:basalt_mandible"},
+    "title": {"translate":"advancements.jaizmod.nether_menagerie.title"}
+  },
+  "requirements": [["molotov_golem"],["crimson_truffler"],["warped_truffler"],["ember_beetle"],["soulwader"],["strider_hunter"]],
+  "rewards": {"experience":100},
+  "sends_telemetry_event": false
+}

@@ -1,6 +1,7 @@
 package jaiz.jaizmod;
 
 import com.mojang.serialization.MapCodec;
+import jaiz.jaizmod.advancement.ModCriteria;
 import jaiz.jaizmod.block.ModBlocks;
 import jaiz.jaizmod.block.blockentities.CustomBlockEntities;
 import jaiz.jaizmod.entity.ModEntities;
@@ -59,6 +60,7 @@ public class JaizMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		ModCriteria.init();
 		TrunkPlacerTypes.register();
 		ModStatusEffects.registerModEffects();
 		ModItems.registerModItems();

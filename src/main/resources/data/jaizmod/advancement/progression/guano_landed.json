@@ -1,0 +1,15 @@
+{
+  "parent": "jaizmod:progression/fruit_bat_caves",
+  "criteria": {
+    "made_a_pile": {
+      "trigger": "jaizmod:guano_landed"
+    }
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.guano_landed.description"},
+    "icon": {"id":"jaizmod:guano"},
+    "title": {"translate":"advancements.jaizmod.guano_landed.title"}
+  },
+  "requirements": [["made_a_pile"]],
+  "sends_telemetry_event": false
+}

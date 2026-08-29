@@ -1,0 +1,33 @@
+{
+  "parent": "jaizmod:adventure/craft_glowing_spyglass",
+  "criteria": {
+    "placed_water_torch": {
+      "conditions": {
+        "location": [
+          {
+            "block": "jaizmod:water_torch",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.jaizmod.water_and_fire.description"
+    },
+    "icon": {
+      "id": "jaizmod:water_torch"
+    },
+    "title": {
+      "translate": "advancements.jaizmod.water_and_fire.title"
+    }
+  },
+  "requirements": [
+    [
+      "placed_water_torch"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

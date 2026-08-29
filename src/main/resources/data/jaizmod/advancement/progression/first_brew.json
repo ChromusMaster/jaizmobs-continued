@@ -1,0 +1,20 @@
+{
+  "parent": "jaizmod:adventure/tea_cup",
+  "criteria": {
+    "drank_tea": {
+      "conditions": {
+        "item": {
+          "items": "#jaizmod:teas"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.first_brew.description"},
+    "icon": {"id":"jaizmod:flower_tea"},
+    "title": {"translate":"advancements.jaizmod.first_brew.title"}
+  },
+  "requirements": [["drank_tea"]],
+  "sends_telemetry_event": false
+}

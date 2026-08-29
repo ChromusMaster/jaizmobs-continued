@@ -1,0 +1,22 @@
+{
+  "parent": "jaizmod:adventure/obsidian_shards",
+  "criteria": {
+    "obsidian_weapon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#jaizmod:obsidian_weapons"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.pick_your_edge.description"},
+    "icon": {"id":"jaizmod:obsidian_sword"},
+    "title": {"translate":"advancements.jaizmod.pick_your_edge.title"}
+  },
+  "requirements": [["obsidian_weapon"]],
+  "sends_telemetry_event": false
+}

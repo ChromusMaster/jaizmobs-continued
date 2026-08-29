@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:adventure/root",
+  "parent": "jaizmod:progression/root",
   "criteria": {
     "tea": {
       "conditions": {
@@ -14,14 +14,14 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.adventure.tea_root.description"
+      "translate": "advancements.jaizmod.tea_root.description"
     },
     "icon": {
       "count": 1,
       "id": "jaizmod:unfired_tea_cup"
     },
     "title": {
-      "translate": "advancements.adventure.tea_root.title"
+      "translate": "advancements.jaizmod.tea_root.title"
     }
   },
   "requirements": [

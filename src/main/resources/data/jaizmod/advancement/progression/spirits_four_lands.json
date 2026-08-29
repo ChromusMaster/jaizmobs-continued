@@ -1,0 +1,17 @@
+{
+  "parent": "jaizmod:progression/root",
+  "criteria": {
+    "totem_spirit": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:totem_spirit"}}]},"trigger":"minecraft:player_killed_entity"},
+    "desert_spirit": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:desert_totem_spirit"}}]},"trigger":"minecraft:player_killed_entity"},
+    "jungle_spirit": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:jungle_totem_spirit"}}]},"trigger":"minecraft:player_killed_entity"},
+    "frosted_spirit": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:frosted_totem_spirit"}}]},"trigger":"minecraft:player_killed_entity"}
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.spirits_four_lands.description"},
+    "frame": "goal",
+    "icon": {"id":"jaizmobs:totem_spirit_spawn_egg"},
+    "title": {"translate":"advancements.jaizmod.spirits_four_lands.title"}
+  },
+  "requirements": [["totem_spirit"],["desert_spirit"],["jungle_spirit"],["frosted_spirit"]],
+  "sends_telemetry_event": false
+}

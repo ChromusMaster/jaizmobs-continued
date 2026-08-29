@@ -1,0 +1,39 @@
+{
+  "parent": "jaizmod:progression/mahogany_forest",
+  "criteria": {
+    "jungle_temple": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "jaizmod:jungle_temple"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.jaizmod.beneath_jungle.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "jaizmod:chiseled_plated_calcite"
+    },
+    "title": {
+      "translate": "advancements.jaizmod.beneath_jungle.title"
+    }
+  },
+  "requirements": [
+    [
+      "jungle_temple"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

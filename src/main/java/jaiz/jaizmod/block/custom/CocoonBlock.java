@@ -1,11 +1,13 @@
 package jaiz.jaizmod.block.custom;
 
 
+import jaiz.jaizmod.advancement.ModCriteria;
 import jaiz.jaizmod.block.ModBlocks;
 import jaiz.jaizmod.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.AABB;
 
 public class CocoonBlock extends Block {
 
@@ -85,6 +88,9 @@ public class CocoonBlock extends Block {
         world.playSound(null, pos, SoundEvents.HONEY_BLOCK_SLIDE, SoundSource.BLOCKS, 0.7f, 0.9f + random.nextFloat() * 0.2f);
         world.setBlock(pos, state.setValue(COCOON_HATCH, 3), Block.UPDATE_CLIENTS);
         ModEntities.BUTTERFLY.spawn(world, pos, EntitySpawnReason.MOB_SUMMONED);
+        for (ServerPlayer player : world.getEntitiesOfClass(ServerPlayer.class, new AABB(pos).inflate(12.0))) {
+            ModCriteria.COCOON_HATCHED.trigger(player);
+        }
         }
     }
 

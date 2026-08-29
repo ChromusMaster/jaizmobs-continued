@@ -1,7 +1,7 @@
 {
-  "parent": "jaizmod:adventure/desert_root",
+  "parent": "jaizmod:progression/root",
   "criteria": {
-    "in_trading_post": {
+    "desert_post": {
       "conditions": {
         "player": [
           {
@@ -16,23 +16,40 @@
         ]
       },
       "trigger": "minecraft:location"
+    },
+    "badlands_post": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "jaizmod:trading_posts_badlands"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
     }
   },
   "display": {
     "description": {
-      "translate": "advancements.adventure.find_trading_post.description"
+      "translate": "advancements.jaizmod.trading_post.description"
     },
     "icon": {
       "count": 1,
       "id": "jaizmod:silk"
     },
     "title": {
-      "translate": "advancements.adventure.find_trading_post.title"
+      "translate": "advancements.jaizmod.trading_post.title"
     }
   },
   "requirements": [
     [
-      "in_trading_post"
+      "desert_post",
+      "badlands_post"
     ]
   ],
   "sends_telemetry_event": true

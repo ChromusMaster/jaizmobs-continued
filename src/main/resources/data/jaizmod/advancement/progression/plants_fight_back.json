@@ -1,0 +1,17 @@
+{
+  "parent": "jaizmod:progression/spirits_four_lands",
+  "criteria": {
+    "sporetrap": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:sporetrap"}}]},"trigger":"minecraft:player_killed_entity"},
+    "pine_giant": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:pine_giant"}}]},"trigger":"minecraft:player_killed_entity"},
+    "cultivator": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:cultivator"}}]},"trigger":"minecraft:player_killed_entity"},
+    "geyser_berry": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:geyser_berry"}}]},"trigger":"minecraft:player_killed_entity"}
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.plants_fight_back.description"},
+    "frame": "goal",
+    "icon": {"id":"jaizmobs:pine_giant_spawn_egg"},
+    "title": {"translate":"advancements.jaizmod.plants_fight_back.title"}
+  },
+  "requirements": [["sporetrap"],["pine_giant"],["cultivator"],["geyser_berry"]],
+  "sends_telemetry_event": false
+}

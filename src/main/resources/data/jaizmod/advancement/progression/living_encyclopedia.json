@@ -1,0 +1,43 @@
+{
+  "parent": "jaizmod:progression/beyond_void",
+  "criteria": {
+    "totem_spirit": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:totem_spirit"}}]},"trigger":"minecraft:player_killed_entity"},
+    "desert_spirit": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:desert_totem_spirit"}}]},"trigger":"minecraft:player_killed_entity"},
+    "jungle_spirit": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:jungle_totem_spirit"}}]},"trigger":"minecraft:player_killed_entity"},
+    "frosted_spirit": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:frosted_totem_spirit"}}]},"trigger":"minecraft:player_killed_entity"},
+    "sporetrap": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:sporetrap"}}]},"trigger":"minecraft:player_killed_entity"},
+    "pine_giant": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:pine_giant"}}]},"trigger":"minecraft:player_killed_entity"},
+    "cultivator": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:cultivator"}}]},"trigger":"minecraft:player_killed_entity"},
+    "geyser_berry": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:geyser_berry"}}]},"trigger":"minecraft:player_killed_entity"},
+    "driplet": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:driplet"}}]},"trigger":"minecraft:player_killed_entity"},
+    "stalagtitan": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:stalagtitan"}}]},"trigger":"minecraft:player_killed_entity"},
+    "starfish_leader": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:starfishleader"}}]},"trigger":"minecraft:player_killed_entity"},
+    "hunter_eel": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:hunter_eel"}}]},"trigger":"minecraft:player_killed_entity"},
+    "klephtopod": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:klephtopod"}}]},"trigger":"minecraft:player_killed_entity"},
+    "molotov_golem": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:molotov_golem"}}]},"trigger":"minecraft:player_killed_entity"},
+    "crimson_truffler": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:crimson_truffler"}}]},"trigger":"minecraft:player_killed_entity"},
+    "warped_truffler": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:warped_truffler"}}]},"trigger":"minecraft:player_killed_entity"},
+    "ember_beetle": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:ember_beetle"}}]},"trigger":"minecraft:player_killed_entity"},
+    "soulwader": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:soulwader"}}]},"trigger":"minecraft:player_killed_entity"},
+    "strider_hunter": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:strider_hunter"}}]},"trigger":"minecraft:player_killed_entity"},
+    "voidbull": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:voidbull"}}]},"trigger":"minecraft:player_killed_entity"},
+    "aeroblob": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:aeroblob"}}]},"trigger":"minecraft:player_killed_entity"},
+    "enderwing": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:enderwing"}}]},"trigger":"minecraft:player_killed_entity"}
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.living_encyclopedia.description"},
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {"id":"jaizmobs:calcite_totem"},
+    "title": {"translate":"advancements.jaizmod.living_encyclopedia.title"}
+  },
+  "requirements": [
+    ["totem_spirit"],["desert_spirit"],["jungle_spirit"],["frosted_spirit"],
+    ["sporetrap"],["pine_giant"],["cultivator"],["geyser_berry"],
+    ["driplet"],["stalagtitan"],["starfish_leader"],["hunter_eel"],["klephtopod"],
+    ["molotov_golem"],["crimson_truffler"],["warped_truffler"],["ember_beetle"],["soulwader"],["strider_hunter"],
+    ["voidbull"],["aeroblob"],["enderwing"]
+  ],
+  "rewards": {"experience":250},
+  "sends_telemetry_event": false
+}

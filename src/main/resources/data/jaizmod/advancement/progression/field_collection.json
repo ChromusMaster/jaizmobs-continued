@@ -1,0 +1,22 @@
+{
+  "parent": "jaizmod:progression/tiny_companion",
+  "criteria": {
+    "butterfly": {"conditions":{"items":[{"items":"jaizmod:butterfly_bottle"}]},"trigger":"minecraft:inventory_changed"},
+    "dragonfly": {"conditions":{"items":[{"items":"jaizmod:dragonfly_bottle"}]},"trigger":"minecraft:inventory_changed"},
+    "caterpillar": {"conditions":{"items":[{"items":"jaizmod:caterpillar_bottle"}]},"trigger":"minecraft:inventory_changed"},
+    "snail": {"conditions":{"items":[{"items":"jaizmod:snail_bottle"}]},"trigger":"minecraft:inventory_changed"}
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.field_collection.description"},
+    "frame": "goal",
+    "icon": {"id":"jaizmod:dragonfly_bottle"},
+    "title": {"translate":"advancements.jaizmod.field_collection.title"}
+  },
+  "requirements": [
+    ["butterfly"],
+    ["dragonfly"],
+    ["caterpillar"],
+    ["snail"]
+  ],
+  "sends_telemetry_event": false
+}

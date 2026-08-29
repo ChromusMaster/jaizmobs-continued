@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:adventure/root",
+  "parent": "jaizmod:progression/root",
   "criteria": {
     "glowing_spyglass": {
       "conditions": {
@@ -14,14 +14,14 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.adventure.glowing_spyglass.description"
+      "translate": "advancements.jaizmod.glowing_spyglass.description"
     },
     "icon": {
       "count": 1,
       "id": "jaizmod:glowing_spyglass"
     },
     "title": {
-      "translate": "advancements.adventure.glowing_spyglass.title"
+      "translate": "advancements.jaizmod.glowing_spyglass.title"
     }
   },
   "requirements": [

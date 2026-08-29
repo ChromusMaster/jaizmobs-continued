@@ -1,0 +1,22 @@
+{
+  "parent": "jaizmod:progression/back_in_one_piece",
+  "criteria": {
+    "petrified_template": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jaizmod:petrified_armor_trim_smithing_template"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.petrified_style.description"},
+    "icon": {"id":"jaizmod:petrified_armor_trim_smithing_template"},
+    "title": {"translate":"advancements.jaizmod.petrified_style.title"}
+  },
+  "requirements": [["petrified_template"]],
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "jaizmod:husbandry/firefly_bottle",
+  "criteria": {
+    "bottled_creature": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#jaizmod:bottled_creatures"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.jaizmod.tiny_companion.description"
+    },
+    "icon": {
+      "id": "jaizmod:butterfly_bottle"
+    },
+    "title": {
+      "translate": "advancements.jaizmod.tiny_companion.title"
+    }
+  },
+  "requirements": [
+    [
+      "bottled_creature"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

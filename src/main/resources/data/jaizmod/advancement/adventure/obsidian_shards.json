@@ -1,5 +1,5 @@
 {
-  "parent": "jaizmod:adventure/desert_root",
+  "parent": "jaizmod:progression/root",
   "criteria": {
     "obsidian_shard": {
       "conditions": {
@@ -14,14 +14,14 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.adventure.obsidian_shards.description"
+      "translate": "advancements.jaizmod.obsidian_arsenal.description"
     },
     "icon": {
       "count": 1,
       "id": "jaizmod:obsidian_shard"
     },
     "title": {
-      "translate": "advancements.adventure.obsidian_shards.title"
+      "translate": "advancements.jaizmod.obsidian_arsenal.title"
     }
   },
   "requirements": [

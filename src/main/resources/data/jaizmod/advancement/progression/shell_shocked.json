@@ -1,0 +1,16 @@
+{
+  "parent": "jaizmod:progression/tide_bites_back",
+  "criteria": {
+    "wore_shell_set": {
+      "trigger": "jaizmod:klephtopod_armor_worn"
+    }
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.shell_shocked.description"},
+    "frame": "goal",
+    "icon": {"id":"jaizmobs:klephtopod_shell"},
+    "title": {"translate":"advancements.jaizmod.shell_shocked.title"}
+  },
+  "requirements": [["wore_shell_set"]],
+  "sends_telemetry_event": false
+}

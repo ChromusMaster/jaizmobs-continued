@@ -1,0 +1,16 @@
+{
+  "parent": "jaizmod:husbandry/place_chrysalis",
+  "criteria": {
+    "witnessed_hatching": {
+      "trigger": "jaizmod:cocoon_hatched"
+    }
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.new_wings.description"},
+    "frame": "goal",
+    "icon": {"id":"jaizmod:butterfly_spawn_egg"},
+    "title": {"translate":"advancements.jaizmod.new_wings.title"}
+  },
+  "requirements": [["witnessed_hatching"]],
+  "sends_telemetry_event": false
+}

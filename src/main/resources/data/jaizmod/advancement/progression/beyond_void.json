@@ -1,0 +1,17 @@
+{
+  "parent": "jaizmod:progression/nether_menagerie",
+  "criteria": {
+    "voidbull": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:voidbull"}}]},"trigger":"minecraft:player_killed_entity"},
+    "aeroblob": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:aeroblob"}}]},"trigger":"minecraft:player_killed_entity"},
+    "enderwing": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:enderwing"}}]},"trigger":"minecraft:player_killed_entity"}
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.beyond_void.description"},
+    "frame": "challenge",
+    "icon": {"id":"jaizmobs:void_husk"},
+    "title": {"translate":"advancements.jaizmod.beyond_void.title"}
+  },
+  "requirements": [["voidbull"],["aeroblob"],["enderwing"]],
+  "rewards": {"experience":100},
+  "sends_telemetry_event": false
+}

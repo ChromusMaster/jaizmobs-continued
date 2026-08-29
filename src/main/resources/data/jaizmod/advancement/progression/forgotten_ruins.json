@@ -1,0 +1,58 @@
+{
+  "parent": "jaizmod:adventure/find_fossil_pit",
+  "criteria": {
+    "desert_ruins": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "jaizmod:desert_ruins"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "badlands_ruins": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "jaizmod:badlands_ruins"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.jaizmod.forgotten_ruins.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "jaizmod:terracotta_bricks"
+    },
+    "title": {
+      "translate": "advancements.jaizmod.forgotten_ruins.title"
+    }
+  },
+  "requirements": [
+    [
+      "desert_ruins"
+    ],
+    [
+      "badlands_ruins"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

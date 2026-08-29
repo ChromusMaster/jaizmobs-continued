@@ -1,0 +1,27 @@
+{
+  "criteria": {
+    "entered_world": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "background": "minecraft:gui/advancements/backgrounds/adventure",
+    "description": {
+      "translate": "advancements.jaizmod.root.description"
+    },
+    "icon": {
+      "id": "jaizmod:glowing_spyglass"
+    },
+    "show_toast": false,
+    "announce_to_chat": false,
+    "title": {
+      "translate": "advancements.jaizmod.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "entered_world"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

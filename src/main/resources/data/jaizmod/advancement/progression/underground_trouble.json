@@ -1,0 +1,15 @@
+{
+  "parent": "jaizmod:progression/spirits_four_lands",
+  "criteria": {
+    "driplet": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:driplet"}}]},"trigger":"minecraft:player_killed_entity"},
+    "stalagtitan": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:stalagtitan"}}]},"trigger":"minecraft:player_killed_entity"}
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.underground_trouble.description"},
+    "frame": "goal",
+    "icon": {"id":"jaizmobs:dripstone_shard"},
+    "title": {"translate":"advancements.jaizmod.underground_trouble.title"}
+  },
+  "requirements": [["driplet"],["stalagtitan"]],
+  "sends_telemetry_event": false
+}

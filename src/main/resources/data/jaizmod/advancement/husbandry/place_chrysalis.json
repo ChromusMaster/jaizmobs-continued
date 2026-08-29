@@ -1,5 +1,5 @@
 {
-  "parent": "jaizmod:husbandry/plants_and_junk_root",
+  "parent": "jaizmod:progression/tiny_companion",
   "criteria": {
     "cocoon": {
       "conditions": {
@@ -15,14 +15,14 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.husbandry.place_chrysalis.description"
+      "translate": "advancements.jaizmod.place_chrysalis.description"
     },
     "icon": {
       "count": 1,
       "id": "jaizmod:cocoon_block"
     },
     "title": {
-      "translate": "advancements.husbandry.place_chrysalis.title"
+      "translate": "advancements.jaizmod.place_chrysalis.title"
     }
   },
   "requirements": [

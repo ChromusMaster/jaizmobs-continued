@@ -13,6 +13,8 @@ The current target is Minecraft Java 26.2. Updating it was a personal challenge 
 
 There are 32 creatures at the moment. Some are peaceful little ambience mobs, some can be tamed or ridden, and some are very much a bad idea to approach without armor. The mod also has three wood families, plants, tea, food, blocks, structures, equipment, trims, sulfur ore, pottery-related loot and a number of small Vanilla+ additions.
 
+The port also has its own advancement tab. It starts small, then follows the creatures, places, tea, equipment and odd discoveries already found in the mod. Nothing outside JaizMod is needed to finish it.
+
 Both original namespaces are still used: `jaizmod` and `jaizmobs`. Keeping them avoids needlessly changing item and entity IDs from the original projects.
 
 A short guide is given to a player the first time they join a world with the mod installed. It points to the Creative tabs and gives a couple of command examples. A more complete player wiki is maintained separately from the source archive.

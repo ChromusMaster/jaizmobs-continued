@@ -1,0 +1,17 @@
+{
+  "parent": "jaizmod:progression/beyond_void",
+  "criteria": {
+    "wore_void_set": {
+      "trigger": "jaizmod:void_armor_worn"
+    }
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.clad_in_void.description"},
+    "frame": "challenge",
+    "icon": {"id":"jaizmobs:void_scale_mail_chestplate"},
+    "title": {"translate":"advancements.jaizmod.clad_in_void.title"}
+  },
+  "requirements": [["wore_void_set"]],
+  "rewards": {"experience":100},
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,16 @@
+{
+  "parent": "jaizmod:progression/underground_trouble",
+  "criteria": {
+    "starfish_leader": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:starfishleader"}}]},"trigger":"minecraft:player_killed_entity"},
+    "hunter_eel": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:hunter_eel"}}]},"trigger":"minecraft:player_killed_entity"},
+    "klephtopod": {"conditions":{"entity":[{"condition":"minecraft:entity_properties","entity":"this","predicate":{"minecraft:entity_type":"jaizmobs:klephtopod"}}]},"trigger":"minecraft:player_killed_entity"}
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.tide_bites_back.description"},
+    "frame": "goal",
+    "icon": {"id":"jaizmobs:hunter_eel"},
+    "title": {"translate":"advancements.jaizmod.tide_bites_back.title"}
+  },
+  "requirements": [["starfish_leader"],["hunter_eel"],["klephtopod"]],
+  "sends_telemetry_event": false
+}

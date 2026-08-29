@@ -1,0 +1,28 @@
+{
+  "parent": "jaizmod:progression/unusual_brew",
+  "criteria": {
+    "chorus": {"conditions":{"item":{"items":"jaizmod:chorus_fruit_tea"}},"trigger":"minecraft:consume_item"},
+    "novel": {"conditions":{"item":{"items":"jaizmod:novel_tea"}},"trigger":"minecraft:consume_item"},
+    "flower": {"conditions":{"item":{"items":"jaizmod:flower_tea"}},"trigger":"minecraft:consume_item"},
+    "glow_berry": {"conditions":{"item":{"items":"jaizmod:glow_berry_tea"}},"trigger":"minecraft:consume_item"},
+    "gunpowder": {"conditions":{"item":{"items":"jaizmod:gunpowder_green_tea"}},"trigger":"minecraft:consume_item"},
+    "herbal": {"conditions":{"item":{"items":"jaizmod:herbal_tea"}},"trigger":"minecraft:consume_item"},
+    "kombucha": {"conditions":{"item":{"items":"jaizmod:kombucha_tea"}},"trigger":"minecraft:consume_item"},
+    "crimson": {"conditions":{"item":{"items":"jaizmod:nether_fungus_tea"}},"trigger":"minecraft:consume_item"},
+    "warped": {"conditions":{"item":{"items":"jaizmod:warped_nether_fungus_tea"}},"trigger":"minecraft:consume_item"},
+    "pitcher": {"conditions":{"item":{"items":"jaizmod:pitcher_plant_tea"}},"trigger":"minecraft:consume_item"},
+    "pumpkin": {"conditions":{"item":{"items":"jaizmod:pumpkin_spice_tea"}},"trigger":"minecraft:consume_item"},
+    "spore": {"conditions":{"item":{"items":"jaizmod:spore_blossom_tea"}},"trigger":"minecraft:consume_item"},
+    "torchflower": {"conditions":{"item":{"items":"jaizmod:torch_flower_tea"}},"trigger":"minecraft:consume_item"},
+    "wither": {"conditions":{"item":{"items":"jaizmod:wither_rose_tea"}},"trigger":"minecraft:consume_item"}
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.all_teas.description"},
+    "frame": "challenge",
+    "icon": {"id":"jaizmod:tea_pot_block"},
+    "title": {"translate":"advancements.jaizmod.all_teas.title"}
+  },
+  "requirements": [["chorus"],["novel"],["flower"],["glow_berry"],["gunpowder"],["herbal"],["kombucha"],["crimson"],["warped"],["pitcher"],["pumpkin"],["spore"],["torchflower"],["wither"]],
+  "rewards": {"experience":150},
+  "sends_telemetry_event": false
+}

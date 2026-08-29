@@ -1,0 +1,21 @@
+{
+  "parent": "jaizmod:adventure/rare_spices",
+  "criteria": {
+    "gourmet_meal": {
+      "conditions": {
+        "item": {
+          "items": "jaizmod:gourmet_meal"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.dinner_served.description"},
+    "frame": "goal",
+    "icon": {"id":"jaizmod:gourmet_meal"},
+    "title": {"translate":"advancements.jaizmod.dinner_served.title"}
+  },
+  "requirements": [["gourmet_meal"]],
+  "sends_telemetry_event": false
+}

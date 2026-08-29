@@ -1,0 +1,23 @@
+{
+  "parent": "jaizmod:progression/pick_your_edge",
+  "criteria": {
+    "battered_axe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jaizmod:battered_axe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.back_in_one_piece.description"},
+    "frame": "goal",
+    "icon": {"id":"jaizmod:battered_axe"},
+    "title": {"translate":"advancements.jaizmod.back_in_one_piece.title"}
+  },
+  "requirements": [["battered_axe"]],
+  "sends_telemetry_event": false
+}

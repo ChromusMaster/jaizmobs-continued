@@ -1,5 +1,6 @@
 package jaiz.jaizmod.item.custom.ancient_horns;
 
+import jaiz.jaizmod.advancement.ModCriteria;
 import jaiz.jaizmod.JaizMod;
 import jaiz.jaizmod.block.ModBlocks;
 import jaiz.jaizmod.sound.ModSounds;
@@ -9,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.*;
 import net.minecraft.world.InteractionHand;
@@ -46,6 +48,9 @@ public class AmethystHornItem extends InstrumentItem {
             itemStack.hurtAndBreak(1, user, hand);
         }
         world.playSound(null, user.getX(), user.getY(), user.getZ(), ModSounds.AMETHYST_HORN, SoundSource.PLAYERS, 15.0f, user.getXRot() * -0.05f + 1f);
+        if (user instanceof ServerPlayer player) {
+            ModCriteria.HORN_USED.trigger(player);
+        }
         int o = user.getRandom().nextInt(12) + 5;
 
         if(user.isShiftKeyDown()){

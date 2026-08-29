@@ -1,0 +1,22 @@
+{
+  "parent": "jaizmod:progression/dinner_served",
+  "criteria": {
+    "starfish": {"conditions":{"item":{"items":"jaizmobs:star_fish"}},"trigger":"minecraft:consume_item"},
+    "hunter_eel": {"conditions":{"item":{"items":"jaizmobs:hunter_eel"}},"trigger":"minecraft:consume_item"},
+    "helium_membrane": {"conditions":{"item":{"items":"jaizmobs:helium_membrane"}},"trigger":"minecraft:consume_item"},
+    "geyser_berry": {"conditions":{"item":{"items":"jaizmobs:geyser_berry"}},"trigger":"minecraft:consume_item"},
+    "strider_ham": {"conditions":{"item":{"items":"jaizmobs:strider_ham"}},"trigger":"minecraft:consume_item"},
+    "warped_fungus": {"conditions":{"item":{"items":"jaizmobs:cooked_warped_fungus"}},"trigger":"minecraft:consume_item"},
+    "crimson_fungus": {"conditions":{"item":{"items":"jaizmobs:cooked_crimson_fungus"}},"trigger":"minecraft:consume_item"},
+    "sniffer_meat": {"conditions":{"item":{"items":"jaizmod:sniffer_meat"}},"trigger":"minecraft:consume_item"}
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.iron_stomach.description"},
+    "frame": "challenge",
+    "icon": {"id":"jaizmobs:star_fish"},
+    "title": {"translate":"advancements.jaizmod.iron_stomach.title"}
+  },
+  "requirements": [["starfish"],["hunter_eel"],["helium_membrane"],["geyser_berry"],["strider_ham"],["warped_fungus"],["crimson_fungus"],["sniffer_meat"]],
+  "rewards": {"experience":100},
+  "sends_telemetry_event": false
+}

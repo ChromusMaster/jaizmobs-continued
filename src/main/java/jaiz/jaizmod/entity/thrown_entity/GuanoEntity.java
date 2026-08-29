@@ -1,5 +1,6 @@
 package jaiz.jaizmod.entity.thrown_entity;
 
+import jaiz.jaizmod.advancement.ModCriteria;
 import jaiz.jaizmod.block.ModBlocks;
 import jaiz.jaizmod.entity.ModEntities;
 import jaiz.jaizmod.item.ModItems;
@@ -9,6 +10,7 @@ import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -81,7 +83,10 @@ public class GuanoEntity extends ThrowableItemProjectile {
             if(this.getInBlockState().isAir())
             {if(this.level().getBlockState(this.blockPosition().below()).isCollisionShapeFullBlock(world, this.blockPosition().below())) {
             world.setBlock(blockPos, blockState, Block.UPDATE_ALL);
-                world.gameEvent(GameEvent.BLOCK_PLACE, blockPos, GameEvent.Context.of(this, blockState));}
+                world.gameEvent(GameEvent.BLOCK_PLACE, blockPos, GameEvent.Context.of(this, blockState));
+                if (this.getOwner() instanceof ServerPlayer player) {
+                    ModCriteria.GUANO_LANDED.trigger(player);
+                }}
             } else {
                 this.entityItemDropper();
             }

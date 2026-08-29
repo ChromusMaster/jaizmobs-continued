@@ -1,5 +1,5 @@
 {
-  "parent": "jaizmod:adventure/desert_root",
+  "parent": "jaizmod:progression/root",
   "criteria": {
     "in_pit": {
       "conditions": {
@@ -20,14 +20,14 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.adventure.find_fossil_pit.description"
+      "translate": "advancements.jaizmod.fossil_pit.description"
     },
     "icon": {
       "count": 1,
       "id": "jaizmod:fossil_soil"
     },
     "title": {
-      "translate": "advancements.adventure.find_fossil_pit.title"
+      "translate": "advancements.jaizmod.fossil_pit.title"
     }
   },
   "requirements": [

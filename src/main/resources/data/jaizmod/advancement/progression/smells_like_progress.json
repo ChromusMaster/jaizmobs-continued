@@ -1,0 +1,22 @@
+{
+  "parent": "jaizmod:progression/pick_your_edge",
+  "criteria": {
+    "sulfur": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jaizmobs:sulfuric_remnant"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.smells_like_progress.description"},
+    "icon": {"id":"jaizmobs:sulfuric_remnant"},
+    "title": {"translate":"advancements.jaizmod.smells_like_progress.title"}
+  },
+  "requirements": [["sulfur"]],
+  "sends_telemetry_event": false
+}

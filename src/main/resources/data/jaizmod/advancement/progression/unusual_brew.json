@@ -1,0 +1,21 @@
+{
+  "parent": "jaizmod:progression/first_brew",
+  "criteria": {
+    "drank_unusual_tea": {
+      "conditions": {
+        "item": {
+          "items": "#jaizmod:unusual_teas"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.unusual_brew.description"},
+    "frame": "goal",
+    "icon": {"id":"jaizmod:gunpowder_green_tea"},
+    "title": {"translate":"advancements.jaizmod.unusual_brew.title"}
+  },
+  "requirements": [["drank_unusual_tea"]],
+  "sends_telemetry_event": false
+}

@@ -14,14 +14,14 @@
   },
   "display": {
     "description": {
-      "translate": "advancements.adventure.tea_cup.description"
+      "translate": "advancements.jaizmod.tea_cup.description"
     },
     "icon": {
       "count": 1,
       "id": "jaizmod:tea_cup"
     },
     "title": {
-      "translate": "advancements.adventure.tea_cup.title"
+      "translate": "advancements.jaizmod.tea_cup.title"
     }
   },
   "requirements": [

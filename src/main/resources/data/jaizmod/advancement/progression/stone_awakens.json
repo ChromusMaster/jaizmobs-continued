@@ -1,0 +1,22 @@
+{
+  "parent": "jaizmod:progression/underground_trouble",
+  "criteria": {
+    "rebuilt_totem": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jaizmobs:calcite_totem"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {"translate":"advancements.jaizmod.stone_awakens.description"},
+    "icon": {"id":"jaizmobs:calcite_totem"},
+    "title": {"translate":"advancements.jaizmod.stone_awakens.title"}
+  },
+  "requirements": [["rebuilt_totem"]],
+  "sends_telemetry_event": false
+}
