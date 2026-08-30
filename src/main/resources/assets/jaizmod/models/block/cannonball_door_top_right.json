@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "textures": {
+    "bottom": "jaizmod:block/cannonball_door_bottom",
+    "top": "jaizmod:block/cannonball_door_top"
+  }
+}

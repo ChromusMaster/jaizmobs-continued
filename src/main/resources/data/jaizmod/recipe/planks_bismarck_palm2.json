@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "jaizmod:stripped_bismarck_palm_wood"
+  ],
+  "result": {
+    "count": 4,
+    "id": "jaizmod:bismarck_palm_planks"
+  }
+}

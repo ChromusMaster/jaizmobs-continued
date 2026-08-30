@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "jaizmod:block/sequoia_planks",
+    "side": "jaizmod:block/sequoia_planks",
+    "top": "jaizmod:block/sequoia_planks"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    "minecraft:water_bucket",
+    "minecraft:glass_bottle",
+    "minecraft:glass_bottle",
+    "minecraft:glass_bottle",
+    "minecraft:sugar",
+    "jaizmod:roasted_guarana"
+  ],
+  "result": {
+    "count": 3,
+    "id": "jaizmod:guarana_soda"
+  }
+}

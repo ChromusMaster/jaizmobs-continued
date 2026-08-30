@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "jaizmod:block/sequoia_slab"
+    },
+    "type=double": {
+      "model": "jaizmod:block/sequoia_planks"
+    },
+    "type=top": {
+      "model": "jaizmod:block/sequoia_slab_top"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "jaizmod:block/bismarck_palm_slab"
+    },
+    "type=double": {
+      "model": "jaizmod:block/bismarck_palm_planks"
+    },
+    "type=top": {
+      "model": "jaizmod:block/bismarck_palm_slab_top"
+    }
+  }
+}

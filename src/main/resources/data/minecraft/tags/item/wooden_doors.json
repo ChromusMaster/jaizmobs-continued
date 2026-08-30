@@ -1,10 +1,14 @@
 {
   "values": [
     "jaizmod:desert_oak_door",
-    "jaizmod:desert_oak_trapdoor",
     "jaizmod:rotten_door",
-    "jaizmod:rotten_trapdoor",
     "jaizmod:mahogany_door",
-    "jaizmod:mahogany_trapdoor"
+    "jaizmod:cumaru_door",
+    "jaizmod:ebony_door",
+    "jaizmod:flamboyant_door",
+    "jaizmod:atlas_cedar_door",
+    "jaizmod:bismarck_palm_door",
+    "jaizmod:cannonball_door",
+    "jaizmod:sequoia_door"
   ]
 }

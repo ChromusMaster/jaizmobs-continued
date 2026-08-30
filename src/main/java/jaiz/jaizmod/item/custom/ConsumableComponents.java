@@ -46,4 +46,7 @@ public class ConsumableComponents {
     public static final Consumable CHORUS_TEA = defaultDrink()
             .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.LEVITATION, 120, 0), 1.0F))
             .build();
+    public static final Consumable GUARANA_SODA = defaultDrink()
+            .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.SPEED, 200, 0), 1.0F))
+            .build();
 }

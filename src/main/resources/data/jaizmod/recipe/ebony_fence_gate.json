@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "R": "minecraft:stick",
+    "X": "jaizmod:ebony_planks"
+  },
+  "pattern": [
+    "RXR",
+    "RXR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "jaizmod:ebony_fence_gate"
+  }
+}

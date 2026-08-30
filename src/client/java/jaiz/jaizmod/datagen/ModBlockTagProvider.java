@@ -1,6 +1,7 @@
 package jaiz.jaizmod.datagen;
 
 import jaiz.jaizmod.block.ModBlocks;
+import jaiz.jaizmod.block.ModWoodSets;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
@@ -164,10 +165,12 @@ public class ModBlockTagProvider extends FabricTagsProvider.BlockTagsProvider {
 
         builder(BlockTags.WOODEN_DOORS)
                 .add(key(ModBlocks.DESERT_OAK_DOOR))
-                .add(key(ModBlocks.DESERT_OAK_TRAPDOOR))
                 .add(key(ModBlocks.ROTTEN_DOOR))
+                .add(key(ModBlocks.MAHOGANY_DOOR));
+
+        builder(BlockTags.WOODEN_TRAPDOORS)
+                .add(key(ModBlocks.DESERT_OAK_TRAPDOOR))
                 .add(key(ModBlocks.ROTTEN_TRAPDOOR))
-                .add(key(ModBlocks.MAHOGANY_DOOR))
                 .add(key(ModBlocks.MAHOGANY_TRAPDOOR));
 
 
@@ -308,6 +311,50 @@ public class ModBlockTagProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(key(ModBlocks.BLOOMING_IVY))
                 .add(key(ModBlocks.ROT_ROOTS))
                 .add(key(ModBlocks.UNDERGROWTH));
+
+        for (ModWoodSets.WoodSet wood : ModWoodSets.ALL) {
+            builder(BlockTags.PLANKS).add(key(wood.planks()));
+            builder(BlockItemTags.LOGS_THAT_BURN.block())
+                    .add(key(wood.log()))
+                    .add(key(wood.wood()))
+                    .add(key(wood.strippedLog()))
+                    .add(key(wood.strippedWood()));
+            builder(BlockTags.FENCES).add(key(wood.fence()));
+            builder(BlockTags.FENCE_GATES).add(key(wood.fenceGate()));
+            builder(BlockTags.WOODEN_SLABS).add(key(wood.slab()));
+            builder(BlockTags.SLABS).add(key(wood.slab()));
+            builder(BlockTags.WOODEN_BUTTONS).add(key(wood.button()));
+            builder(BlockTags.WOODEN_STAIRS).add(key(wood.stairs()));
+            builder(BlockTags.STAIRS).add(key(wood.stairs()));
+            builder(BlockTags.WOODEN_PRESSURE_PLATES).add(key(wood.pressurePlate()));
+            builder(BlockTags.WOODEN_FENCES).add(key(wood.fence()));
+            builder(BlockTags.WOODEN_DOORS).add(key(wood.door()));
+            builder(BlockTags.WOODEN_TRAPDOORS).add(key(wood.trapdoor()));
+            builder(BlockTags.LEAVES).add(key(wood.leaves()));
+            builder(BlockItemTags.SAPLINGS.block()).add(key(wood.sapling()));
+            builder(BlockTags.MINEABLE_WITH_HOE).add(key(wood.leaves()));
+            builder(BlockTags.MINEABLE_WITH_AXE)
+                    .add(key(wood.log()))
+                    .add(key(wood.wood()))
+                    .add(key(wood.strippedLog()))
+                    .add(key(wood.strippedWood()))
+                    .add(key(wood.planks()))
+                    .add(key(wood.stairs()))
+                    .add(key(wood.slab()))
+                    .add(key(wood.fence()))
+                    .add(key(wood.fenceGate()))
+                    .add(key(wood.door()))
+                    .add(key(wood.trapdoor()))
+                    .add(key(wood.button()))
+                    .add(key(wood.pressurePlate()));
+        }
+        builder(BlockTags.MINEABLE_WITH_HOE)
+                .add(key(ModWoodSets.GUARANA_BUSH))
+                .add(key(ModWoodSets.THATCH))
+                .add(key(ModWoodSets.THATCH_STAIRS))
+                .add(key(ModWoodSets.THATCH_SLAB));
+        builder(BlockTags.SLABS).add(key(ModWoodSets.THATCH_SLAB));
+        builder(BlockTags.STAIRS).add(key(ModWoodSets.THATCH_STAIRS));
 
 
     }

@@ -2,6 +2,7 @@ package jaiz.jaizmod.datagen;
 
 import jaiz.jaizmod.block.ModBlocks;
 import jaiz.jaizmod.item.ModItems;
+import jaiz.jaizmod.item.ModWoodItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
@@ -210,10 +211,12 @@ public class ModItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
 
         builder(ItemTags.WOODEN_DOORS)
                 .add(key(ModItems.DESERT_OAK_DOOR))
-                .add(key(ModItems.DESERT_OAK_TRAPDOOR))
                 .add(key(ModItems.ROTTEN_DOOR))
+                .add(key(ModItems.MAHOGANY_DOOR));
+
+        builder(ItemTags.WOODEN_TRAPDOORS)
+                .add(key(ModItems.DESERT_OAK_TRAPDOOR))
                 .add(key(ModItems.ROTTEN_TRAPDOOR))
-                .add(key(ModItems.MAHOGANY_DOOR))
                 .add(key(ModItems.MAHOGANY_TRAPDOOR));
 
         builder(ItemTags.LEAVES)
@@ -241,6 +244,26 @@ public class ModItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
                 .add(key(Items.PITCHER_POD))
                 .add(key(Items.PITCHER_PLANT))
                 .add(key(ModItems.ANCIENT_SPROUT));
+
+        for (ModWoodItems.WoodItems wood : ModWoodItems.ALL) {
+            builder(ItemTags.LOGS_THAT_BURN)
+                    .add(key(wood.log()))
+                    .add(key(wood.wood()))
+                    .add(key(wood.strippedLog()))
+                    .add(key(wood.strippedWood()));
+            builder(ItemTags.PLANKS).add(key(wood.planks()));
+            builder(BlockItemTags.FENCES.item()).add(key(wood.fence()));
+            builder(ItemTags.FENCE_GATES).add(key(wood.fenceGate()));
+            builder(ItemTags.WOODEN_SLABS).add(key(wood.slab()));
+            builder(ItemTags.WOODEN_BUTTONS).add(key(wood.button()));
+            builder(ItemTags.WOODEN_STAIRS).add(key(wood.stairs()));
+            builder(ItemTags.WOODEN_PRESSURE_PLATES).add(key(wood.pressurePlate()));
+            builder(ItemTags.WOODEN_FENCES).add(key(wood.fence()));
+            builder(ItemTags.WOODEN_DOORS).add(key(wood.door()));
+            builder(ItemTags.WOODEN_TRAPDOORS).add(key(wood.trapdoor()));
+            builder(ItemTags.LEAVES).add(key(wood.leaves()));
+            builder(ItemTags.SAPLINGS).add(key(wood.sapling()));
+        }
 
     }
 

@@ -89,6 +89,6 @@ public class AirHornItem extends InstrumentItem {
                     );
             user.getCooldowns().addCooldown(itemStack, 120);
         }
-        return InteractionResult.FAIL;
+        return InteractionResult.SUCCESS;
     }
 }

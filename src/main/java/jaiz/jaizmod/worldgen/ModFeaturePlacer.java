@@ -1,5 +1,6 @@
 package jaiz.jaizmod.worldgen;
 
+import jaiz.jaizmod.block.ModWoodSets;
 import jaiz.jaizmod.entity.ModEntities;
 import jaiz.jaizmod.entity.fruit_bat.FruitBatEntity;
 import jaiz.jaizmod.worldgen.biome.ModBiomes;
@@ -16,6 +17,23 @@ import net.minecraft.world.level.levelgen.Heightmap;
 
 public class ModFeaturePlacer {
     public static void addPlacedFeaturesSpawn() {
+
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.JUNGLE, Biomes.SPARSE_JUNGLE, ModBiomes.MAHOGANY_FOREST),
+                GenerationStep.Decoration.VEGETAL_DECORATION, ModWoodSets.CUMARU.placedKey());
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.DARK_FOREST, Biomes.JUNGLE, ModBiomes.MAHOGANY_FOREST),
+                GenerationStep.Decoration.VEGETAL_DECORATION, ModWoodSets.EBONY.placedKey());
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU, Biomes.WINDSWEPT_SAVANNA),
+                GenerationStep.Decoration.VEGETAL_DECORATION, ModWoodSets.FLAMBOYANT.placedKey());
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.WINDSWEPT_HILLS, Biomes.WINDSWEPT_FOREST, Biomes.MEADOW, Biomes.GROVE),
+                GenerationStep.Decoration.VEGETAL_DECORATION, ModWoodSets.ATLAS_CEDAR.placedKey());
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.BEACH, Biomes.JUNGLE, Biomes.SPARSE_JUNGLE),
+                GenerationStep.Decoration.VEGETAL_DECORATION, ModWoodSets.BISMARCK_PALM.placedKey());
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.JUNGLE, Biomes.BAMBOO_JUNGLE, ModBiomes.MAHOGANY_FOREST),
+                GenerationStep.Decoration.VEGETAL_DECORATION, ModWoodSets.CANNONBALL.placedKey());
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.OLD_GROWTH_PINE_TAIGA, Biomes.OLD_GROWTH_SPRUCE_TAIGA),
+                GenerationStep.Decoration.VEGETAL_DECORATION, ModWoodSets.SEQUOIA.placedKey());
+        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.JUNGLE, Biomes.SPARSE_JUNGLE, Biomes.BAMBOO_JUNGLE, ModBiomes.MAHOGANY_FOREST),
+                GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.GUARANA_PATCH);
 
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.DESERT, Biomes.BADLANDS, Biomes.ERODED_BADLANDS, Biomes.WOODED_BADLANDS),
                 GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.DESERT_OAK_PLACED_KEY);

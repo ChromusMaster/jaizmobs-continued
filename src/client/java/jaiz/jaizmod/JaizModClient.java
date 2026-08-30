@@ -2,6 +2,7 @@ package jaiz.jaizmod;
 
 import com.terraformersmc.terraform.boat.api.TerraformBoatClientHelper;
 import jaiz.jaizmod.block.ModBlocks;
+import jaiz.jaizmod.block.ModWoodSets;
 import jaiz.jaizmod.entity.ModEntities;
 import jaiz.jaizmod.entity.ModModelLayers;
 import jaiz.jaizmod.entity.bandit.Bandit;
@@ -70,6 +71,10 @@ public class JaizModClient implements ClientModInitializer {
 
 		BlockColorRegistry.register(List.of(BlockTintSources.foliage()), ModBlocks.MAHOGANY_LEAVES,
 				ModBlocks.DESERT_OAK_LEAVES, ModBlocks.IVY, ModBlocks.UNDERGROWTH, Blocks.LILY_PAD);
+		BlockColorRegistry.register(List.of(BlockTintSources.foliage()), ModWoodSets.ALL.stream()
+				.filter(wood -> wood != ModWoodSets.FLAMBOYANT)
+				.map(ModWoodSets.WoodSet::leaves)
+				.toArray(net.minecraft.world.level.block.Block[]::new));
 
 		EntityRendererRegistry.register(ModEntities.MASON_MOUTH, MasonMouthRenderer::new);
 		ModelLayerRegistry.registerModelLayer(ModModelLayers.MASON_MOUTH, Masonmouth::getTexturedModelData);

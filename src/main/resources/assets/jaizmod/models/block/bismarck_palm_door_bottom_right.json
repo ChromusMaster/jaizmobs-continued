@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right",
+  "textures": {
+    "bottom": "jaizmod:block/bismarck_palm_door_bottom",
+    "top": "jaizmod:block/bismarck_palm_door_top"
+  }
+}

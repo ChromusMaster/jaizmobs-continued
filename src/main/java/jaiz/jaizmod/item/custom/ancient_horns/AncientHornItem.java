@@ -90,6 +90,6 @@ public class AncientHornItem extends InstrumentItem {
             user.getCooldowns().addCooldown(itemStack, 120);
         }
 
-        return InteractionResult.FAIL;
+        return InteractionResult.SUCCESS;
     }
 }

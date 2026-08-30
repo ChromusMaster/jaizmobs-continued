@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "jaizmod:block/flamboyant_slab"
+    },
+    "type=double": {
+      "model": "jaizmod:block/flamboyant_planks"
+    },
+    "type=top": {
+      "model": "jaizmod:block/flamboyant_slab_top"
+    }
+  }
+}

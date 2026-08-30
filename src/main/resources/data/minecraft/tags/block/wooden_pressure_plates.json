@@ -2,6 +2,13 @@
   "values": [
     "jaizmod:desert_oak_pressure_plate",
     "jaizmod:rotten_pressure_plate",
-    "jaizmod:mahogany_pressure_plate"
+    "jaizmod:mahogany_pressure_plate",
+    "jaizmod:cumaru_pressure_plate",
+    "jaizmod:ebony_pressure_plate",
+    "jaizmod:flamboyant_pressure_plate",
+    "jaizmod:atlas_cedar_pressure_plate",
+    "jaizmod:bismarck_palm_pressure_plate",
+    "jaizmod:cannonball_pressure_plate",
+    "jaizmod:sequoia_pressure_plate"
   ]
 }

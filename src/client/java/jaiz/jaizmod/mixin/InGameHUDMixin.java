@@ -1,6 +1,5 @@
 package jaiz.jaizmod.mixin;
 
-import jaiz.jaizmod.statuseffects.HypnoStatusEffect;
 import jaiz.jaizmod.statuseffects.ModStatusEffects;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -50,7 +49,9 @@ public abstract class InGameHUDMixin {
     private void init(GuiGraphicsExtractor context, DeltaTracker tickCounter, CallbackInfo ci) {
 
         if (this.minecraft.player != null && this.minecraft.player.hasEffect(ModStatusEffects.HYPNO)) {
-            this.renderHypnosisOverlay(context, HypnoStatusEffect.hypnopulse);
+            float phase = (this.minecraft.player.tickCount + tickCounter.getGameTimeDeltaPartialTick(false)) % 100.0F;
+            float opacity = phase <= 50.0F ? phase / 100.0F : (100.0F - phase) / 100.0F;
+            this.renderHypnosisOverlay(context, opacity);
         }
     }
 

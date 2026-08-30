@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "jaizmod:block/bismarck_palm_planks",
+    "side": "jaizmod:block/bismarck_palm_planks",
+    "top": "jaizmod:block/bismarck_palm_planks"
+  }
+}

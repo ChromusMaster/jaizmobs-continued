@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "jaizmod:block/flamboyant_planks",
+    "side": "jaizmod:block/flamboyant_planks",
+    "top": "jaizmod:block/flamboyant_planks"
+  }
+}

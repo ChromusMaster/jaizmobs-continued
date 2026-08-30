@@ -2,6 +2,13 @@
   "values": [
     "jaizmod:desert_oak_fence_gate",
     "jaizmod:mahogany_fence_gate",
-    "jaizmod:rotten_fence_gate"
+    "jaizmod:rotten_fence_gate",
+    "jaizmod:cumaru_fence_gate",
+    "jaizmod:ebony_fence_gate",
+    "jaizmod:flamboyant_fence_gate",
+    "jaizmod:atlas_cedar_fence_gate",
+    "jaizmod:bismarck_palm_fence_gate",
+    "jaizmod:cannonball_fence_gate",
+    "jaizmod:sequoia_fence_gate"
   ]
 }

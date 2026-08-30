@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "jaizmod:block/cannonball_slab"
+    },
+    "type=double": {
+      "model": "jaizmod:block/cannonball_planks"
+    },
+    "type=top": {
+      "model": "jaizmod:block/cannonball_slab_top"
+    }
+  }
+}

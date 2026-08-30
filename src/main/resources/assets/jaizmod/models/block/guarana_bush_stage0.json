@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "jaizmod:block/guarana_bush_stage0"
+  }
+}

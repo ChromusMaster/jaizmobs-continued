@@ -1,6 +1,13 @@
 {
   "values": [
     "jaizmod:desert_oak_sapling",
-    "jaizmod:mahogany_sapling"
+    "jaizmod:mahogany_sapling",
+    "jaizmod:cumaru_sapling",
+    "jaizmod:ebony_sapling",
+    "jaizmod:flamboyant_sapling",
+    "jaizmod:atlas_cedar_sapling",
+    "jaizmod:bismarck_palm_sapling",
+    "jaizmod:cannonball_sapling",
+    "jaizmod:sequoia_sapling"
   ]
 }

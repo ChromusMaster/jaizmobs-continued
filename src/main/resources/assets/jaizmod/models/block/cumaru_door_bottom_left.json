@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "jaizmod:block/cumaru_door_bottom",
+    "top": "jaizmod:block/cumaru_door_top"
+  }
+}

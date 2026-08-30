@@ -3,6 +3,7 @@ package jaiz.jaizmod;
 import com.mojang.serialization.MapCodec;
 import jaiz.jaizmod.advancement.ModCriteria;
 import jaiz.jaizmod.block.ModBlocks;
+import jaiz.jaizmod.block.ModWoodSets;
 import jaiz.jaizmod.block.blockentities.CustomBlockEntities;
 import jaiz.jaizmod.entity.ModEntities;
 import jaiz.jaizmod.entity.bandit.BanditEntity;
@@ -32,12 +33,14 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.CompostableRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityType;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -229,6 +232,23 @@ public class JaizMod implements ModInitializer {
 		FlammableBlockRegistry.getDefaultInstance()
 				.add(ModBlocks.DRIED_LEAVES, 6, 10);
 
+		ModWoodSets.ALL.forEach(JaizMod::registerWoodSet);
+		FlammableBlockRegistry.getDefaultInstance().add(ModWoodSets.THATCH, 60, 30);
+		FlammableBlockRegistry.getDefaultInstance().add(ModWoodSets.THATCH_STAIRS, 60, 30);
+		FlammableBlockRegistry.getDefaultInstance().add(ModWoodSets.THATCH_SLAB, 60, 30);
+		ModWoodSets.ALL.forEach(wood -> CompostableRegistry.INSTANCE.add(wood.sapling(), 0.3F));
+		CompostableRegistry.INSTANCE.add(ModItems.CUMARU_BEAN, 0.3F);
+		CompostableRegistry.INSTANCE.add(ModItems.EBONY_FRUIT, 0.65F);
+		CompostableRegistry.INSTANCE.add(ModItems.FLAMBOYANT_PETALS, 0.3F);
+		CompostableRegistry.INSTANCE.add(ModItems.FLAMBOYANT_POD, 0.3F);
+		CompostableRegistry.INSTANCE.add(ModItems.ATLAS_CEDAR_CONE, 0.3F);
+		CompostableRegistry.INSTANCE.add(ModItems.BISMARCK_PALM_FRUIT, 0.65F);
+		CompostableRegistry.INSTANCE.add(ModItems.PALM_FROND, 0.5F);
+		CompostableRegistry.INSTANCE.add(ModItems.CANNONBALL_PULP, 0.65F);
+		CompostableRegistry.INSTANCE.add(ModItems.SEQUOIA_CONE, 0.3F);
+		CompostableRegistry.INSTANCE.add(ModItems.GUARANA_FRUIT, 0.65F);
+		CompostableRegistry.INSTANCE.add(ModItems.GUARANA_SEEDS, 0.3F);
+
 		StrippableBlockRegistry.register(ModBlocks.DESERT_OAK_LOG, ModBlocks.STRIPPED_DESERT_OAK_LOG);
 		StrippableBlockRegistry.register(ModBlocks.DESERT_OAK_WOOD, ModBlocks.STRIPPED_DESERT_OAK_WOOD);
 		FabricDefaultAttributeRegistry.register(ModEntities.FRUIT_BAT, FruitBatEntity.createAttributes());
@@ -259,5 +279,21 @@ public class JaizMod implements ModInitializer {
 		StrippableBlockRegistry.register(ModBlocks.ROTTEN_LOG, ModBlocks.STRIPPED_ROTTEN_LOG);
 		StrippableBlockRegistry.register(ModBlocks.ROTTEN_WOOD, ModBlocks.STRIPPED_ROTTEN_WOOD);
 
+	}
+
+	private static void registerWoodSet(ModWoodSets.WoodSet wood) {
+		FlammableBlockRegistry registry = FlammableBlockRegistry.getDefaultInstance();
+		int logBurn = wood == ModWoodSets.SEQUOIA ? 2 : 5;
+		int woodSpread = wood == ModWoodSets.SEQUOIA ? 5 : 20;
+		for (Block block : new Block[]{wood.log(), wood.wood(), wood.strippedLog(), wood.strippedWood()}) {
+			registry.add(block, logBurn, 5);
+		}
+		for (Block block : new Block[]{wood.planks(), wood.stairs(), wood.slab(), wood.fence(), wood.fenceGate(), wood.door(), wood.trapdoor()}) {
+			registry.add(block, 5, woodSpread);
+		}
+		registry.add(wood.leaves(), 30, 60);
+		registry.add(wood.sapling(), 60, 100);
+		StrippableBlockRegistry.register(wood.log(), wood.strippedLog());
+		StrippableBlockRegistry.register(wood.wood(), wood.strippedWood());
 	}
 }

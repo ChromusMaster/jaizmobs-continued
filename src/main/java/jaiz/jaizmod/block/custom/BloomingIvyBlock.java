@@ -65,13 +65,16 @@ public class BloomingIvyBlock extends VineBlock {
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getItemInHand(hand);
-        if (BloomingIvyBlock.shearItem(itemStack)) {
+        if (!BloomingIvyBlock.shearItem(itemStack)) {
+            return super.useItemOn(stack, state, world, pos, player, hand, hit);
+        }
+        if (!world.isClientSide()) {
             BloomingIvyBlock.shear(player, world, pos, state);
             if (!player.getAbilities().instabuild) {
                 stack.hurtAndBreak(1, player, hand);
             }
         }
-        return super.useItemOn(stack, state, world, pos, player, hand, hit);
+        return InteractionResult.SUCCESS;
     }
 
     public static void shear(@Nullable Entity user, Level world, BlockPos pos, BlockState state) {

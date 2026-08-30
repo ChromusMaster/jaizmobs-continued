@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "jaizmod:block/bismarck_palm_log",
+    "side": "jaizmod:block/bismarck_palm_log"
+  }
+}

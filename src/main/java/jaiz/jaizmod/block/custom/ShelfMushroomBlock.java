@@ -174,17 +174,23 @@ public class ShelfMushroomBlock extends Block{
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack itemStack = player.getItemInHand(hand);
         if (ShelfMushroomBlock.shearItem(itemStack) && ShelfMushroomBlock.shearable(state)) {
-            ShelfMushroomBlock.shear(player, world, pos, state);
-            if (!player.getAbilities().instabuild) {
-                stack.hurtAndBreak(1, player, hand);
+            if (!world.isClientSide()) {
+                ShelfMushroomBlock.shear(player, world, pos, state);
+                if (!player.getAbilities().instabuild) {
+                    stack.hurtAndBreak(1, player, hand);
+                }
             }
+            return InteractionResult.SUCCESS;
         }
 
         if (ShelfMushroomBlock.growItem(itemStack)) {
-            ShelfMushroomBlock.popResource(world, pos, new ItemStack(ModBlocks.SHELF_MUSHROOM_BLOCK));
-            if (!player.getAbilities().instabuild) {
-                itemStack.shrink(1);
+            if (!world.isClientSide()) {
+                ShelfMushroomBlock.popResource(world, pos, new ItemStack(ModBlocks.SHELF_MUSHROOM_BLOCK));
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
             }
+            return InteractionResult.SUCCESS;
         }
         return super.useItemOn(stack, state, world, pos, player, hand, hit);
     }

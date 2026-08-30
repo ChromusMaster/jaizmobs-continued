@@ -139,7 +139,7 @@ public class CalciteGolemEntity extends TamableAnimal implements AttackingMob {
             }
             if (!this.level().isClientSide()) {
                 this.setOwner(player);
-                this.level().broadcastEntityEvent(this, EntityEvent.DEATH);
+                this.level().broadcastEntityEvent(this, EntityEvent.TAMING_SUCCEEDED);
             }
             return this.level().isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
         }

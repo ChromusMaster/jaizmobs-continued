@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right",
+  "textures": {
+    "bottom": "jaizmod:block/atlas_cedar_door_bottom",
+    "top": "jaizmod:block/atlas_cedar_door_top"
+  }
+}

@@ -161,6 +161,6 @@ public class AmethystHornItem extends InstrumentItem {
             }
 
         }
-        return InteractionResult.FAIL;
+        return InteractionResult.SUCCESS;
     }
 }

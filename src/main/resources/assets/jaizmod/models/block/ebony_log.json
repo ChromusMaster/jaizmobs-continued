@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "jaizmod:block/ebony_log_top",
+    "side": "jaizmod:block/ebony_log"
+  }
+}

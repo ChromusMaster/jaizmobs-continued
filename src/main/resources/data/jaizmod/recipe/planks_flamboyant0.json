@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "jaizmod:flamboyant_log"
+  ],
+  "result": {
+    "count": 4,
+    "id": "jaizmod:flamboyant_planks"
+  }
+}

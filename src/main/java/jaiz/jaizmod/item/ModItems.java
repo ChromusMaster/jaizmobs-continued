@@ -3,6 +3,7 @@ package jaiz.jaizmod.item;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import jaiz.jaizmod.JaizMod;
 import jaiz.jaizmod.block.ModBlocks;
+import jaiz.jaizmod.block.ModWoodSets;
 import jaiz.jaizmod.entity.ModEntities;
 import jaiz.jaizmod.entity.boats.ModBoats;
 import jaiz.jaizmod.item.custom.*;
@@ -53,6 +54,23 @@ public class ModItems {
     public static Item registerItem(String id, Function<Item.Properties, Item> factory) {
         return registerItem(id, factory, new Item.Properties());
     }
+
+    public static final Item CUMARU_BEAN = registerItem("cumaru_bean", Item::new);
+    public static final Item EBONY_FRUIT = registerItem("ebony_fruit", Item::new);
+    public static final Item FLAMBOYANT_PETALS = registerItem("flamboyant_petals", Item::new);
+    public static final Item FLAMBOYANT_POD = registerItem("flamboyant_pod", Item::new);
+    public static final Item ATLAS_CEDAR_CONE = registerItem("atlas_cedar_cone", Item::new);
+    public static final Item BISMARCK_PALM_FRUIT = registerItem("bismarck_palm_fruit", Item::new);
+    public static final Item PALM_FROND = registerItem("palm_frond", Item::new);
+    public static final Item CANNONBALL_FRUIT = registerItem("cannonball_fruit", CannonballFruitItem::new);
+    public static final Item CANNONBALL_PULP = registerItem("cannonball_pulp", Item::new, new Item.Properties().food(ModFoodComponents.CANNONBALL_PULP));
+    public static final Item CANNONBALL_SHELL = registerItem("cannonball_shell", Item::new);
+    public static final Item SEQUOIA_CONE = registerItem("sequoia_cone", Item::new);
+    public static final Item GUARANA_FRUIT = registerItem("guarana_fruit", Item::new, new Item.Properties().food(ModFoodComponents.GUARANA_FRUIT));
+    public static final Item GUARANA_SEEDS = registerItem("guarana_seeds", createBlockItemWithUniqueName(ModWoodSets.GUARANA_BUSH));
+    public static final Item ROASTED_GUARANA = registerItem("roasted_guarana", Item::new);
+    public static final Item GUARANA_SODA = registerItem("guarana_soda", GuaranaSodaItem::new,
+            new Item.Properties().food(ModFoodComponents.GUARANA_SODA, ConsumableComponents.GUARANA_SODA).stacksTo(16));
 
     public static final Item SNIFFER_TUFT = registerItem("sniffer_tuft", Item::new, new Item.Properties());
 
@@ -359,6 +377,7 @@ public class ModItems {
     public static final Item SNIFFER_WOOL = registerBlockItem("sniffer_wool", ModBlocks.SNIFFER_WOOL);
 
     public static void registerModItems() {
+        ModWoodItems.initialize();
         JaizMod.LOGGER.info("registering Mod Items for " + JaizMod.MOD_ID);
     }
 }

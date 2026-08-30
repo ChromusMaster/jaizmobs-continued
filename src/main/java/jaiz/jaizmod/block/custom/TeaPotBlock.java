@@ -154,29 +154,30 @@ public class TeaPotBlock extends Block {
 
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        BlockState blockStatetrue = state.setValue(HAS_CUP, true);
-        BlockState blockStatefalse = state.setValue(HAS_CUP, false);
-
-        if ((stack.is(ModItems.TEA_CUP) && !state.getValue(HAS_CUP))) {
-            world.playSound(null, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5,
-                    (double)pos.getZ() + 0.5, SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
-            stack.consume(1, player);
-            world.setBlock(pos, blockStatetrue, Block.UPDATE_ALL);
+        if (stack.is(ModItems.TEA_CUP) && !state.getValue(HAS_CUP)) {
+            if (!world.isClientSide()) {
+                world.playSound(null, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5,
+                        (double)pos.getZ() + 0.5, SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                stack.consume(1, player);
+                world.setBlock(pos, state.setValue(HAS_CUP, true), Block.UPDATE_ALL);
+            }
             return InteractionResult.SUCCESS;
         }
-        else if(state.getValue(HAS_CUP)){
+        if (state.getValue(HAS_CUP)) {
             HashMap<Item, Item> recipes = getTeaRecipes();
-            if (recipes.containsKey(stack.getItem())) {
-                ItemStack output = recipes.get(stack.getItem()).getDefaultInstance();
-                popResource(world, pos, output);
+            Item output = recipes.get(stack.getItem());
+            if (output != null && stack.is(ModTags.Items.TEA_INGREDIENT)) {
+                if (!world.isClientSide()) {
+                    popResource(world, pos, output.getDefaultInstance());
+                    world.setBlock(pos, state.setValue(HAS_CUP, false), Block.UPDATE_ALL);
+                    world.playSound(null, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5,
+                            (double)pos.getZ() + 0.5, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(1);
+                    }
+                }
+                return InteractionResult.SUCCESS;
             }
-            if ((stack.is(ModTags.Items.TEA_INGREDIENT))) {
-            world.setBlock(pos, blockStatefalse, Block.UPDATE_ALL);
-            world.playSound(null, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5,
-                    (double)pos.getZ() + 0.5, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
-            if (!player.getAbilities().instabuild) {stack.shrink(1);}}
-
-            return super.useItemOn(stack, state, world, pos, player, hand, hit);
         }
         return super.useItemOn(stack, state, world, pos, player, hand, hit);
     }

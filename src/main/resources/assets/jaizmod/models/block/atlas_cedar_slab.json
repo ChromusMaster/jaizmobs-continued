@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "jaizmod:block/atlas_cedar_planks",
+    "side": "jaizmod:block/atlas_cedar_planks",
+    "top": "jaizmod:block/atlas_cedar_planks"
+  }
+}
