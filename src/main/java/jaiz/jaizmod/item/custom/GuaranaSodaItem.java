@@ -9,7 +9,7 @@ import net.minecraft.world.level.Level;
 
 public final class GuaranaSodaItem extends DescribedItem {
     public GuaranaSodaItem(Properties properties) {
-        super(properties);
+        super(properties, 1);
     }
 
     @Override

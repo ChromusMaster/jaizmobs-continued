@@ -273,5 +273,11 @@
   "tooltip.jaizmod.guarana_fruit": "Commestibile; può anche essere preparato come semi di guaranà",
   "tooltip.jaizmod.guarana_seeds": "Piantali su terra zappata o tostali in una fornace",
   "tooltip.jaizmod.roasted_guarana": "Usato per preparare la bibita al guaranà",
-  "tooltip.jaizmod.guarana_soda": "Una bibita frizzante che conferisce velocità per poco tempo"
+  "tooltip.jaizmod.guarana_soda": "Una bibita frizzante che conferisce velocità per poco tempo",
+  "item.jaizmod.sniffer_meat": "Carne di sniffer",
+  "item.jaizmod.cooked_sniffer_meat": "Carne di sniffer cotta",
+  "tooltip.jaizmod.sniffer_meat": "Carne cruda ottenuta da uno sniffer",
+  "tooltip.jaizmod.cooked_sniffer_meat": "Carne di sniffer cotta e pronta da mangiare",
+  "tooltip.jaizmod.restores_hunger.singular": "Ripristina %s punto fame (mezzo cosciotto)",
+  "tooltip.jaizmod.restores_hunger.plural": "Ripristina %s punti fame"
 }

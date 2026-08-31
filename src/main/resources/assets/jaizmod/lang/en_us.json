@@ -548,5 +548,9 @@
   "tooltip.jaizmod.guarana_fruit": "Edible; can also be prepared into Guaraná Seeds",
   "tooltip.jaizmod.guarana_seeds": "Plant on farmland or roast in a furnace",
   "tooltip.jaizmod.roasted_guarana": "Used to prepare Guaraná Soda",
-  "tooltip.jaizmod.guarana_soda": "A fizzy drink that briefly grants Speed"
+  "tooltip.jaizmod.guarana_soda": "A fizzy drink that briefly grants Speed",
+  "tooltip.jaizmod.sniffer_meat": "Raw meat obtained from a Sniffer",
+  "tooltip.jaizmod.cooked_sniffer_meat": "Cooked Sniffer meat, ready to eat",
+  "tooltip.jaizmod.restores_hunger.singular": "Restores %s hunger point (half a drumstick)",
+  "tooltip.jaizmod.restores_hunger.plural": "Restores %s hunger points"
 }

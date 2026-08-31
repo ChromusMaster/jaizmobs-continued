@@ -273,5 +273,11 @@
   "tooltip.jaizmod.guarana_fruit": "Съедобен; также можно получить семена гуараны",
   "tooltip.jaizmod.guarana_seeds": "Посадите на грядке или обжарьте в печи",
   "tooltip.jaizmod.roasted_guarana": "Используется для приготовления газировки с гуараной",
-  "tooltip.jaizmod.guarana_soda": "Газированный напиток, ненадолго дающий скорость"
+  "tooltip.jaizmod.guarana_soda": "Газированный напиток, ненадолго дающий скорость",
+  "item.jaizmod.sniffer_meat": "Сырая нюхачатина",
+  "item.jaizmod.cooked_sniffer_meat": "Жареная нюхачатина",
+  "tooltip.jaizmod.sniffer_meat": "Сырое мясо, полученное с нюхача",
+  "tooltip.jaizmod.cooked_sniffer_meat": "Приготовленное мясо нюхача",
+  "tooltip.jaizmod.restores_hunger.singular": "Восстанавливает %s единицу голода (половину окорока)",
+  "tooltip.jaizmod.restores_hunger.plural": "Восстанавливает %s единиц голода"
 }

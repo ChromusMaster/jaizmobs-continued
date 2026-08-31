@@ -273,5 +273,11 @@
   "tooltip.jaizmod.guarana_fruit": "食べられ、ガラナの種にも加工できます",
   "tooltip.jaizmod.guarana_seeds": "耕地に植えるか、かまどで焙煎できます",
   "tooltip.jaizmod.roasted_guarana": "ガラナソーダの材料です",
-  "tooltip.jaizmod.guarana_soda": "短時間だけ移動速度が上がる炭酸飲料です"
+  "tooltip.jaizmod.guarana_soda": "短時間だけ移動速度が上がる炭酸飲料です",
+  "item.jaizmod.sniffer_meat": "スニッファーの生肉",
+  "item.jaizmod.cooked_sniffer_meat": "焼いたスニッファーの肉",
+  "tooltip.jaizmod.sniffer_meat": "スニッファーから得られる生肉です",
+  "tooltip.jaizmod.cooked_sniffer_meat": "焼いて食べやすくしたスニッファーの肉です",
+  "tooltip.jaizmod.restores_hunger.singular": "満腹度を%s回復します（肉ゲージ半分）",
+  "tooltip.jaizmod.restores_hunger.plural": "満腹度を%s回復します"
 }

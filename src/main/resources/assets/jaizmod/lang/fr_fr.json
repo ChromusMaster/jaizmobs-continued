@@ -273,5 +273,11 @@
   "tooltip.jaizmod.guarana_fruit": "Comestible ; peut aussi être préparé en graines de guarana",
   "tooltip.jaizmod.guarana_seeds": "À planter sur de la terre labourée ou à torréfier au four",
   "tooltip.jaizmod.roasted_guarana": "Sert à préparer du soda au guarana",
-  "tooltip.jaizmod.guarana_soda": "Une boisson pétillante qui accorde brièvement Célérité"
+  "tooltip.jaizmod.guarana_soda": "Une boisson pétillante qui accorde brièvement Célérité",
+  "item.jaizmod.sniffer_meat": "Viande de renifleur",
+  "item.jaizmod.cooked_sniffer_meat": "Viande de renifleur cuite",
+  "tooltip.jaizmod.sniffer_meat": "Viande crue obtenue sur un renifleur",
+  "tooltip.jaizmod.cooked_sniffer_meat": "Viande de renifleur cuite, prête à manger",
+  "tooltip.jaizmod.restores_hunger.singular": "Restaure %s point de faim (un demi-pilon)",
+  "tooltip.jaizmod.restores_hunger.plural": "Restaure %s points de faim"
 }

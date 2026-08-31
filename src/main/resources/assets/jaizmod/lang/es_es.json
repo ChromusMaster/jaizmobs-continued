@@ -273,5 +273,11 @@
   "tooltip.jaizmod.guarana_fruit": "Comestible; también se puede preparar como semillas de guaraná",
   "tooltip.jaizmod.guarana_seeds": "Plántalas en tierra de cultivo o tuéstalas en un horno",
   "tooltip.jaizmod.roasted_guarana": "Se usa para preparar refresco de guaraná",
-  "tooltip.jaizmod.guarana_soda": "Una bebida gaseosa que otorga velocidad brevemente"
+  "tooltip.jaizmod.guarana_soda": "Una bebida gaseosa que otorga velocidad brevemente",
+  "item.jaizmod.sniffer_meat": "Carne de sniffer",
+  "item.jaizmod.cooked_sniffer_meat": "Carne de sniffer cocinada",
+  "tooltip.jaizmod.sniffer_meat": "Carne cruda obtenida de un sniffer",
+  "tooltip.jaizmod.cooked_sniffer_meat": "Carne de sniffer cocinada y lista para comer",
+  "tooltip.jaizmod.restores_hunger.singular": "Restaura %s punto de hambre (medio muslo)",
+  "tooltip.jaizmod.restores_hunger.plural": "Restaura %s puntos de hambre"
 }

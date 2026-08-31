@@ -273,5 +273,11 @@
   "tooltip.jaizmod.guarana_fruit": "Essbar; kann außerdem zu Guaranasamen verarbeitet werden",
   "tooltip.jaizmod.guarana_seeds": "Auf Ackerboden pflanzen oder im Ofen rösten",
   "tooltip.jaizmod.roasted_guarana": "Wird zur Herstellung von Guarana-Limonade verwendet",
-  "tooltip.jaizmod.guarana_soda": "Ein sprudelndes Getränk, das kurz Schnelligkeit verleiht"
+  "tooltip.jaizmod.guarana_soda": "Ein sprudelndes Getränk, das kurz Schnelligkeit verleiht",
+  "item.jaizmod.sniffer_meat": "Schnüfflerfleisch",
+  "item.jaizmod.cooked_sniffer_meat": "Gebratenes Schnüfflerfleisch",
+  "tooltip.jaizmod.sniffer_meat": "Rohes Fleisch von einem Schnüffler",
+  "tooltip.jaizmod.cooked_sniffer_meat": "Gebratenes Schnüfflerfleisch, fertig zum Essen",
+  "tooltip.jaizmod.restores_hunger.singular": "Stellt %s Hungerpunkt wieder her (eine halbe Keule)",
+  "tooltip.jaizmod.restores_hunger.plural": "Stellt %s Hungerpunkte wieder her"
 }

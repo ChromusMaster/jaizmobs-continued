@@ -57,17 +57,17 @@ public class ModItems {
     }
 
     public static final Item CUMARU_BEAN = registerItem("cumaru_bean", DescribedItem::new);
-    public static final Item EBONY_FRUIT = registerItem("ebony_fruit", DescribedItem::new, new Item.Properties().food(ModFoodComponents.EBONY_FRUIT));
+    public static final Item EBONY_FRUIT = registerItem("ebony_fruit", settings -> new DescribedItem(settings, 2), new Item.Properties().food(ModFoodComponents.EBONY_FRUIT));
     public static final Item FLAMBOYANT_PETALS = registerItem("flamboyant_petals", DescribedItem::new);
     public static final Item FLAMBOYANT_POD = registerItem("flamboyant_pod", DescribedItem::new);
     public static final Item ATLAS_CEDAR_CONE = registerItem("atlas_cedar_cone", DescribedItem::new);
-    public static final Item BISMARCK_PALM_FRUIT = registerItem("bismarck_palm_fruit", DescribedItem::new, new Item.Properties().food(ModFoodComponents.BISMARCK_PALM_FRUIT));
+    public static final Item BISMARCK_PALM_FRUIT = registerItem("bismarck_palm_fruit", settings -> new DescribedItem(settings, 2), new Item.Properties().food(ModFoodComponents.BISMARCK_PALM_FRUIT));
     public static final Item PALM_FROND = registerItem("palm_frond", DescribedItem::new);
     public static final Item CANNONBALL_FRUIT = registerItem("cannonball_fruit", CannonballFruitItem::new);
-    public static final Item CANNONBALL_PULP = registerItem("cannonball_pulp", DescribedItem::new, new Item.Properties().food(ModFoodComponents.CANNONBALL_PULP));
+    public static final Item CANNONBALL_PULP = registerItem("cannonball_pulp", settings -> new DescribedItem(settings, 2), new Item.Properties().food(ModFoodComponents.CANNONBALL_PULP));
     public static final Item CANNONBALL_SHELL = registerItem("cannonball_shell", DescribedItem::new);
     public static final Item SEQUOIA_CONE = registerItem("sequoia_cone", DescribedItem::new);
-    public static final Item GUARANA_FRUIT = registerItem("guarana_fruit", DescribedItem::new, new Item.Properties().food(ModFoodComponents.GUARANA_FRUIT));
+    public static final Item GUARANA_FRUIT = registerItem("guarana_fruit", settings -> new DescribedItem(settings, 1), new Item.Properties().food(ModFoodComponents.GUARANA_FRUIT));
     public static final Item GUARANA_SEEDS = registerItem("guarana_seeds", settings -> new DescribedBlockItem(ModWoodSets.GUARANA_BUSH, settings.useItemDescriptionPrefix()));
     public static final Item ROASTED_GUARANA = registerItem("roasted_guarana", DescribedItem::new);
     public static final Item GUARANA_SODA = registerItem("guarana_soda", GuaranaSodaItem::new,
@@ -166,8 +166,8 @@ public class ModItems {
             "amethyst_horn", AmethystHornItem::new, new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1).durability(64)
     );
 
-    public static final Item SNIFFER_MEAT = registerItem("sniffer_meat", Item::new, new Item.Properties().food(ModFoodComponents.SNIFFER_MEAT));
-    public static final Item COOKED_SNIFFER_MEAT = registerItem("cooked_sniffer_meat", Item::new, new Item.Properties().food(ModFoodComponents.COOKED_SNIFFER_MEAT));
+    public static final Item SNIFFER_MEAT = registerItem("sniffer_meat", settings -> new DescribedItem(settings, 8), new Item.Properties().food(ModFoodComponents.SNIFFER_MEAT));
+    public static final Item COOKED_SNIFFER_MEAT = registerItem("cooked_sniffer_meat", settings -> new DescribedItem(settings, 12), new Item.Properties().food(ModFoodComponents.COOKED_SNIFFER_MEAT));
 
     public static final Item DYNAMITE = registerItem("dynamite", DynamiteItem::new, new Item.Properties());
 

@@ -273,5 +273,11 @@
   "tooltip.jaizmod.guarana_fruit": "可食用，也可加工成瓜拉纳种子",
   "tooltip.jaizmod.guarana_seeds": "可种在耕地上，或放入熔炉烘焙",
   "tooltip.jaizmod.roasted_guarana": "用于制作瓜拉纳汽水",
-  "tooltip.jaizmod.guarana_soda": "短暂赋予速度效果的气泡饮料"
+  "tooltip.jaizmod.guarana_soda": "短暂赋予速度效果的气泡饮料",
+  "item.jaizmod.sniffer_meat": "嗅探兽生肉",
+  "item.jaizmod.cooked_sniffer_meat": "熟嗅探兽肉",
+  "tooltip.jaizmod.sniffer_meat": "从嗅探兽身上获得的生肉",
+  "tooltip.jaizmod.cooked_sniffer_meat": "烤熟后可食用的嗅探兽肉",
+  "tooltip.jaizmod.restores_hunger.singular": "恢复%s点饥饿值（半格鸡腿）",
+  "tooltip.jaizmod.restores_hunger.plural": "恢复%s点饥饿值"
 }
