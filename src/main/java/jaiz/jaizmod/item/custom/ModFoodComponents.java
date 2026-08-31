@@ -21,6 +21,8 @@ public class ModFoodComponents{
 
     public static final FoodProperties SNIFFER_MEAT = new FoodProperties.Builder().nutrition(8).saturationModifier(0.5f).build();
     public static final FoodProperties COOKED_SNIFFER_MEAT = new FoodProperties.Builder().nutrition(12).saturationModifier(1.0f).build();
+    public static final FoodProperties EBONY_FRUIT = new FoodProperties.Builder().nutrition(2).saturationModifier(0.2f).build();
+    public static final FoodProperties BISMARCK_PALM_FRUIT = new FoodProperties.Builder().nutrition(2).saturationModifier(0.15f).build();
     public static final FoodProperties GUARANA_FRUIT = new FoodProperties.Builder().nutrition(1).saturationModifier(0.1f).build();
     public static final FoodProperties GUARANA_SODA = new FoodProperties.Builder().nutrition(1).saturationModifier(0.1f).alwaysEdible().build();
     public static final FoodProperties CANNONBALL_PULP = new FoodProperties.Builder().nutrition(2).saturationModifier(0.2f).build();

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "jaizmod:cannonball_boat",
+    "minecraft:chest"
+  ],
+  "result": {
+    "count": 1,
+    "id": "jaizmod:cannonball_chest_boat"
+  }
+}

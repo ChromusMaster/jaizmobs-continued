@@ -31,6 +31,7 @@ import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.Block;
+import java.util.List;
 import java.util.function.Function;
 
 public class ModItems {
@@ -55,20 +56,20 @@ public class ModItems {
         return registerItem(id, factory, new Item.Properties());
     }
 
-    public static final Item CUMARU_BEAN = registerItem("cumaru_bean", Item::new);
-    public static final Item EBONY_FRUIT = registerItem("ebony_fruit", Item::new);
-    public static final Item FLAMBOYANT_PETALS = registerItem("flamboyant_petals", Item::new);
-    public static final Item FLAMBOYANT_POD = registerItem("flamboyant_pod", Item::new);
-    public static final Item ATLAS_CEDAR_CONE = registerItem("atlas_cedar_cone", Item::new);
-    public static final Item BISMARCK_PALM_FRUIT = registerItem("bismarck_palm_fruit", Item::new);
-    public static final Item PALM_FROND = registerItem("palm_frond", Item::new);
+    public static final Item CUMARU_BEAN = registerItem("cumaru_bean", DescribedItem::new);
+    public static final Item EBONY_FRUIT = registerItem("ebony_fruit", DescribedItem::new, new Item.Properties().food(ModFoodComponents.EBONY_FRUIT));
+    public static final Item FLAMBOYANT_PETALS = registerItem("flamboyant_petals", DescribedItem::new);
+    public static final Item FLAMBOYANT_POD = registerItem("flamboyant_pod", DescribedItem::new);
+    public static final Item ATLAS_CEDAR_CONE = registerItem("atlas_cedar_cone", DescribedItem::new);
+    public static final Item BISMARCK_PALM_FRUIT = registerItem("bismarck_palm_fruit", DescribedItem::new, new Item.Properties().food(ModFoodComponents.BISMARCK_PALM_FRUIT));
+    public static final Item PALM_FROND = registerItem("palm_frond", DescribedItem::new);
     public static final Item CANNONBALL_FRUIT = registerItem("cannonball_fruit", CannonballFruitItem::new);
-    public static final Item CANNONBALL_PULP = registerItem("cannonball_pulp", Item::new, new Item.Properties().food(ModFoodComponents.CANNONBALL_PULP));
-    public static final Item CANNONBALL_SHELL = registerItem("cannonball_shell", Item::new);
-    public static final Item SEQUOIA_CONE = registerItem("sequoia_cone", Item::new);
-    public static final Item GUARANA_FRUIT = registerItem("guarana_fruit", Item::new, new Item.Properties().food(ModFoodComponents.GUARANA_FRUIT));
-    public static final Item GUARANA_SEEDS = registerItem("guarana_seeds", createBlockItemWithUniqueName(ModWoodSets.GUARANA_BUSH));
-    public static final Item ROASTED_GUARANA = registerItem("roasted_guarana", Item::new);
+    public static final Item CANNONBALL_PULP = registerItem("cannonball_pulp", DescribedItem::new, new Item.Properties().food(ModFoodComponents.CANNONBALL_PULP));
+    public static final Item CANNONBALL_SHELL = registerItem("cannonball_shell", DescribedItem::new);
+    public static final Item SEQUOIA_CONE = registerItem("sequoia_cone", DescribedItem::new);
+    public static final Item GUARANA_FRUIT = registerItem("guarana_fruit", DescribedItem::new, new Item.Properties().food(ModFoodComponents.GUARANA_FRUIT));
+    public static final Item GUARANA_SEEDS = registerItem("guarana_seeds", settings -> new DescribedBlockItem(ModWoodSets.GUARANA_BUSH, settings.useItemDescriptionPrefix()));
+    public static final Item ROASTED_GUARANA = registerItem("roasted_guarana", DescribedItem::new);
     public static final Item GUARANA_SODA = registerItem("guarana_soda", GuaranaSodaItem::new,
             new Item.Properties().food(ModFoodComponents.GUARANA_SODA, ConsumableComponents.GUARANA_SODA).stacksTo(16));
 
@@ -111,6 +112,25 @@ public class ModItems {
 
     public static final Item ROTTEN_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.ROTTEN_BOAT_ID, false, false);
     public static final Item ROTTEN_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.ROTTEN_BOAT_ID, true, false);
+
+    public static final Item CUMARU_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.CUMARU_BOAT_ID, false, false);
+    public static final Item CUMARU_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.CUMARU_BOAT_ID, true, false);
+    public static final Item EBONY_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.EBONY_BOAT_ID, false, false);
+    public static final Item EBONY_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.EBONY_BOAT_ID, true, false);
+    public static final Item FLAMBOYANT_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.FLAMBOYANT_BOAT_ID, false, false);
+    public static final Item FLAMBOYANT_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.FLAMBOYANT_BOAT_ID, true, false);
+    public static final Item ATLAS_CEDAR_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.ATLAS_CEDAR_BOAT_ID, false, false);
+    public static final Item ATLAS_CEDAR_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.ATLAS_CEDAR_BOAT_ID, true, false);
+    public static final Item BISMARCK_PALM_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.BISMARCK_PALM_BOAT_ID, false, false);
+    public static final Item BISMARCK_PALM_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.BISMARCK_PALM_BOAT_ID, true, false);
+    public static final Item CANNONBALL_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.CANNONBALL_BOAT_ID, false, false);
+    public static final Item CANNONBALL_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.CANNONBALL_BOAT_ID, true, false);
+    public static final Item SEQUOIA_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.SEQUOIA_BOAT_ID, false, false);
+    public static final Item SEQUOIA_CHEST_BOAT = TerraformBoatItemHelper.registerBoatItem(ModBoats.SEQUOIA_BOAT_ID, true, false);
+    public static final List<Item> NEW_WOOD_BOATS = List.of(CUMARU_BOAT, CUMARU_CHEST_BOAT, EBONY_BOAT, EBONY_CHEST_BOAT,
+            FLAMBOYANT_BOAT, FLAMBOYANT_CHEST_BOAT, ATLAS_CEDAR_BOAT, ATLAS_CEDAR_CHEST_BOAT,
+            BISMARCK_PALM_BOAT, BISMARCK_PALM_CHEST_BOAT, CANNONBALL_BOAT, CANNONBALL_CHEST_BOAT,
+            SEQUOIA_BOAT, SEQUOIA_CHEST_BOAT);
 
 
     public static final Item FRUIT_BAT_SPAWN_EGG = registerItem("fruit_bat_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.FRUIT_BAT));

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "jaizmod:sequoia_boat",
+    "minecraft:chest"
+  ],
+  "result": {
+    "count": 1,
+    "id": "jaizmod:sequoia_chest_boat"
+  }
+}

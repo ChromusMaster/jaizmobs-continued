@@ -8,11 +8,10 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public final class CannonballFruitItem extends Item {
+public final class CannonballFruitItem extends DescribedItem {
     public CannonballFruitItem(Properties properties) {
         super(properties);
     }

@@ -2,13 +2,12 @@ package jaiz.jaizmod.item.custom;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
-public final class GuaranaSodaItem extends Item {
+public final class GuaranaSodaItem extends DescribedItem {
     public GuaranaSodaItem(Properties properties) {
         super(properties);
     }

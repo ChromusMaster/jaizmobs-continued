@@ -168,6 +168,7 @@ public class ModItemGroups {
                         entries.accept(ModItems.MAHOGANY_BOAT);
                         entries.accept(ModItems.MAHOGANY_CHEST_BOAT);
                         ModWoodItems.ALL.forEach(wood -> wood.all().forEach(entries::accept));
+                        ModItems.NEW_WOOD_BOATS.forEach(entries::accept);
                         entries.accept(ModWoodItems.THATCH);
                         entries.accept(ModWoodItems.THATCH_STAIRS);
                         entries.accept(ModWoodItems.THATCH_SLAB);

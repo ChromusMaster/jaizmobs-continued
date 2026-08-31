@@ -43,9 +43,7 @@ public class JaizModClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 
-		TerraformBoatClientHelper.registerModelLayers(ModBoats.MAHOGANY_BOAT_ID);
-		TerraformBoatClientHelper.registerModelLayers(ModBoats.ROTTEN_BOAT_ID);
-		TerraformBoatClientHelper.registerModelLayers(ModBoats.DESERT_OAK_BOAT_ID);
+		ModBoats.ALL.forEach(TerraformBoatClientHelper::registerModelLayers);
 
 		EntityRendererRegistry.register(ModEntities.BUTTERFLY, ButterflyRenderer::new);
 		ModelLayerRegistry.registerModelLayer(ModModelLayers.BUTTERFLY, Butterfly::getTexturedModelData);
