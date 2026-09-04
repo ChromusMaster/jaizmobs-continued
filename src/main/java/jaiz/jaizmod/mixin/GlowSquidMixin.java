@@ -18,7 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
-import java.util.Objects;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -37,6 +36,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -74,25 +74,25 @@ public abstract class GlowSquidMixin extends Squid {
 
     public void tick() {
         super.tick();
-        hypnotisecooldown--;
-        if(this.level().getNearestPlayer(this, 32) != null){
-            if(hypnotisecooldown <= 0){
-            if(isPlayerStaring(Objects.requireNonNull(this.level().getNearestPlayer(this, 32)))){
-                hypnotiseeffectcooldown++;
-                staringcount++;
-                if(staringcount >= 60){
-                Objects.requireNonNull(this.level().getNearestPlayer(this, 32))
-                        .lookAt(EntityAnchorArgument.Anchor.EYES, this.position());
-                if(hypnotiseeffectcooldown >= 20){
-                    hypnotiseeffectcooldown = 0;
-                    Objects.requireNonNull(this.level().getNearestPlayer(this, 40))
-                            .addEffect(new MobEffectInstance(ModStatusEffects.HYPNO,
-                                    60, 0, false, true));}
-                }
-            }
-            else {
-                staringcount = 0;
-            }
+        if (hypnotisecooldown > 0) {
+            hypnotisecooldown--;
+        }
+        if (this.level().isClientSide()) {
+            return;
+        }
+        Player nearestPlayer = this.level().getNearestPlayer(this, 32);
+        if (nearestPlayer == null || hypnotisecooldown > 0 || !isPlayerStaring(nearestPlayer)) {
+            staringcount = 0;
+            return;
+        }
+        hypnotiseeffectcooldown++;
+        staringcount++;
+        if(staringcount >= 60){
+            nearestPlayer.lookAt(EntityAnchorArgument.Anchor.EYES, this.position());
+            if(hypnotiseeffectcooldown >= 20){
+                hypnotiseeffectcooldown = 0;
+                nearestPlayer.addEffect(new MobEffectInstance(ModStatusEffects.HYPNO,
+                        60, 0, false, true));
             }
         }
     }
@@ -157,21 +157,16 @@ public abstract class GlowSquidMixin extends Squid {
     //Romeo's Code
     @Inject(method = "aiStep", at = @At("HEAD"))
     private void newMobTick(CallbackInfo ci) {
-
         if(this.level() instanceof ServerLevel serverLevel) {
-        if(serverLevel.getServer().getGlobalGameRules().get(ModGameRules.DO_GLOWING_SQUID)){
-        if(this.level() !=null){
-            if(SquidLightBlockEntity.waterNeedsUpdate(this.level(), this.blockPosition())){
-                this.level().setBlockAndUpdate(this.blockPosition(),
-                        ModBlocks.WATER_TEMPORARY_LIGHT.defaultBlockState()
-                        .setValue(WaterTickingBlock.WATERLOGGED, true));
-            } else if (!SquidLightBlockEntity.waterNeedsUpdate(this.level(), this.blockPosition())) {
-                this.level().setBlockAndUpdate(this.blockPosition(),
-                        ModBlocks.WATER_TEMPORARY_LIGHT.defaultBlockState()
-                        .setValue(WaterTickingBlock.WATERLOGGED, false));
+            if(serverLevel.getServer().getGlobalGameRules().get(ModGameRules.DO_GLOWING_SQUID)){
+                boolean waterlogged = SquidLightBlockEntity.waterNeedsUpdate(serverLevel, this.blockPosition());
+                BlockState desiredState = ModBlocks.WATER_TEMPORARY_LIGHT.defaultBlockState()
+                        .setValue(WaterTickingBlock.WATERLOGGED, waterlogged);
+                if (!serverLevel.getBlockState(this.blockPosition()).equals(desiredState)) {
+                    serverLevel.setBlockAndUpdate(this.blockPosition(), desiredState);
+                }
             }
-        }}
-    }
+        }
     }
 
 }

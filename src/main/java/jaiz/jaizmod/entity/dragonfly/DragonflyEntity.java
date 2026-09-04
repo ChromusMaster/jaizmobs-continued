@@ -53,7 +53,6 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
-import java.util.Objects;
 
 public class DragonflyEntity extends Animal implements Bottlable {
     private static final EntityDataAccessor<Boolean> FROM_BOTTLE = SynchedEntityData.defineId(DragonflyEntity.class, EntityDataSerializers.BOOLEAN);
@@ -147,10 +146,9 @@ public class DragonflyEntity extends Animal implements Bottlable {
         if (!this.isBaby() && this.isPassenger() && this.getVehicle() instanceof AbstractBoat abstractBoatEntity && !abstractBoatEntity.hasEnoughSpaceFor(this)) {
             this.stopRiding();
         }
-        if(this.isBaby()){
-            Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(0.5);
-        } else {
-            Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(1.0);
+        var scaleAttribute = this.getAttribute(Attributes.SCALE);
+        if (scaleAttribute != null) {
+            scaleAttribute.setBaseValue(this.isBaby() ? 0.5 : 1.0);
         }
     }
 

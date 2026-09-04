@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "jaizmod:cannonball_shell",
+    "jaizmod:cannonball_shell"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:bowl"
+  }
+}

@@ -73,24 +73,32 @@ public class CocoonBlock extends Block {
             entity.causeFallDamage(fallDistance, 0.0F, world.damageSources().fall());
             world.playSound(null, pos, SoundEvents.TURTLE_EGG_BREAK, SoundSource.BLOCKS, 0.2f, 0.5f);
             world.setBlock(pos, state.setValue(COCOON_HATCH, 3), Block.UPDATE_CLIENTS);
+            if (!world.isClientSide()) {
+                world.scheduleTick(pos, this, 100);
+            }
         }
     }
 
 
     @Override
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        if (!this.isBroken(state)) {
+        if (this.isBroken(state)) {
+            world.removeBlock(pos, false);
+            return;
+        }
         if (!this.isReadyToCOCOON_HATCH(state)) {
             world.playSound(null, pos, SoundEvents.HONEY_BLOCK_STEP, SoundSource.BLOCKS, 0.2f, 0.9f + random.nextFloat() * 0.2f);
             world.setBlock(pos, state.setValue(COCOON_HATCH, this.getCOCOON_HATCHStage(state) + 1), Block.UPDATE_CLIENTS);
+            int hatchTime = CocoonBlock.isAboveCOCOON_HATCHBooster(world, pos) ? 2200 : 4400;
+            world.scheduleTick(pos, this, hatchTime / 3 + random.nextInt(3000));
             return;
         }
         world.playSound(null, pos, SoundEvents.HONEY_BLOCK_SLIDE, SoundSource.BLOCKS, 0.7f, 0.9f + random.nextFloat() * 0.2f);
         world.setBlock(pos, state.setValue(COCOON_HATCH, 3), Block.UPDATE_CLIENTS);
+        world.scheduleTick(pos, this, 100);
         ModEntities.BUTTERFLY.spawn(world, pos, EntitySpawnReason.MOB_SUMMONED);
         for (ServerPlayer player : world.getEntitiesOfClass(ServerPlayer.class, new AABB(pos).inflate(12.0))) {
             ModCriteria.COCOON_HATCHED.trigger(player);
-        }
         }
     }
 

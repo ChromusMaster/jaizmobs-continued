@@ -45,6 +45,6 @@ public enum MasonMouthVariant {
     }
 
     public static MasonMouthVariant byId(int id) {
-        return BY_ID[id % BY_ID.length];
+        return BY_ID[Math.floorMod(id, BY_ID.length)];
     }
 }

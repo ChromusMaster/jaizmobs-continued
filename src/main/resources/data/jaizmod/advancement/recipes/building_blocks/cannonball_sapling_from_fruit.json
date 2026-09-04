@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cannonball_fruit": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jaizmod:cannonball_fruit"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jaizmod:cannonball_sapling_from_fruit"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cannonball_fruit"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jaizmod:cannonball_sapling_from_fruit"
+    ]
+  }
+}

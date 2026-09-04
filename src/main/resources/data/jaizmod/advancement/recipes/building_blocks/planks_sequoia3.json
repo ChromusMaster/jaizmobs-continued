@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sequoia_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jaizmod:sequoia_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jaizmod:planks_sequoia3"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sequoia_wood"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jaizmod:planks_sequoia3"
+    ]
+  }
+}

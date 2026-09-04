@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_flamboyant_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jaizmod:flamboyant_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jaizmod:planks_flamboyant3"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_flamboyant_wood"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jaizmod:planks_flamboyant3"
+    ]
+  }
+}

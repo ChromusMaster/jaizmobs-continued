@@ -1,0 +1,28 @@
+{
+  "parent": "jaizmod:progression/root",
+  "criteria": {
+    "crafted_guarana_soda": {
+      "conditions": {
+        "recipe_id": "jaizmod:guarana_soda"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.jaizmod.brazilian_refreshment.description"
+    },
+    "icon": {
+      "id": "jaizmod:guarana_soda"
+    },
+    "title": {
+      "translate": "advancements.jaizmod.brazilian_refreshment.title"
+    }
+  },
+  "requirements": [
+    [
+      "crafted_guarana_soda"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

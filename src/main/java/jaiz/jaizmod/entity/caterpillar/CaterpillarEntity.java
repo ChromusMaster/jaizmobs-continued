@@ -64,17 +64,19 @@ public class CaterpillarEntity extends Animal implements Bottlable {
 
     @Override
     public void tick() {
-        if (!this.level().isClientSide() && this.isAlive() && --this.cocoonTime <= 0 && this.getInBlockState().isAir()) {
-            Level world = this.level();
-            this.playSound(SoundEvents.TURTLE_EGG_CRACK, 1.0f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
-            this.gameEvent(GameEvent.BLOCK_PLACE);
-            BlockPos blockPos2 = this.blockPosition();
-            BlockState blockState = ModBlocks.COCOON_BLOCK.defaultBlockState();
-            world.setBlock(blockPos2, blockState, Block.UPDATE_ALL);
-            world.gameEvent(GameEvent.BLOCK_PLACE, blockPos2, GameEvent.Context.of(this, blockState));
-            this.discard();
-        } else if (!this.level().isClientSide() && this.isAlive() && --this.cocoonTime <= 0 && this.entityItemDropper()) {
-            this.discard();
+        if (!this.level().isClientSide() && this.isAlive() && --this.cocoonTime <= 0) {
+            if (this.getInBlockState().isAir()) {
+                Level world = this.level();
+                this.playSound(SoundEvents.TURTLE_EGG_CRACK, 1.0f, (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.0f);
+                this.gameEvent(GameEvent.BLOCK_PLACE);
+                BlockPos blockPos2 = this.blockPosition();
+                BlockState blockState = ModBlocks.COCOON_BLOCK.defaultBlockState();
+                world.setBlock(blockPos2, blockState, Block.UPDATE_ALL);
+                world.gameEvent(GameEvent.BLOCK_PLACE, blockPos2, GameEvent.Context.of(this, blockState));
+                this.discard();
+            } else if (this.entityItemDropper()) {
+                this.discard();
+            }
         }
         super.tick();
     }

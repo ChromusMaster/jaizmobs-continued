@@ -172,17 +172,20 @@ public class ModItemGroups {
                         entries.accept(ModWoodItems.THATCH);
                         entries.accept(ModWoodItems.THATCH_STAIRS);
                         entries.accept(ModWoodItems.THATCH_SLAB);
+                        entries.accept(ModItems.FLAMBOYANT_PETALS);
+                        entries.accept(ModItems.PALM_FROND);
+                        /*
+                        Reserved for future mechanics involving the new tree species.
                         entries.accept(ModItems.CUMARU_BEAN);
                         entries.accept(ModItems.EBONY_FRUIT);
-                        entries.accept(ModItems.FLAMBOYANT_PETALS);
                         entries.accept(ModItems.FLAMBOYANT_POD);
                         entries.accept(ModItems.ATLAS_CEDAR_CONE);
                         entries.accept(ModItems.BISMARCK_PALM_FRUIT);
-                        entries.accept(ModItems.PALM_FROND);
                         entries.accept(ModItems.CANNONBALL_FRUIT);
                         entries.accept(ModItems.CANNONBALL_PULP);
                         entries.accept(ModItems.CANNONBALL_SHELL);
                         entries.accept(ModItems.SEQUOIA_CONE);
+                        */
                         entries.accept(ModItems.GUARANA_FRUIT);
                         entries.accept(ModItems.GUARANA_SEEDS);
                         entries.accept(ModItems.ROASTED_GUARANA);

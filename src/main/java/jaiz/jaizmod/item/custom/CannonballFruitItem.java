@@ -11,6 +11,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+/*
+Reserved for a future use of the Cannonball Fruit.
 public final class CannonballFruitItem extends DescribedItem {
     public CannonballFruitItem(Properties properties) {
         super(properties);
@@ -37,3 +39,4 @@ public final class CannonballFruitItem extends DescribedItem {
         }
     }
 }
+*/

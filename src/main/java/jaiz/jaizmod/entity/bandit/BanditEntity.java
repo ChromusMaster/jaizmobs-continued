@@ -151,7 +151,7 @@ public class BanditEntity extends Monster {
                 itemStack.shrink(1);
             }
             this.playSound(ModSounds.BANDIT_TRADE,1.0f, 1.0f);
-            this.TradingItemDropper(this, this.level().getNearestPlayer(this, 32));
+            this.TradingItemDropper(this, player);
             return InteractionResult.SUCCESS;
             }
             else {

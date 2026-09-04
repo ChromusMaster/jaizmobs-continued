@@ -78,5 +78,6 @@
   "item.jaizmobs.klephtopod_chestplate": "Peitoral de Klephtopod",
   "item.jaizmobs.helium_membrane": "Membrana de Hélio",
   "item.jaizmobs.geyser_berry": "Fruta-gêiser",
-  "block.jaizmobs.sulfur_ore": "Minério de Enxofre"
+  "block.jaizmobs.sulfur_ore": "Minério de Enxofre",
+  "entity.jaizmobs.snail": "Caracol"
 }

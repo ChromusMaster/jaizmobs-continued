@@ -6,7 +6,6 @@ import jaiz.jaizmod.item.ModItems;
 import jaiz.jaizmod.util.Bottlable;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -85,10 +84,9 @@ public class SnailEntity extends Animal implements Bottlable {
         if (!this.isBaby() && this.isPassenger() && this.getVehicle() instanceof AbstractBoat abstractBoatEntity && !abstractBoatEntity.hasEnoughSpaceFor(this)) {
             this.stopRiding();
         }
-        if(this.isBaby()){
-            Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(0.5);
-        } else {
-            Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(1.0);
+        var scaleAttribute = this.getAttribute(Attributes.SCALE);
+        if (scaleAttribute != null) {
+            scaleAttribute.setBaseValue(this.isBaby() ? 0.5 : 1.0);
         }
     }
 

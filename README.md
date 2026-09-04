@@ -13,7 +13,7 @@ The current target is Minecraft Java 26.2. Updating it was a personal challenge 
 
 There are 32 creatures at the moment. Some are peaceful little ambience mobs, some can be tamed or ridden, and some are very much a bad idea to approach without armor. The mod also has ten wood families, plants, tea, food, blocks, structures, equipment, trims, sulfur ore, pottery-related loot and a number of small Vanilla+ additions.
 
-The 2.3 update adds cumaru, ebony, flamboyant, Atlas cedar, Bismarck palm, cannonball trees and sequoias. They grow in new Overworld chunks and do not rewrite terrain that was already explored. Guarana is treated as a bush instead of another wood set. Its fruit can be planted and roasted, and it is also used for a short-lived guarana soda speed boost. The other trees have small uses of their own, such as dyes, cones, palm thatch and cannonball fruit shells.
+The 2.3 update adds cumaru, ebony, flamboyant, Atlas cedar, Bismarck palm, cannonball trees and sequoias. They grow in new Overworld chunks and do not rewrite terrain that was already explored. Their leaves can drop the matching saplings, while flamboyant petals and palm fronds provide red dye and thatch. Guarana is treated as a bush instead of another wood set. Its fruit can be planted and roasted, and it is also used for a short-lived guarana soda speed boost.
 
 The End expansion we discussed is not part of this version. I would rather give it enough room to feel useful than add one lonely tree and call it done, so that work is being held for 2.4.0.
 

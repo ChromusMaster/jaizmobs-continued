@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sequoia_cone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jaizmod:sequoia_cone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jaizmod:sequoia_sapling_from_fruit"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sequoia_cone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jaizmod:sequoia_sapling_from_fruit"
+    ]
+  }
+}

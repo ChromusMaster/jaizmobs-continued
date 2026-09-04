@@ -36,6 +36,7 @@ public class AmethystHornItem extends InstrumentItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltip, TooltipFlag type) {
+        super.appendHoverText(stack, context, display, tooltip, type);
         MutableComponent mutableText = Component.translatable(Util.makeDescriptionId("instrument", Identifier.parse("amethyst_horn")));
         tooltip.accept(mutableText.withStyle(ChatFormatting.GRAY));
     }
@@ -150,12 +151,18 @@ public class AmethystHornItem extends InstrumentItem {
 
         }else{
             user.getCooldowns().addCooldown(itemStack, 120);
-            if(user.level() == null || user.level().isClientSide()) {
+            if(user.level().isClientSide()) {
                 AABB box = (new AABB(user.blockPosition()).inflate(72.0).expandTowards(0.0, 0.0, 0.0));
                 List<LivingEntity> list = user.level().getEntitiesOfClass(LivingEntity.class, box);
+                int remainingParticles = 256;
                 for (LivingEntity livingEntity  : list) {
-                    for (int i = 0; i < o; i++) {
+                    int particleCount = Math.min(o, remainingParticles);
+                    for (int i = 0; i < particleCount; i++) {
                         livingEntity.level().addParticle(JaizMod.AMETHYST_SPARKLE_PARTICLE, livingEntity.getRandomX(1.2), livingEntity.getRandomY(), livingEntity.getRandomZ(1.2), 0.0, 0.0, 0.0);
+                    }
+                    remainingParticles -= particleCount;
+                    if (remainingParticles == 0) {
+                        break;
                     }
                 }
             }

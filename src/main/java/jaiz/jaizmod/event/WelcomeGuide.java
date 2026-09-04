@@ -45,6 +45,7 @@ public final class WelcomeGuide {
 
     private static ItemStack createGuide() {
         ItemStack guide = new ItemStack(Items.WRITTEN_BOOK);
+        guide.set(DataComponents.CUSTOM_NAME, Component.translatable("guide.jaizmod.welcome.title"));
         List<Filterable<Component>> pages = List.of(
                 Filterable.passThrough(Component.translatable("guide.jaizmod.welcome.page_1")),
                 Filterable.passThrough(Component.translatable("guide.jaizmod.welcome.page_2")),

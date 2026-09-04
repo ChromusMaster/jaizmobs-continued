@@ -237,15 +237,18 @@ public class JaizMod implements ModInitializer {
 		FlammableBlockRegistry.getDefaultInstance().add(ModWoodSets.THATCH_STAIRS, 60, 30);
 		FlammableBlockRegistry.getDefaultInstance().add(ModWoodSets.THATCH_SLAB, 60, 30);
 		ModWoodSets.ALL.forEach(wood -> CompostableRegistry.INSTANCE.add(wood.sapling(), 0.3F));
+		CompostableRegistry.INSTANCE.add(ModItems.FLAMBOYANT_PETALS, 0.3F);
+		CompostableRegistry.INSTANCE.add(ModItems.PALM_FROND, 0.5F);
+		/*
+		Reserved for future mechanics involving the new tree species.
 		CompostableRegistry.INSTANCE.add(ModItems.CUMARU_BEAN, 0.3F);
 		CompostableRegistry.INSTANCE.add(ModItems.EBONY_FRUIT, 0.65F);
-		CompostableRegistry.INSTANCE.add(ModItems.FLAMBOYANT_PETALS, 0.3F);
 		CompostableRegistry.INSTANCE.add(ModItems.FLAMBOYANT_POD, 0.3F);
 		CompostableRegistry.INSTANCE.add(ModItems.ATLAS_CEDAR_CONE, 0.3F);
 		CompostableRegistry.INSTANCE.add(ModItems.BISMARCK_PALM_FRUIT, 0.65F);
-		CompostableRegistry.INSTANCE.add(ModItems.PALM_FROND, 0.5F);
 		CompostableRegistry.INSTANCE.add(ModItems.CANNONBALL_PULP, 0.65F);
 		CompostableRegistry.INSTANCE.add(ModItems.SEQUOIA_CONE, 0.3F);
+		*/
 		CompostableRegistry.INSTANCE.add(ModItems.GUARANA_FRUIT, 0.65F);
 		CompostableRegistry.INSTANCE.add(ModItems.GUARANA_SEEDS, 0.3F);
 

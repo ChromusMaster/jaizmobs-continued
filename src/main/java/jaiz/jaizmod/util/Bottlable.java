@@ -30,7 +30,9 @@ public interface Bottlable {
 
     @Deprecated
     static void copyDataToStack(Mob entity, ItemStack stack) {
-        stack.set(DataComponents.CUSTOM_NAME, entity.getCustomName());
+        if (entity.hasCustomName()) {
+            stack.set(DataComponents.CUSTOM_NAME, entity.getCustomName());
+        }
         CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, nbtCompound -> {
             if (entity.isNoAi()) {
                 nbtCompound.putBoolean("NoAI", entity.isNoAi());
@@ -92,8 +94,8 @@ public interface Bottlable {
             ItemStack itemStack3 = ItemUtils.createFilledResult(itemStack, player, itemStack2, false);
             player.setItemInHand(hand, itemStack3);
             Level world = entity.level();
-            if (!world.isClientSide()) {
-                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer)player, itemStack2);
+            if (player instanceof ServerPlayer serverPlayer) {
+                CriteriaTriggers.FILLED_BUCKET.trigger(serverPlayer, itemStack2);
             }
 
             entity.discard();

@@ -35,11 +35,11 @@ public class FruitBatEntity extends Bat {
     public void tick() {
         if (!this.level().isClientSide() && this.isAlive() && --this.poopTime <= 0) {
             GuanoEntity poop = new GuanoEntity(ModEntities.GUANO, this.level());
-            this.level().addFreshEntity(poop);
             this.playSound(SoundEvents.SLIME_SQUISH, 0.5f,
                     (this.random.nextFloat() - this.random.nextFloat()) * 0.2f + 1.5f);
             poop.snapTo(this.getX(),
                     this.getY() - 0.5, this.getZ(), 0.0F, 0.0F);
+            this.level().addFreshEntity(poop);
             poopTime = this.random.nextInt(5000) + 3000;
         }
         super.tick();
@@ -62,11 +62,6 @@ public class FruitBatEntity extends Bat {
         } else {
             return InteractionResult.FAIL;
         }
-    }
-
-    @Override
-    public boolean removeWhenFarAway(double distanceSquared) {
-        return false;
     }
 
     public static boolean canSpawn(EntityType<FruitBatEntity> fruitBatEntityEntityType, ServerLevelAccessor serverWorldAccess, EntitySpawnReason spawnReason, BlockPos blockPos, RandomSource random) {

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cumaru_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jaizmod:cumaru_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jaizmod:planks_cumaru0"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cumaru_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jaizmod:planks_cumaru0"
+    ]
+  }
+}

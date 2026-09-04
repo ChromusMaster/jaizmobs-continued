@@ -36,7 +36,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class TeaPotBlock extends Block {
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
@@ -115,41 +115,45 @@ public class TeaPotBlock extends Block {
 
     }
 
-    public static HashMap<Item, Item> getTeaRecipes() {
-        HashMap<Item, Item> recipes = new HashMap<>();
-        recipes.put(Items.WITHER_ROSE, ModItems.WITHER_ROSE_TEA);
-        recipes.put(Items.CHORUS_FRUIT, ModItems.CHORUS_FRUIT_TEA);
-        recipes.put(Items.DANDELION, ModItems.FLOWER_TEA);
-        recipes.put(Items.POPPY, ModItems.FLOWER_TEA);
-        recipes.put(Items.BLUE_ORCHID, ModItems.FLOWER_TEA);
-        recipes.put(Items.ALLIUM, ModItems.FLOWER_TEA);
-        recipes.put(Items.AZURE_BLUET, ModItems.FLOWER_TEA);
-        recipes.put(Items.RED_TULIP, ModItems.FLOWER_TEA);
-        recipes.put(Items.ORANGE_TULIP, ModItems.FLOWER_TEA);
-        recipes.put(Items.WHITE_TULIP, ModItems.FLOWER_TEA);
-        recipes.put(Items.PINK_TULIP, ModItems.FLOWER_TEA);
-        recipes.put(Items.OXEYE_DAISY, ModItems.FLOWER_TEA);
-        recipes.put(Items.CORNFLOWER, ModItems.FLOWER_TEA);
-        recipes.put(Items.LILAC, ModItems.FLOWER_TEA);
-        recipes.put(Items.LILY_OF_THE_VALLEY, ModItems.FLOWER_TEA);
-        recipes.put(Items.SUNFLOWER, ModItems.FLOWER_TEA);
-        recipes.put(Items.PEONY, ModItems.FLOWER_TEA);
-        recipes.put(Items.ROSE_BUSH, ModItems.FLOWER_TEA);
-        recipes.put(Items.GLOW_BERRIES, ModItems.GLOW_BERRY_TEA);
-        recipes.put(Items.SPORE_BLOSSOM, ModItems.SPORE_BLOSSOM_TEA);
-        recipes.put(Items.GUNPOWDER, ModItems.GUNPOWDER_GREEN_TEA);
-        recipes.put(Items.FERN, ModItems.HERBAL_TEA);
-        recipes.put(Items.RED_MUSHROOM, ModItems.HERBAL_TEA);
-        recipes.put(Items.BROWN_MUSHROOM, ModItems.HERBAL_TEA);
-        recipes.put(Items.WHEAT, ModItems.KOMBUCHA_TEA);
-        recipes.put(Items.KELP, ModItems.KOMBUCHA_TEA);
-        recipes.put(Items.WARPED_FUNGUS, ModItems.WARPED_NETHER_FUNGUS_TEA);
-        recipes.put(Items.CRIMSON_FUNGUS, ModItems.NETHER_FUNGUS_TEA);
-        recipes.put(Items.BOOK, ModItems.NOVEL_TEA);
-        recipes.put(Items.PUMPKIN, ModItems.PUMPKIN_SPICE_TEA);
-        recipes.put(Items.PITCHER_PLANT, ModItems.PITCHER_PLANT_TEA);
-        recipes.put(Items.TORCHFLOWER, ModItems.TORCH_FLOWER_TEA);
-        return recipes;
+    public static Map<Item, Item> getTeaRecipes() {
+        return TeaRecipes.VALUES;
+    }
+
+    private static final class TeaRecipes {
+        private static final Map<Item, Item> VALUES = Map.ofEntries(
+                Map.entry(Items.WITHER_ROSE, ModItems.WITHER_ROSE_TEA),
+                Map.entry(Items.CHORUS_FRUIT, ModItems.CHORUS_FRUIT_TEA),
+                Map.entry(Items.DANDELION, ModItems.FLOWER_TEA),
+                Map.entry(Items.POPPY, ModItems.FLOWER_TEA),
+                Map.entry(Items.BLUE_ORCHID, ModItems.FLOWER_TEA),
+                Map.entry(Items.ALLIUM, ModItems.FLOWER_TEA),
+                Map.entry(Items.AZURE_BLUET, ModItems.FLOWER_TEA),
+                Map.entry(Items.RED_TULIP, ModItems.FLOWER_TEA),
+                Map.entry(Items.ORANGE_TULIP, ModItems.FLOWER_TEA),
+                Map.entry(Items.WHITE_TULIP, ModItems.FLOWER_TEA),
+                Map.entry(Items.PINK_TULIP, ModItems.FLOWER_TEA),
+                Map.entry(Items.OXEYE_DAISY, ModItems.FLOWER_TEA),
+                Map.entry(Items.CORNFLOWER, ModItems.FLOWER_TEA),
+                Map.entry(Items.LILAC, ModItems.FLOWER_TEA),
+                Map.entry(Items.LILY_OF_THE_VALLEY, ModItems.FLOWER_TEA),
+                Map.entry(Items.SUNFLOWER, ModItems.FLOWER_TEA),
+                Map.entry(Items.PEONY, ModItems.FLOWER_TEA),
+                Map.entry(Items.ROSE_BUSH, ModItems.FLOWER_TEA),
+                Map.entry(Items.GLOW_BERRIES, ModItems.GLOW_BERRY_TEA),
+                Map.entry(Items.SPORE_BLOSSOM, ModItems.SPORE_BLOSSOM_TEA),
+                Map.entry(Items.GUNPOWDER, ModItems.GUNPOWDER_GREEN_TEA),
+                Map.entry(Items.FERN, ModItems.HERBAL_TEA),
+                Map.entry(Items.RED_MUSHROOM, ModItems.HERBAL_TEA),
+                Map.entry(Items.BROWN_MUSHROOM, ModItems.HERBAL_TEA),
+                Map.entry(Items.WHEAT, ModItems.KOMBUCHA_TEA),
+                Map.entry(Items.KELP, ModItems.KOMBUCHA_TEA),
+                Map.entry(Items.WARPED_FUNGUS, ModItems.WARPED_NETHER_FUNGUS_TEA),
+                Map.entry(Items.CRIMSON_FUNGUS, ModItems.NETHER_FUNGUS_TEA),
+                Map.entry(Items.BOOK, ModItems.NOVEL_TEA),
+                Map.entry(Items.PUMPKIN, ModItems.PUMPKIN_SPICE_TEA),
+                Map.entry(Items.PITCHER_PLANT, ModItems.PITCHER_PLANT_TEA),
+                Map.entry(Items.TORCHFLOWER, ModItems.TORCH_FLOWER_TEA)
+        );
     }
 
     @Override
@@ -164,7 +168,7 @@ public class TeaPotBlock extends Block {
             return InteractionResult.SUCCESS;
         }
         if (state.getValue(HAS_CUP)) {
-            HashMap<Item, Item> recipes = getTeaRecipes();
+            Map<Item, Item> recipes = getTeaRecipes();
             Item output = recipes.get(stack.getItem());
             if (output != null && stack.is(ModTags.Items.TEA_INGREDIENT)) {
                 if (!world.isClientSide()) {

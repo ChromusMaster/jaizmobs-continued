@@ -1,7 +1,6 @@
 package jaiz.jaizmod.block.blockentities;
 
 import jaiz.jaizmod.block.ModBlocks;
-import jaiz.jaizmod.block.blockentities.CustomBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.animal.squid.GlowSquid;
 import net.minecraft.world.level.Level;
@@ -21,29 +20,20 @@ public class SquidLightBlockEntity extends BlockEntity implements TickableBlockE
         if (this.level == null || this.level.isClientSide()) {
             return;
         }
-
-        if(this.getLevel() !=null && !getLevel().isClientSide()){
-
-            boolean glowSquidNearby = false;
-            for (GlowSquid glowSquid : level.getEntitiesOfClass(GlowSquid.class, new AABB(worldPosition).inflate(2.0))) {
-                if (glowSquid.distanceToSqr(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ()) <= 9) {
-                    glowSquidNearby = true;
-                    if (waterNeedsUpdate(glowSquid.level(), glowSquid.blockPosition())) {
-                        level.setBlockAndUpdate(glowSquid.blockPosition(), ModBlocks.WATER_TEMPORARY_LIGHT.defaultBlockState().setValue(WaterTickingBlock.WATERLOGGED, true));
-                    } else if(!waterNeedsUpdate(glowSquid.level(), glowSquid.blockPosition())) {
-                        level.setBlockAndUpdate(glowSquid.blockPosition(), ModBlocks.WATER_TEMPORARY_LIGHT.defaultBlockState().setValue(WaterTickingBlock.WATERLOGGED, false));
-                    }
-                }
-            }
-
-            if (!glowSquidNearby && waterNeedsUpdate(level, worldPosition)) {
-                level.setBlockAndUpdate(worldPosition, Blocks.WATER.defaultBlockState());
-            } else if (!glowSquidNearby && !waterNeedsUpdate(level, worldPosition)) {
-                level.setBlockAndUpdate(worldPosition, Blocks.AIR.defaultBlockState());
-            }
-
+        if (Math.floorMod(this.level.getGameTime() + this.worldPosition.asLong(), 10) != 0) {
+            return;
         }
-
+        boolean glowSquidNearby = !this.level.getEntitiesOfClass(
+                GlowSquid.class,
+                new AABB(this.worldPosition).inflate(2.0),
+                glowSquid -> glowSquid.distanceToSqr(this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ()) <= 9
+        ).isEmpty();
+        if (!glowSquidNearby) {
+            BlockState replacement = waterNeedsUpdate(this.level, this.worldPosition)
+                    ? Blocks.WATER.defaultBlockState()
+                    : Blocks.AIR.defaultBlockState();
+            this.level.setBlockAndUpdate(this.worldPosition, replacement);
+        }
     }
 
     public static boolean waterNeedsUpdate(Level world, BlockPos pos) {

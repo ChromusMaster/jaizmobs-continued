@@ -19,6 +19,7 @@ public final class DescribedBlockItem extends BlockItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, context, display, tooltip, flag);
         tooltip.accept(Component.translatable(Util.makeDescriptionId("tooltip", BuiltInRegistries.ITEM.getKey(this))).withStyle(ChatFormatting.GRAY));
     }
 }

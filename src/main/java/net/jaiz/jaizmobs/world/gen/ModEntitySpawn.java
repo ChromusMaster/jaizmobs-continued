@@ -82,15 +82,15 @@ public class ModEntitySpawn {
         // Void Bull Spawn
 
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.END_HIGHLANDS), MobCategory.MONSTER,
-                ModEntities.VOIDBULL, 1, 0, 1);
+                ModEntities.VOIDBULL, 1, 1, 1);
 
         // Aeroblob
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.END_BARRENS), MobCategory.MONSTER,
-                ModEntities.AEROBLOB, 1, 0, 1);
+                ModEntities.AEROBLOB, 1, 1, 1);
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.SMALL_END_ISLANDS), MobCategory.MONSTER,
-                ModEntities.AEROBLOB, 2, 0, 1);
+                ModEntities.AEROBLOB, 2, 1, 1);
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.END_HIGHLANDS), MobCategory.MONSTER,
-                ModEntities.AEROBLOB, 1, 0, 1);
+                ModEntities.AEROBLOB, 1, 1, 1);
 
         // StarFishes Spawn
 
@@ -102,7 +102,7 @@ public class ModEntitySpawn {
         // Enderwing / Arch Phantom
 
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.END_HIGHLANDS), MobCategory.MONSTER,
-                ModEntities.ENDERWING, 1, 0, 1);
+                ModEntities.ENDERWING, 1, 1, 1);
 
         // Dripstone Creatures
 
@@ -121,20 +121,20 @@ public class ModEntitySpawn {
         // Cultivator
 
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.CHERRY_GROVE), MobCategory.CREATURE,
-                ModEntities.CULTIVATOR, 1, 0, 1);
+                ModEntities.CULTIVATOR, 1, 1, 1);
 
         // Klephtopod
 
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.DEEP_LUKEWARM_OCEAN), MobCategory.CREATURE,
-                ModEntities.KLEPHTOPOD, 1, 0, 1);
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.WARM_OCEAN), MobCategory.CREATURE,
-                ModEntities.KLEPHTOPOD, 1, 0, 1);
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.DEEP_LUKEWARM_OCEAN), MobCategory.WATER_CREATURE,
+                ModEntities.KLEPHTOPOD, 1, 1, 1);
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.WARM_OCEAN), MobCategory.WATER_CREATURE,
+                ModEntities.KLEPHTOPOD, 1, 1, 1);
 
         // Hunter Eel
 
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.DEEP_LUKEWARM_OCEAN), MobCategory.CREATURE,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.DEEP_LUKEWARM_OCEAN), MobCategory.WATER_CREATURE,
                 ModEntities.HUNTER_EEL, 2, 1, 2);
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.WARM_OCEAN), MobCategory.CREATURE,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.WARM_OCEAN), MobCategory.WATER_CREATURE,
                 ModEntities.HUNTER_EEL, 2, 1, 2);
 
         // MolotovGolem

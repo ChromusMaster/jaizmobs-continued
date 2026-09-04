@@ -45,10 +45,38 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
+import java.util.Map;
 
 
 public class MasonmouthEntity extends AbstractGolem {
+
+    private static final Map<Item, MasonMouthVariant> SHERD_VARIANTS = Map.ofEntries(
+            Map.entry(Items.ANGLER_POTTERY_SHERD, MasonMouthVariant.ANGLER),
+            Map.entry(Items.ARCHER_POTTERY_SHERD, MasonMouthVariant.ARCHER),
+            Map.entry(Items.ARMS_UP_POTTERY_SHERD, MasonMouthVariant.ARMS_UP),
+            Map.entry(Items.BLADE_POTTERY_SHERD, MasonMouthVariant.BLADE),
+            Map.entry(Items.BREWER_POTTERY_SHERD, MasonMouthVariant.BREWER),
+            Map.entry(Items.BURN_POTTERY_SHERD, MasonMouthVariant.BURN),
+            Map.entry(Items.DANGER_POTTERY_SHERD, MasonMouthVariant.DANGER),
+            Map.entry(Items.EXPLORER_POTTERY_SHERD, MasonMouthVariant.EXPLORER),
+            Map.entry(Items.FLOW_POTTERY_SHERD, MasonMouthVariant.FLOW),
+            Map.entry(Items.FRIEND_POTTERY_SHERD, MasonMouthVariant.FRIEND),
+            Map.entry(Items.GUSTER_POTTERY_SHERD, MasonMouthVariant.GUSTER),
+            Map.entry(Items.HEART_POTTERY_SHERD, MasonMouthVariant.HEART),
+            Map.entry(Items.HEARTBREAK_POTTERY_SHERD, MasonMouthVariant.HEARTBREAK),
+            Map.entry(Items.HOWL_POTTERY_SHERD, MasonMouthVariant.HOWL),
+            Map.entry(Items.MINER_POTTERY_SHERD, MasonMouthVariant.MINER),
+            Map.entry(Items.MOURNER_POTTERY_SHERD, MasonMouthVariant.MOURNER),
+            Map.entry(Items.PLENTY_POTTERY_SHERD, MasonMouthVariant.PLENTY),
+            Map.entry(Items.PRIZE_POTTERY_SHERD, MasonMouthVariant.PRIZE),
+            Map.entry(Items.SCRAPE_POTTERY_SHERD, MasonMouthVariant.SCRAPE),
+            Map.entry(Items.SHEAF_POTTERY_SHERD, MasonMouthVariant.SHEAF),
+            Map.entry(Items.SHELTER_POTTERY_SHERD, MasonMouthVariant.SHELTER),
+            Map.entry(Items.SKULL_POTTERY_SHERD, MasonMouthVariant.SKULL),
+            Map.entry(Items.SNORT_POTTERY_SHERD, MasonMouthVariant.SNORT),
+            Map.entry(Items.GOLD_NUGGET, MasonMouthVariant.GILDED),
+            Map.entry(Items.CLAY_BALL, MasonMouthVariant.CLAY)
+    );
 
     private static final EntityDataAccessor<Boolean> ATTACKING =
             SynchedEntityData.defineId(MasonmouthEntity.class, EntityDataSerializers.BOOLEAN);
@@ -278,34 +306,8 @@ public class MasonmouthEntity extends AbstractGolem {
         return SoundEvents.SPLASH_POTION_BREAK;
     }
 
-    public static HashMap<Item, MasonMouthVariant> getSherdVariant() {
-        HashMap<Item, MasonMouthVariant> sherd_variant = new HashMap<>();
-        sherd_variant.put(Items.ANGLER_POTTERY_SHERD, MasonMouthVariant.ANGLER);
-        sherd_variant.put(Items.ARCHER_POTTERY_SHERD, MasonMouthVariant.ARCHER);
-        sherd_variant.put(Items.ARMS_UP_POTTERY_SHERD, MasonMouthVariant.ARMS_UP);
-        sherd_variant.put(Items.BLADE_POTTERY_SHERD, MasonMouthVariant.BLADE);
-        sherd_variant.put(Items.BREWER_POTTERY_SHERD, MasonMouthVariant.BREWER);
-        sherd_variant.put(Items.BURN_POTTERY_SHERD, MasonMouthVariant.BURN);
-        sherd_variant.put(Items.DANGER_POTTERY_SHERD, MasonMouthVariant.DANGER);
-        sherd_variant.put(Items.EXPLORER_POTTERY_SHERD, MasonMouthVariant.EXPLORER);
-        sherd_variant.put(Items.FLOW_POTTERY_SHERD, MasonMouthVariant.FLOW);
-        sherd_variant.put(Items.FRIEND_POTTERY_SHERD, MasonMouthVariant.FRIEND);
-        sherd_variant.put(Items.GUSTER_POTTERY_SHERD, MasonMouthVariant.GUSTER);
-        sherd_variant.put(Items.HEART_POTTERY_SHERD, MasonMouthVariant.HEART);
-        sherd_variant.put(Items.HEARTBREAK_POTTERY_SHERD, MasonMouthVariant.HEARTBREAK);
-        sherd_variant.put(Items.HOWL_POTTERY_SHERD, MasonMouthVariant.HOWL);
-        sherd_variant.put(Items.MINER_POTTERY_SHERD, MasonMouthVariant.MINER);
-        sherd_variant.put(Items.MOURNER_POTTERY_SHERD, MasonMouthVariant.MOURNER);
-        sherd_variant.put(Items.PLENTY_POTTERY_SHERD, MasonMouthVariant.PLENTY);
-        sherd_variant.put(Items.PRIZE_POTTERY_SHERD, MasonMouthVariant.PRIZE);
-        sherd_variant.put(Items.SCRAPE_POTTERY_SHERD, MasonMouthVariant.SCRAPE);
-        sherd_variant.put(Items.SHEAF_POTTERY_SHERD, MasonMouthVariant.SHEAF);
-        sherd_variant.put(Items.SHELTER_POTTERY_SHERD, MasonMouthVariant.SHELTER);
-        sherd_variant.put(Items.SKULL_POTTERY_SHERD, MasonMouthVariant.SKULL);
-        sherd_variant.put(Items.SNORT_POTTERY_SHERD, MasonMouthVariant.SNORT);
-        sherd_variant.put(Items.GOLD_NUGGET, MasonMouthVariant.GILDED);
-        sherd_variant.put(Items.CLAY_BALL, MasonMouthVariant.CLAY);
-        return sherd_variant;
+    public static Map<Item, MasonMouthVariant> getSherdVariant() {
+        return SHERD_VARIANTS;
     }
 
     @Override
@@ -316,7 +318,7 @@ public class MasonmouthEntity extends AbstractGolem {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        HashMap<Item, MasonMouthVariant> sherd_variant = getSherdVariant();
+        Map<Item, MasonMouthVariant> sherd_variant = getSherdVariant();
         if (itemStack.is(ModTags.Items.MASON_MOUTH_TRANSFORMABLE)){
             if (sherd_variant.containsKey(player.getItemInHand(hand).getItem())) {
                 MasonMouthVariant output = sherd_variant.get(player.getItemInHand(hand).getItem());

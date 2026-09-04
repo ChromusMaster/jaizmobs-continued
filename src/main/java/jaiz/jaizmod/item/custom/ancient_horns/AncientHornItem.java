@@ -38,6 +38,7 @@ public class AncientHornItem extends InstrumentItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> tooltip, TooltipFlag type) {
+        super.appendHoverText(stack, context, display, tooltip, type);
         MutableComponent mutableText = Component.translatable(Util.makeDescriptionId("instrument", Identifier.parse("ancient_horn")));
         tooltip.accept(mutableText.withStyle(ChatFormatting.GRAY));
     }

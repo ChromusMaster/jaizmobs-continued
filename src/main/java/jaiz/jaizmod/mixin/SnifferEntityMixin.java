@@ -59,7 +59,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
-import java.util.Objects;
 
 @Mixin(Sniffer.class)
 public abstract class SnifferEntityMixin
@@ -375,8 +374,8 @@ public abstract class SnifferEntityMixin
         if (this.getBlockStateOn().is(Blocks.MUD) && !this.isMuddy()) {
             this.setMuddy(true);
         }
-        if (this.hasControllingPassenger() && Objects.requireNonNull
-                (this.getControllingPassenger()).isSprinting() && rammingCooldown < 30)
+        LivingEntity controllingPassenger = this.getControllingPassenger();
+        if (controllingPassenger != null && controllingPassenger.isSprinting() && rammingCooldown < 30)
         {
             if (this.level() instanceof ServerLevel serverWorld && this.isAlive()) {
                 for (Mob mobEntity : this.level()
@@ -419,7 +418,7 @@ public abstract class SnifferEntityMixin
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, EntitySpawnReason spawnReason, @Nullable SpawnGroupData entityData) {
-        if (entityData == null) {
+        if (!(entityData instanceof AgeableMob.AgeableMobGroupData)) {
             entityData = new AgeableMob.AgeableMobGroupData(true);
         }
         AgeableMob.AgeableMobGroupData passiveData = (AgeableMob.AgeableMobGroupData)entityData;
@@ -429,10 +428,14 @@ public abstract class SnifferEntityMixin
         passiveData.increaseGroupSizeByOne();
         if(this.random.nextInt(50) == 1  && !this.level().isClientSide()){
             this.setBull(true);
-            Objects.requireNonNull(this.
-                    getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(8.0);
-            Objects.requireNonNull(this.
-                    getAttribute(Attributes.MAX_HEALTH)).setBaseValue(40.0);
+            var attackDamage = this.getAttribute(Attributes.ATTACK_DAMAGE);
+            if (attackDamage != null) {
+                attackDamage.setBaseValue(8.0);
+            }
+            var maxHealth = this.getAttribute(Attributes.MAX_HEALTH);
+            if (maxHealth != null) {
+                maxHealth.setBaseValue(40.0);
+            }
             this.heal(32);
         }
         setTexture();
